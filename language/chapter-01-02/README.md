@@ -188,3 +188,52 @@ public String concat(String string1, String string2) throws MyException {
 }
 
 
+
+#3.3 constructors
+
+constructor name is same class name
+
+constructor access modifies like public
+
+Constructor Overloading
+
+public class MyClass {
+
+    private int number = 0;
+
+    public MyClass() {
+    }
+
+    public MyClass(int theNumber) {
+        this.number = theNumber;
+    }
+}
+
+Default, no-arg Constructor
+
+
+Calling a Constructor From a Constructor
+
+public class Employee {
+
+    private String firstName = null;
+    private String lastName  = null;
+    private int    birthYear = 0;
+
+    public Employee(String first,
+        String last,
+        int    year   ) {
+
+        firstName = first;
+        lastName  = last;
+        birthYear = year;
+    }
+
+    public Employee(String first, String last){
+        this(first, last, -1);
+    }
+}
+
+
+# 5.Java Packages
+

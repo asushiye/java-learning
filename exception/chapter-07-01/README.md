@@ -33,5 +33,12 @@ Catching Exceptions
         System.out.println("Division attempt done");
     }
 
+ 
+ Propagating Exceptions
+
+     public void callDivide() throws BadNumberException{
+        int result = divide(2,1);
+        System.out.println(result);
+    }
 
 
