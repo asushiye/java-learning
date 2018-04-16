@@ -4,6 +4,9 @@
 .settings/
 target/
 
+out/
+.bak
+
 #IntelliJ Stuff
 .idea
 *.iml
