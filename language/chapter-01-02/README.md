@@ -10,6 +10,8 @@ java core concept
   3.1、Method
 4、interface
 5、package
+6、Java Access Modifiers
+
 
 
 #1、Variables
@@ -71,11 +73,11 @@ myFloat = myFloat +1;
 
 #2.1、Java Math Operators and Math Class
 Java Math Operators
-	Addition
-	Subtraction
-	Multiplication
-	Division
-	Remainder / Modulo
+	Addition            +
+	Subtraction         -
+	Multiplication      *
+	Division	    /
+	Remainder / Modulo  mod
 Java Math Operator Precedence
 	Java Integer Math
 	Java Floating Point Math
@@ -90,7 +92,6 @@ The Java Math Class
 	Math.max()
 	Math.round()
 	Math.random()
-
 
 
 
@@ -116,7 +117,7 @@ Java Field Access Modifiers
 public class Customer {
 
     private   String email;      // the class itself can access this java field.
-              String position;  // no modifier = package access modifier  class in the same package can access
+    [package] String position;  // no modifier = package access modifier  class in the same package can access
     protected String name;      // class itself and subclass can access modifier 
     public    String city;      // all class in same application can access
 
@@ -236,4 +237,22 @@ public class Employee {
 
 
 # 5.Java Packages
+
+Java Package Naming Conventions
+Java packages are always written in lowercase letters
+
+
+
+
+# 6 Access Modifiers
+Class Access Modifiers
+
+The Java access modifiers private and protected cannot be assigned to a class. Only to constructors, methods and fields inside classes. Classes can only have the default (package) and public access modifier assigned to them.
+
+Interface Access Modifiers
+
+herefore you cannot use the private and protected access modifiers in interfaces
+
+
+
 

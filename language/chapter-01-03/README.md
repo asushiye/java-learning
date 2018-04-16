@@ -1,4 +1,5 @@
 #chapter-01-03
+Java Files Syntax
 
 Java Files
 Java Syntax
@@ -13,14 +14,15 @@ Java Syntax
 comments and annotations
 
 #1¡¢Java Files
-
+java code inside a java files£¬type for  class, abstract class, interface, enum, annotation
 
 #2¡¢Java Syntax from java Files 
+
 package javacore;
 
 import java.util.HashMap;
 
-// type Declaration for class, absract class, interface, enum, annotation
+// type Declaration for class, abstract class, interface, enum, annotation
 public class MyClass {
 
     protected final String name = "John";
@@ -39,7 +41,6 @@ public class MyClass {
     public static void main(String[] args) {
     }
 }
-
 
 
 #Package Declaration
