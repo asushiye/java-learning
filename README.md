@@ -1,6 +1,6 @@
-#Java-language-learning
+# Java-language-learning
 
-|content||chapter|
+|content|chapter|
 |-|-|
 |Java Language		   |chapter-01|
 |Java Collections	   |chapter-02|
