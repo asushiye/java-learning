@@ -17,10 +17,10 @@ Java Lambda Expressions
 ## Java Lambdas and the Single Method Interface
 
 lambda expression是一个匿名函数，
-使用运算符 =>，该运算符读为“goes to”。
+使用运算符 ->，该运算符读为“goes to”。
 
 语法如下：
-形参列表=>函数体
+形参列表 -> 函数体
 函数体多于一条语句的可用大括号括起。
 
 ```
