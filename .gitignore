@@ -3,6 +3,7 @@
 .springBeans
 .settings/
 target/
+out/
 
 #IntelliJ Stuff
 .idea
