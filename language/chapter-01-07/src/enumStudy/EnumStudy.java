@@ -9,6 +9,7 @@ public class EnumStudy {
             System.out.println(slevel);
         }
 
+
         String levelValue= level.getLevelValue();
         System.out.println(levelValue);
 
