@@ -1,11 +1,9 @@
 # java language Ä¿Â¼½á¹¹
 
 # chapter-01-01
-
 your first java app
 
 # chapter-01-02
-
 java core concept
 
 		1¡¢Variables (java variables and java data type )
