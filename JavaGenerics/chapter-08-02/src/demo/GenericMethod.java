@@ -15,7 +15,6 @@ public class GenericMethod {
         String thesElement= GenericMethod.AddAndReturn(stringElement, list);
         System.out.println(list.iterator().next());
 
-
         Integer integerElement = 1;
         Set<Integer> set = new HashSet<Integer>();
         Integer theiElement = GenericMethod.AddAndReturn(integerElement, set);

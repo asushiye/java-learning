@@ -10,7 +10,7 @@ Java Generics Tutorial
 # chapter-08-02
 Java Generic Classes
 
-可以生成自己的Java类。 泛型不限于Java API中的预定义类
+
 
 
 
