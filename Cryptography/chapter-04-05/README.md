@@ -1,61 +1,56 @@
-# Java MessageDigest
+# Java Mac
 
-		Creating a MessageDigest Instance
-			Message Digest Algorithms
-		Calculate Message Digest
-
-## Creating a MessageDigest Instance
-
-`MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");`
+ chapter-04-05
 
 
+		Creating a Mac Instance
+		Initializing the Mac
+		Calculating the MAC
 
-Algorithm Name
-* MD2
-* MD5
-* SHA-1
-* SHA-256
-* SHA-384
-* SHA-512
 
-## Calculate Message Digest
+The Java **Mac (javax.crypto.Mac)** class can create a Message Authentication Code (MAC) from binary data. 
+A MAC is a message digest which has been encrypted with a secret key. 
+Only if you have the secret key can you verify the MAC
 
-```
-byte[] data1 = "0123456789".getBytes("UTF-8");
+## Creating a Mac Instance
 
-MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-byte[] digest = messageDigest.digest(data1);
-```
+`Mac mac = Mac.getInstance("HmacSHA256");`
 
-If you have multiple blocks of data to include in the same message digest, call the update() method and finish off with a call to digest().
+
+
+## Initializing the Mac
 
 ```
-byte[] data1 = "0123456789".getBytes("UTF-8");
-byte[] data2 = "abcdefghijklmnopqrstuvxyz".getBytes("UTF-8");
+byte[] keyBytes   = new byte[]{0,1,2,3,4,5,6,7,8 ,9,10,11,12,13,14,15};
+String algorithm  = "RawBytes";
+SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
 
-MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-messageDigest.update(data1);
-messageDigest.update(data2);
+mac.init(key);
 
-byte[] digest = messageDigest.digest();
+## Calculating the MAC
+
+```
+byte[] data  = "abcdefghijklmnopqrstuvxyz".getBytes("UTF-8");
+byte[] macBytes = mac.doFinal(data);
 ```
 
 
 ÊµÀý
 
 ```
-public class MyMessageDigest {
-
+public class MyMac {
     public static void main(String[] args)
     {
         try{
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] data1 = "zhenyun".getBytes("UTF-8");
-            byte[] data2 = "su".getBytes("UTF-8");
-            messageDigest.update(data1);
-            messageDigest.update(data2);
-            byte[] digest = messageDigest.digest();
+            Mac mac = Mac.getInstance("HmacSHA256");
+            byte[] keyBytes   = new byte[]{0,1,2,3,4,5,6,7,8 ,9,10,11,12,13,14,15};
+            String algorithm  = "RawBytes";
+            SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
+            mac.init(key);
 
+            byte[] data  = "zhenyun.su".getBytes("UTF-8");
+            byte[] macBytes = mac.doFinal(data);
+            
         }catch (NoSuchAlgorithmException e){
             System.out.print(e.getMessage());
         }catch (Exception e1){
