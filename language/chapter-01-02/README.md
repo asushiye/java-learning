@@ -1,22 +1,22 @@
-#chapter-01-02
+# chapter-01-02
 
 java core concept
 
-1¡¢Variables (java variables and java data type )
-2¡¢Operations (Variables Operation¡¢condition Operation¡¢)
-3¡¢Class + Object
-  3.1¡¢Fields
-  3.2¡¢Constructor
-  3.1¡¢Method
-4¡¢interface
-5¡¢package
-6¡¢Java Access Modifiers
+1. Variables (java variables and java data type )
+2. Operations (Variables Operation. condition Operation. )
+3. Class + Object
+  3.1. Fields
+  3.2. Constructor
+  3.1. Method
+4. interface
+5. package
+6. Java Access Modifiers
 
 
 
-#1¡¢Variables
+# 1. Variables
 
-#java variables type
+# java variables type
 In Java there are four types of variables:
 
 Non-static fields  belong to an object, called instance variables
@@ -24,54 +24,54 @@ Static fields      belong to an  class, called class variables, static fields ha
 Local variables    a variable declared inside a method, local variables used inside a method
 Parameters         A parameter is a variable that is passed to a method when the method is called
 
-#base data types
+# base data types
 Here are examples of how to declare variables of all the primitive data types in Java:
-boolean myBoolean   true or falses
-byte    myByte;      8bit   -128 ~ 127
-short   myShort;     16bit
-char    myChar;      16bit
-int     myInt;       32bit
-long    myLong;      64bit
-float   myFloat;     32bit
-double  myDouble;    64bit
+>boolean myBoolean   true or falses
+>byte    myByte;      8bit   -128 ~ 127
+>short   myShort;     16bit
+>char    myChar;      16bit
+>int     myInt;       32bit
+>long    myLong;      64bit
+>float   myFloat;     32bit
+>double  myDouble;    64bit
 
-#Object types
+# Object types
 Here are examples of how to declare variables of the object types in Java:
-Boolean myBoolean   true or falses
-Byte    myByte;      8bit   -128 ~ 127
-Short   myShort;     16bit
-Char    myChar;      16bit
-Int     myInt;       32bit
-Long    myLong;      64bit
-Float   myFloat;     32bit
-Double  myDouble;    64bit
-String  myString;
+>Boolean myBoolean   true or falses
+>Byte    myByte;      8bit   -128 ~ 127
+>Short   myShort;     16bit
+>Char    myChar;      16bit
+>Int     myInt;       32bit
+>Long    myLong;      64bit
+>Float   myFloat;     32bit
+>Double  myDouble;    64bit
+>String  myString;
 
-#Variable declarartion
+# Variable declarartion
 type name ;
 int myInt ;
 
-#Variable assginment
+# Variable assginment
 myInt =1 ;
 
 float myFloat =2.0 ;
 
-#Variable reading
+# Variable reading
 float myFloat =2.0 ;
 myFloat = myFloat +1;
 
-#Variable naming Conventions
-1¡¢Java variable names are case sensitive. The variable name money is not the same as Money or MONEY.
-2¡¢Java variable names must start with a letter, or the $ or _ character.
-3¡¢Variable names cannot be equal to reserved key words in Java. For instance, the words int or for
-4¡¢If variable names consist of multiple words, each word after the first word has its first letter written in uppercase. 
+# Variable naming Conventions
+1. Java variable names are case sensitive. The variable name money is not the same as Money or MONEY.
+2. Java variable names must start with a letter, or the $ or _ character.
+3. Variable names cannot be equal to reserved key words in Java. For instance, the words int or for
+4. If variable names consist of multiple words, each word after the first word has its first letter written in uppercase. 
    For instance, ¡°variableName¡± or ¡°bigApple¡±.
-5¡¢Static final fields (constants) are named in all uppercase, ¡¢ For instance ¡°EXCHANGE_RATE¡± or ¡°COEFFICIENT¡±.
+5. Static final fields (constants) are named in all uppercase, .  For instance ¡°EXCHANGE_RATE¡± or ¡°COEFFICIENT¡±.
 
 
-#2¡¢operations
+# 2. operations
 
-#2.1¡¢Java Math Operators and Math Class
+# 2.1. Java Math Operators and Math Class
 Java Math Operators
 	Addition            +
 	Subtraction         -
@@ -95,7 +95,7 @@ The Java Math Class
 
 
 
-#3¡¢Class + Object
+# 3. Class + Object
 
 Define Java Class in Java File
 
@@ -105,7 +105,7 @@ A Java class can contain:
 	Methods
 
 
-#3.1 Java Fields
+# 3.1 Java Fields
 
 Field Declaration Syntax
 
@@ -147,7 +147,7 @@ public class Customer {
 
 
 
-#3.2¡¢Java Methods
+# 3.2. Java Methods
 
 A method parameter similar to a variable. You can read its value, and change its value too
 public MyClass{
@@ -190,7 +190,7 @@ public String concat(String string1, String string2) throws MyException {
 
 
 
-#3.3 constructors
+# 3.3 constructors
 
 constructor name is same class name
 
@@ -236,7 +236,7 @@ public class Employee {
 }
 
 
-# 5.Java Packages
+#  5.Java Packages
 
 Java Package Naming Conventions
 Java packages are always written in lowercase letters
@@ -244,7 +244,7 @@ Java packages are always written in lowercase letters
 
 
 
-# 6 Access Modifiers
+#  6 Access Modifiers
 Class Access Modifiers
 
 The Java access modifiers private and protected cannot be assigned to a class. Only to constructors, methods and fields inside classes. Classes can only have the default (package) and public access modifier assigned to them.
