@@ -163,6 +163,6 @@ addAll Collection from other collection
 
 ## Java Collections - Generic Collections
 
-²Î¿¼£ºJavaGenerics
+refer to£ºJavaGenerics
 
 

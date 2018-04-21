@@ -41,13 +41,15 @@ byte[] digitalSignature = signature.sign();
 ```
 
 ```
+signature1.initVerify(keyPair.getPublic());
+
 byte[] data2 = "abcdefghijklmnopqrstuvxyz".getBytes("UTF-8");
 signature2.update(data2);
 
 boolean verified = signature2.verify(digitalSignature);
 ```
 
-ÊµÀý
+for example
 
 ```
 public class MySignature {

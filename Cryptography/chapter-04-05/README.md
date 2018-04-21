@@ -2,6 +2,7 @@
 
  chapter-04-05
 
+MAC Message Authentication Code
 
 		Creating a Mac Instance
 		Initializing the Mac
@@ -26,6 +27,7 @@ String algorithm  = "RawBytes";
 SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
 
 mac.init(key);
+```
 
 ## Calculating the MAC
 
@@ -35,7 +37,7 @@ byte[] macBytes = mac.doFinal(data);
 ```
 
 
-ÊµÀý
+for example
 
 ```
 public class MyMac {

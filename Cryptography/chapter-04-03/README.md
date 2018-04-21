@@ -42,7 +42,7 @@ byte[] digest = messageDigest.digest();
 ```
 
 
-ÊµÀý
+for example
 
 ```
 public class MyMessageDigest {

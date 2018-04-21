@@ -83,7 +83,9 @@ myInterface.sayHello();
 # Java Interfaces vs. Abstract Classes
 
 接口是暴露公共接口的更灵活的机制
+
 If you need to separate an interface from its implementation, use an interface. 
+
 If you also need to provide a base class or default implementation of the interface, add an abstract class (or normal class) that implements the interface.
 
 

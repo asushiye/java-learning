@@ -2,6 +2,8 @@
 
 Java Lambda Expressions
 
+Lambda表达式提供了一个更加简练的函数式语法来写匿名方法.
+
 		Java Lambdas and the Single Method Interface
 			Matching Lambdas to Interfaces
 		Lambda Type Inference

@@ -77,7 +77,7 @@ System.out.println(level.getLevelCode());
 package
 java.lang.Enum
 
-JDK金典案例
+JDK  金典案例
 
 java.util.concurrent.TimeUntil
 
