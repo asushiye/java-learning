@@ -19,33 +19,33 @@ java core concept
 # java variables type
 In Java there are four types of variables:
 
-Non-static fields  belong to an object, called instance variables
-Static fields      belong to an  class, called class variables, static fields have same value for all object of a class
-Local variables    a variable declared inside a method, local variables used inside a method
-Parameters         A parameter is a variable that is passed to a method when the method is called
+1. Non-static fields  belong to an object, called instance variables
+2. Static fields      belong to an  class, called class variables, static fields have same value for all object of a class
+3. Local variables    a variable declared inside a method, local variables used inside a method
+4. Parameters         A parameter is a variable that is passed to a method when the method is called
 
 # base data types
 Here are examples of how to declare variables of all the primitive data types in Java:
->boolean myBoolean   true or falses
->byte    myByte;      8bit   -128 ~ 127
->short   myShort;     16bit
->char    myChar;      16bit
->int     myInt;       32bit
->long    myLong;      64bit
->float   myFloat;     32bit
->double  myDouble;    64bit
+* boolean myBoolean   true or falses
+* byte    myByte;      8bit   -128 ~ 127
+* short   myShort;     16bit
+* char    myChar;      16bit
+* int     myInt;       32bit
+* long    myLong;      64bit
+* float   myFloat;     32bit
+* double  myDouble;    64bit
 
 # Object types
 Here are examples of how to declare variables of the object types in Java:
->Boolean myBoolean   true or falses
->Byte    myByte;      8bit   -128 ~ 127
->Short   myShort;     16bit
->Char    myChar;      16bit
->Int     myInt;       32bit
->Long    myLong;      64bit
->Float   myFloat;     32bit
->Double  myDouble;    64bit
->String  myString;
+* Boolean myBoolean   true or falses
+* Byte    myByte;      8bit   -128 ~ 127
+* Short   myShort;     16bit
+* Char    myChar;      16bit
+* Int     myInt;       32bit
+* Long    myLong;      64bit
+* Float   myFloat;     32bit
+* Double  myDouble;    64bit
+* String  myString;
 
 # Variable declarartion
 type name ;
@@ -165,17 +165,21 @@ Final Parameters
 
 The value of a final parameter cannot be changed. That is, if the parameter is a reference to an object, the reference cannot be changed, 
 
+```
 public void writeText(final String text1, final String text2) {
     System.out.print(text1);    // read value of text1 parameter.
     System.out.print(text2);    // read value of text2 parameter.
 }
+```
 
 Method Access Modifiers
+
 same java field access Modifiers  private, protected, package, public  
 
 Exception Declarations
 If an error occurs inside a method, the method may throw an exception. Exceptions have to be declared in the method declaration, like this (marked in bold):
 
+```
 public String concat(String string1, String string2) throws MyException {
 
     if(string1 == null) {
@@ -187,7 +191,7 @@ public String concat(String string1, String string2) throws MyException {
 
     return string1 + string2;
 }
-
+```
 
 
 # 3.3 constructors
@@ -214,7 +218,7 @@ Default, no-arg Constructor
 
 
 Calling a Constructor From a Constructor
-
+```
 public class Employee {
 
     private String firstName = null;
@@ -234,7 +238,7 @@ public class Employee {
         this(first, last, -1);
     }
 }
-
+```
 
 #  5.Java Packages
 
