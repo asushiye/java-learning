@@ -65,33 +65,33 @@ myFloat = myFloat +1;
 2. Java variable names must start with a letter, or the $ or _ character.
 3. Variable names cannot be equal to reserved key words in Java. For instance, the words int or for
 4. If variable names consist of multiple words, each word after the first word has its first letter written in uppercase. 
-   For instance, ¡°variableName¡± or ¡°bigApple¡±.
-5. Static final fields (constants) are named in all uppercase, .  For instance ¡°EXCHANGE_RATE¡± or ¡°COEFFICIENT¡±.
+   For instance, "variableName" or "bigApple".
+5. Static final fields (constants) are named in all uppercase, .  For instance "EXCHANGE_RATE" or "COEFFICIENT".
 
 
 # 2. operations
 
 # 2.1. Java Math Operators and Math Class
-Java Math Operators
-	Addition            +
-	Subtraction         -
-	Multiplication      *
-	Division	    /
-	Remainder / Modulo  mod
-Java Math Operator Precedence
-	Java Integer Math
-	Java Floating Point Math
-	Floating Point Precision
-The Java Math Class
-	Basic Math Functions
-	Math.abs()
-	Math.ceil()
-	Math.floor()
-	Math.floorDiv()
-	Math.min()
-	Math.max()
-	Math.round()
-	Math.random()
+		Java Math Operators
+			Addition            +
+			Subtraction         -
+			Multiplication      *
+			Division	    /
+			Remainder / Modulo  mod
+		Java Math Operator Precedence
+			Java Integer Math
+			Java Floating Point Math
+			Floating Point Precision
+		The Java Math Class
+			Basic Math Functions
+			Math.abs()
+			Math.ceil()
+			Math.floor()
+			Math.floorDiv()
+			Math.min()
+			Math.max()
+			Math.round()
+			Math.random()
 
 
 
@@ -125,33 +125,36 @@ public class Customer {
 
 Static and Non-static Fields
 
-Static Fields  // called class Variables 
-Non-static Fields // called Object or install Variable
+* Static Fields  // called class Variables 
+* Non-static Fields // called Object or install Variable
 
 final Fields
 
 A final field cannot have its value changed, once assigned
 
+```
 public class Customer {
 
     final String field1 = "Fixed Value";
 
 }
+```
 
 Since static final fields are often used as constants
+
+```
 public class Customer {
-
     static final String CONSTANT_1 = "Fixed Value";
-
 }
-
+```
 
 
 # 3.2. Java Methods
 
 A method parameter similar to a variable. You can read its value, and change its value too
-public MyClass{
 
+```
+public MyClass{
     public void writeText(String text1, String text2) {
         System.out.print(text1);    // read value of text1 parameter.
         System.out.print(text2);    // read value of text2 parameter.
@@ -160,6 +163,7 @@ public MyClass{
         text2 = "new value 2";      // change value of text2
     }
 }
+```
 
 Final Parameters
 
@@ -202,6 +206,7 @@ constructor access modifies like public
 
 Constructor Overloading
 
+```
 public class MyClass {
 
     private int number = 0;
@@ -213,6 +218,7 @@ public class MyClass {
         this.number = theNumber;
     }
 }
+```
 
 Default, no-arg Constructor
 
@@ -246,12 +252,13 @@ Java Package Naming Conventions
 Java packages are always written in lowercase letters
 
 
-
-
 #  6 Access Modifiers
+
 Class Access Modifiers
 
-The Java access modifiers private and protected cannot be assigned to a class. Only to constructors, methods and fields inside classes. Classes can only have the default (package) and public access modifier assigned to them.
+The Java access modifiers private and protected cannot be assigned to a class. 
+
+Only to constructors, methods and fields inside classes. Classes can only have the default (package) and public access modifier assigned to them.
 
 Interface Access Modifiers
 
