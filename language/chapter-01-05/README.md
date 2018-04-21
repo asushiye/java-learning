@@ -1,6 +1,7 @@
 # chapter-01-05
 
 Java Abstract Classes
+
 Java Interface
 
 ## Java abstract class
@@ -68,7 +69,7 @@ public class MyInterfaceImpl implements MyInterface {
 }
 ```
 
-A class that implements an interface must implement all the methods declared in the interface
+A class that implements an interface must **implement all the methods** declared in the interface
 
 
 Interface Instances

@@ -1,4 +1,4 @@
-#chapter-01-07
+# chapter-01-07
 
 Java Annotation
 
@@ -13,7 +13,11 @@ Java annotations are typically used for the following purposes:
 * Build-time instructions
 * Runtime instructions
 
-		Annotation Basics
+
+### Compiler instructions
+Annotation syntax
+
+		Annotation
 		@Entity
 
 		Annotation Elements
@@ -30,30 +34,38 @@ Here is an example annotation added above a class definition:
 	}
 ```
 
-Built-in Java Annotations
+### Build-time instructions
 * @Deprecated
 * @Override
 * @SuppressWarnings
 
-# @Deprecated
+#### @Deprecated
 The @Deprecated annotation is used to mark a class, method or field as deprecated, meaning it should no longer be used
+
+```
 @Deprecated
 public class MyComponent {
-
 }
-f your code uses deprecated classes, methods or fields, the compiler will give you a warning
+```
+
+If your code uses deprecated classes, methods or fields, the compiler will give you a warning
 warning MyComponent ÒÑ¹ýÆÚ
 
-# @Override
+#### @Override
 The @Override Java annotation is used above methods that override methods in a superclass. 
+
 If the method does not match a method in the superclass, the compiler will give you an error.
-# @SuppressWarnings
+
+#### @SuppressWarnings
+
 The @SuppressWarnings annotation makes the compiler suppress warnings for a given method. For instance, 
+
 if a method calls a deprecated method, or makes an insecure type cast, the compiler may generate a warning. 
+
 You can suppress these warnings by annotating the method containing the code with the @SuppressWarnings annotation.
 
 
-Creating Your Own Annotations
+## Creating Your Own Annotations
 It is possible to create your own (custom) Java annotations. Annotations are defined in their own file, just like a Java class or interface
 
 ```
@@ -82,6 +94,7 @@ public class MyClass {
 
 ```
 
+custom Annotation can use
 1. @Retention
 2. @Target
 3. @Inherited
@@ -103,6 +116,17 @@ import java.lang.annotation.RetentionPolicy;
     String   value() default "";
 }
 ```
+
+RetentionPolicy.RUNTIME
+
+Annotations are to be recorded in the class file by the compiler and retained by the VM at run time, so they may be read reflectively.
+
+
+* RetentionPolicy.SOURCE
+* RetentionPolicy.CLASS
+* RetentionPolicy.RUNTIME
+
+
 
 ## @Target
 You can specify which Java elements your custom annotation can be used to annotate
