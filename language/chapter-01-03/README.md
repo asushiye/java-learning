@@ -13,10 +13,10 @@ Java Files Syntax
 		  Type Declaration End
 		comments and annotations
 
-# 1¡¢Java Files
+# 1. Java Files
 java code inside a java files£¬type for  class, abstract class, interface, enum, annotation
 
-# 2¡¢Java Syntax from java Files 
+# 2. Java Syntax from java Files 
 
 ```
 package javacore;
