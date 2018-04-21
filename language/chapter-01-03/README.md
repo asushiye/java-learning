@@ -14,7 +14,7 @@ Java Files Syntax
 		comments and annotations
 
 # 1. Java Files
-java code inside a java files£¬type for  class, abstract class, interface, enum, annotation
+java code inside a java files, type for  **class, abstract class, interface, enum, annotation**
 
 # 2. Java Syntax from java Files 
 
@@ -48,7 +48,8 @@ public class MyClass {
 # Package Declaration
 The first line in the code example shown earlier is the package declaration. This part, to be more specific:
 
-package javacore;
+`package javacore;`
+
 The package declaration consists of the word package, a space, and then the name of the package the type is to be located in. The .java file should be located in a directory structure that matches the package name. Packages and package declarations are covered in more detail in the text on Java packages.
 
 # Import Statements

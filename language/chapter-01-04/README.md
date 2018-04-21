@@ -1,8 +1,8 @@
-#chapter-01-04
+# chapter-01-04
 
-#Java Inheritance
+# Java Inheritance
 
-
+```
 public class Vehicle {
     protected String licensePlate = null;
 
@@ -17,14 +17,18 @@ public class Car extends Vehicle {
         return this.numberOfSeats;
     }
 }
+```
 
-##inheritance and type cast
+## inheritance and type cast
 
+``
 Car     car     = new Car();
 Vehicle vehicle = car;
+``
 
-##upcasting and downcasting
+## upcasting and downcasting
 
+```
 Car     car     = new Car();
 
 // upcast to Vehicle
@@ -32,9 +36,10 @@ Vehicle vehicle = car;
 
 // downcast to car again
 Car     car2    =  (Car) vehicle;
-
+```
 
 Calling Superclass Methods
+```
 public class Car extends Vehicle {
 
     public void setLicensePlate(String license) {
@@ -42,10 +47,12 @@ public class Car extends Vehicle {
     }
 
 }
+```
 
-#The instanceof Instruction
+# The instanceof Instruction
 
 
+```
 Car car = new Car();
 boolean isCar = car instanceof Car;  //true
 
@@ -55,3 +62,4 @@ boolean isVehicle = car instanceof Vehicle; //true
 Truck truck = new Truck();
 Vehicle vehicle = truck;
 boolean isCar = vehicle instanceof Car; //false
+```
