@@ -1,10 +1,16 @@
 # Java Date and Time
 
-java coding standards refer to alibaba java coding standards
+refer to web: https://www.timeanddate.com/time/zones/
+
 
 ## chapter-06-01
 
-一、编程规约
+Java Date and Time Tutorial
+
+## chapter-06-02
+
+Java 8 Date Time API
+
 
 
 

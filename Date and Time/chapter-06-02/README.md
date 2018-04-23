@@ -1,5 +1,7 @@
 # Java 8 Date Time API
 
+refer to web: https://www.timeanddate.com/time/zones/
+
 		Instant
 		Duration
 		LocalDate
@@ -44,6 +46,7 @@ The Instant class also has several methods which can be used to make calculation
 * minusSeconds()
 * minusMillis()
 * minusNanos()
+
 I will show you two examples below to illustrate how these methods work:
 
 ```
@@ -162,7 +165,6 @@ Here are a few LocalDate calculation examples to give you an idea of how these d
 
 ```
 LocalDate localDate = LocalDate.of(2015, 12, 31);
-
 LocalDate localDate1 = localDate.plusYears(3);
 LocalDate localDate2 = localDate.minusYears(3);
 
@@ -328,7 +330,6 @@ The Java DateTimeFormatter class is used to parse and format dates represented w
 	ISO_OFFSET_DATE_TIME
 
 	ISO_ZONED_DATE_TIME
-
 	ISO_INSTANT
 
 	ISO_DATE
@@ -357,3 +358,88 @@ String formattedZonedDate = formatter.format(ZonedDateTime.now());
 System.out.println("formattedZonedDate = " + formattedZonedDate);
 
 ，，，
+
+for example
+
+
+
+```
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+
+public class MyDateTime {
+
+    public static void main(String[] args) {
+        System.out.println("1、 Instant duration----------------");
+        Instant instant1 = Instant.now();
+        System.out.println(instant1.getNano());
+        System.out.println(instant1.getEpochSecond());
+        Instant instant2 = instant1.minusSeconds(3);
+        System.out.println(instant2.getEpochSecond());
+
+        Duration duration =  Duration.between(instant1, instant2);
+        System.out.println(duration.getSeconds());
+        System.out.println(duration.toHours());
+        System.out.println(duration.toNanos());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
+        // LocalDate localDate =  LocalDate.now();
+        System.out.println("2、 LocalDate----------------");
+        LocalDate localDate =  LocalDate.of(2018,04,12);
+
+        String formattedDate = formatter.format(localDate);
+
+        System.out.println(formattedDate);
+        System.out.println(localDate.getYear());
+        System.out.println(localDate.getMonth());
+        System.out.println(localDate.getDayOfMonth());
+        System.out.println(localDate.getDayOfWeek());
+        System.out.println(localDate.getDayOfYear());
+
+        System.out.println(formatter.format(localDate.plusDays(1)));
+        System.out.println(formatter.format(localDate.plusMonths(1)));
+        System.out.println(formatter.format(localDate.plusWeeks(1)));
+        System.out.println(formatter.format(localDate.plusYears(1)));
+
+
+        System.out.println("3、 LocalTime----------------");
+        LocalTime localTime = LocalTime.of(23, 12,12,1334);
+
+        System.out.println(localTime.getHour());
+        System.out.println(localTime.getMinute());
+        System.out.println(localTime.getSecond());
+        System.out.println(localTime.getNano());
+
+        System.out.println("4、 LocalDateTime----------------");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(formatter.format(localDateTime));
+
+        System.out.println(localDateTime.getYear());
+        System.out.println(localDateTime.getMonth());
+        System.out.println(localDateTime.getDayOfMonth());
+        System.out.println(localDateTime.getHour());
+        System.out.println(localDateTime.getMinute());
+        System.out.println(localDateTime.getSecond());
+        System.out.println(localDateTime.getNano());
+
+        System.out.println("5、 ZoneDateTime----------------");
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ISO_DATE_TIME;
+
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        System.out.println(formatDateTime.format(zonedDateTime));
+
+        ZoneId zoneId1 = ZoneId.of("America/Chicago");
+        System.out.println(formatDateTime.format(ZonedDateTime.now(zoneId1)));
+
+        System.out.println(formatDateTime.format(ZonedDateTime.now(ZoneId.of("GMT"))));
+        System.out.println(formatDateTime.format(ZonedDateTime.now(ZoneId.of("UTC"))));
+        System.out.println(formatDateTime.format(ZonedDateTime.now(ZoneId.of("UTC-2"))));
+        System.out.println(formatDateTime.format(ZonedDateTime.now(ZoneId.of("UT"))));
+
+
+    }
+}
+
+
+```
