@@ -31,10 +31,11 @@ TimeUnit.SECONDS.toMillis(44)
 提供很多转化函数
 
 //关于秒的常用方法 
-TimeUnit.SECONDS.toMillis(1) 1秒转换为毫秒数 
-TimeUnit.SECONDS.toMinutes(60) 60秒转换为分钟数 
-TimeUnit.SECONDS.sleep(5) 线程休眠5秒 
-TimeUnit.SECONDS.convert(1, TimeUnit.MINUTES) 1分钟转换为秒数 
+
+* TimeUnit.SECONDS.toMillis(1) 1秒转换为毫秒数 
+* TimeUnit.SECONDS.toMinutes(60) 60秒转换为分钟数 
+* TimeUnit.SECONDS.sleep(5) 线程休眠5秒 
+* TimeUnit.SECONDS.convert(1, TimeUnit.MINUTES) 1分钟转换为秒数 
 
 
 实例
@@ -51,33 +52,33 @@ public class MyTimeUnit {
         try
         {
             MyTimeUnit myTimeUnit = new MyTimeUnit();
-            myTimeUnit.timeUnit = TimeUnit.DAYS;
-            myTimeUnit.timeUnitInfo();
+            myTimeUnit.timeUnitInfo(Long.valueOf(1), TimeUnit.DAYS );
 
             TimeUnit.SECONDS.sleep(2);
 
-            myTimeUnit.timeUnit = TimeUnit.HOURS;
-            myTimeUnit.timeUnitInfo();
+            myTimeUnit.timeUnitInfo(Long.valueOf(1), TimeUnit.HOURS);
 
         }catch(InterruptedException e){
             System.out.println(e.getStackTrace());
         }
     }
 
-    public  void timeUnitInfo(){
+    public  void timeUnitInfo(Long time, TimeUnit unit){
+        timeUnit = unit;
         System.out.println(timeUnit.name());
-        System.out.println(timeUnit.toDays(1));
-        System.out.println(timeUnit.toHours(1));
-        System.out.println(timeUnit.toMinutes(1));
-        System.out.println(timeUnit.toSeconds(1));
-        System.out.println(timeUnit.toMillis(1));
-        System.out.println(timeUnit.toMicros(1));
-        System.out.println(timeUnit.toNanos(1));
+        System.out.println(timeUnit.toDays(time));
+        System.out.println(timeUnit.toHours(time));
+        System.out.println(timeUnit.toMinutes(time));
+        System.out.println(timeUnit.toSeconds(time));
+        System.out.println(timeUnit.toMillis(time));
+        System.out.println(timeUnit.toMicros(time));
+        System.out.println(timeUnit.toNanos(time));
 
         System.out.println("48Hour is "+(timeUnit.convert(48, TimeUnit.HOURS))+timeUnit.name());
         System.out.println("-------------------");
 
     }
 }
+
 
 ```

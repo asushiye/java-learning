@@ -23,3 +23,7 @@
 |Java Regular Expressions (regex)   |chapter-19| 
 |Java XML                   |chapter-20|
 |Java ZIP                   |chapter-21|
+|-|-|
+|Java Coding Standards      |chapter-99|
+|-|-|
+
