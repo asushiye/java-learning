@@ -54,9 +54,11 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 ## Java IO Class Overview Table
 
 |  A 	|Byte Based|Byte Based	|Character Based|Character Based|
+
 |  A 	|Input	|Output	|Input	|Output|
 | - | - | - | - | - |
 |Basic	|InputStream	|OutputStream	|Reader InputStreamReader	|Writer OutputStreamWriter|
+
 |Arrays	|ByteArrayInputStream	|ByteArrayOutputStream	|CharArrayReader	|CharArrayWriter|
 |Files	|FileInputStream RandomAccessFile	|FileOutputStream RandomAccessFile	|FileReader	|FileWriter|
 |Pipes	|PipedInputStream	|PipedOutputStream	|PipedReader	|PipedWriter|
