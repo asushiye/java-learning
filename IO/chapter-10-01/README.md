@@ -1,9 +1,9 @@
 # Java IO Tutorial
-chapter A 10 A 01
+chapter-10-01
 
 Java IO is an API that comes with Java which is targeted at reading and writing data (input and output). 
 
-For instance, read data from a file or over network, and write to a file or write a response back over the network.
+For instance, read data from-file or over network, and write to-file or write-response back over the network.
 
 The Java IO API is located in the **Java IO package (java.io)**.
 
@@ -14,26 +14,26 @@ The most typical sources and destinations of data are these
 * Files
 * Pipes
 * Network Connections
-* In A memory Buffers (e.g. arrays)
+* In-memory Buffers (e.g. arrays)
 * System.in, System.out, System.error
 
-a program reading data from a source and writing it to some destination:
+a program reading data from-source and writing it to some destination:
 
-> Source  A  A > Program   A  A > Destination
+> Source --> Program  --> Destination
 
 ## Streams data flow 
 
-A stream is a conceptually endless flow of data. 
+A stream is-conceptually endless flow of data. 
 
-You can either read from a stream or write to a stream. 
+You can either read from-stream or write to-stream. 
 
-A stream is connected to a data source or a data destination. 
+A stream is connected to-data source or-data destination. 
 
 Streams in Java IO can be either byte based (reading and writing bytes) or character based (reading and writing characters).
 
 
-> Source  A  A > InputStream / Reader   A  A > Program
-> Program   A  A > OutputStream / Writer   A  A >  Destination
+> Source --> InputStream / Reader  --> Program
+> Program  --> OutputStream / Writer  -->  Destination
 
 ## Java IO Purposes and Features
 
@@ -42,7 +42,7 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 * File Access
 * Network Access
 * Internal Memory Buffer Access
-* Inter A Thread Communication (Pipes)
+* Inter-Thread Communication (Pipes)
 * Buffering
 * Filtering
 * Parsing
@@ -54,7 +54,7 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 ## Java IO Class Overview Table
 
 
-|  A 	|Input(Byte Based)|Output(Byte Based)|Input(Char Based)|Output(Char Based)|
+| -	|Input(Byte Based)|Output(Byte Based)|Input(Char Based)|Output(Char Based)|
 | - | - | - | - | - |
 |Basic	|InputStream	|OutputStream	|Reader InputStreamReader	|Writer OutputStreamWriter|
 |Arrays	|ByteArrayInputStream	|ByteArrayOutputStream	|CharArrayReader	|CharArrayWriter|
@@ -62,11 +62,11 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 |Pipes	|PipedInputStream	|PipedOutputStream	|PipedReader	|PipedWriter|
 |Buffering	|BufferedInputStream	|BufferedOutputStream	|BufferedReader	|BufferedWriter|
 |Filtering	|FilterInputStream	|FilterOutputStream	|FilterReader	|FilterWriter|
-|Parsing	|PushbackInputStream StreamTokenizer |	  A  	|PushbackReader LineNumberReader	 | A  |
-|Strings	 |  A 	| 	 A |StringReader	|StringWriter|
-|Data	|DataInputStream	|DataOutputStream	 	|  A | A  |
-|Data  A  Formatted | A 	|PrintStream	 |	 A |PrintWriter|
-|Objects	|ObjectInputStream	|ObjectOutputStream	 	 | A  | A  |
-|Utilities	|SequenceInputStream|  A | A | A |
+|Parsing	|PushbackInputStream StreamTokenizer |	 - 	|PushbackReader LineNumberReader	 |- |
+|Strings	 | -	| 	-|StringReader	|StringWriter|
+|Data	|DataInputStream	|DataOutputStream	 	| -|- |
+|Data - Formatted |-	|PrintStream	 |	-|PrintWriter|
+|Objects	|ObjectInputStream	|ObjectOutputStream	 	 |- |- |
+|Utilities	|SequenceInputStream| -|-|-|
  
 
