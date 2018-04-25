@@ -1,5 +1,5 @@
 # Java IO Tutorial
-chapter-10-01
+chapter A 10 A 01
 
 Java IO is an API that comes with Java which is targeted at reading and writing data (input and output). 
 
@@ -14,12 +14,12 @@ The most typical sources and destinations of data are these
 * Files
 * Pipes
 * Network Connections
-* In-memory Buffers (e.g. arrays)
+* In A memory Buffers (e.g. arrays)
 * System.in, System.out, System.error
 
 a program reading data from a source and writing it to some destination:
 
-> Source --> Program  --> Destination
+> Source  A  A > Program   A  A > Destination
 
 ## Streams data flow 
 
@@ -32,8 +32,8 @@ A stream is connected to a data source or a data destination.
 Streams in Java IO can be either byte based (reading and writing bytes) or character based (reading and writing characters).
 
 
-> Source --> InputStream / Reader  --> Program
-> Program  --> OutputStream / Writer  -->  Destination
+> Source  A  A > InputStream / Reader   A  A > Program
+> Program   A  A > OutputStream / Writer   A  A >  Destination
 
 ## Java IO Purposes and Features
 
@@ -42,7 +42,7 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 * File Access
 * Network Access
 * Internal Memory Buffer Access
-* Inter-Thread Communication (Pipes)
+* Inter A Thread Communication (Pipes)
 * Buffering
 * Filtering
 * Parsing
@@ -53,20 +53,20 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 
 ## Java IO Class Overview Table
 
-| -	|Byte Based|Byte Based	|Character Based|Character Based|
-| -	|Input	|Output	|Input	|Output|
-|-|-|-|-|-|
+|  A 	|Byte Based|Byte Based	|Character Based|Character Based|
+|  A 	|Input	|Output	|Input	|Output|
+| - | - | - | - | - |
 |Basic	|InputStream	|OutputStream	|Reader InputStreamReader	|Writer OutputStreamWriter|
 |Arrays	|ByteArrayInputStream	|ByteArrayOutputStream	|CharArrayReader	|CharArrayWriter|
 |Files	|FileInputStream RandomAccessFile	|FileOutputStream RandomAccessFile	|FileReader	|FileWriter|
 |Pipes	|PipedInputStream	|PipedOutputStream	|PipedReader	|PipedWriter|
 |Buffering	|BufferedInputStream	|BufferedOutputStream	|BufferedReader	|BufferedWriter|
 |Filtering	|FilterInputStream	|FilterOutputStream	|FilterReader	|FilterWriter|
-|Parsing	|PushbackInputStream StreamTokenizer |	 - 	|PushbackReader LineNumberReader	 |- |
-|Strings	 | -	| 	-|StringReader	|StringWriter|
-|Data	|DataInputStream	|DataOutputStream	 	| -|- |
-|Data - Formatted |-	|PrintStream	 |	-|PrintWriter|
-|Objects	|ObjectInputStream	|ObjectOutputStream	 	 |- |- |
-|Utilities	|SequenceInputStream| -|-|-|
+|Parsing	|PushbackInputStream StreamTokenizer |	  A  	|PushbackReader LineNumberReader	 | A  |
+|Strings	 |  A 	| 	 A |StringReader	|StringWriter|
+|Data	|DataInputStream	|DataOutputStream	 	|  A | A  |
+|Data  A  Formatted | A 	|PrintStream	 |	 A |PrintWriter|
+|Objects	|ObjectInputStream	|ObjectOutputStream	 	 | A  | A  |
+|Utilities	|SequenceInputStream|  A | A | A |
  
 
