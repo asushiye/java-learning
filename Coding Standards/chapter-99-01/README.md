@@ -5,6 +5,7 @@
 		命名风格
 		代码格式
 		代码文件层级结构
+		OO规约
 
 作为优秀的程序员，我们追求代码可读性，简洁。
 ## 命名风格
@@ -86,3 +87,10 @@
 * 4） 包内共享常量：即在当前包下单独的 constant 目录下。  
 * 5） 类内共享常量：直接在类内部 private static final 定义。 
 
+
+## OO规约
+
+
+
+6. 【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals。 
+正例："test".equals(object); 反例：object.equals("test"); 
