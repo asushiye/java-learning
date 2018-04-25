@@ -63,10 +63,10 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 |Buffering	|BufferedInputStream	|BufferedOutputStream	|BufferedReader	|BufferedWriter|
 |Filtering	|FilterInputStream	|FilterOutputStream	|FilterReader	|FilterWriter|
 |Parsing	|PushbackInputStream StreamTokenizer |	 - 	|PushbackReader LineNumberReader	 |- |
-|Strings	 | -	| 	-|StringReader	|StringWriter|
-|Data	|DataInputStream	|DataOutputStream	 	| -|- |
 |Data - Formatted |-	|PrintStream	 |	-|PrintWriter|
+|Data	|DataInputStream	|DataOutputStream	 	| -|- |
 |Objects	|ObjectInputStream	|ObjectOutputStream	 	 |- |- |
+|Strings	 | -	| 	-|StringReader	|StringWriter|
 |Utilities	|SequenceInputStream| -|-|-|
  
 
