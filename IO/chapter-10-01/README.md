@@ -53,20 +53,20 @@ Java IO contains many subclasses of the InputStream, OutputStream, Reader and Wr
 
 ## Java IO Class Overview Table
 
-|	|Byte Based	|Character Based|
-| 	|Input	|Output	|Input	|Output|
-|-|-|-|-|
+| -	|Byte Based|Byte Based	|Character Based|Character Based|
+| -	|Input	|Output	|Input	|Output|
+|-|-|-|-|-|
 |Basic	|InputStream	|OutputStream	|Reader InputStreamReader	|Writer OutputStreamWriter|
 |Arrays	|ByteArrayInputStream	|ByteArrayOutputStream	|CharArrayReader	|CharArrayWriter|
 |Files	|FileInputStream RandomAccessFile	|FileOutputStream RandomAccessFile	|FileReader	|FileWriter|
 |Pipes	|PipedInputStream	|PipedOutputStream	|PipedReader	|PipedWriter|
 |Buffering	|BufferedInputStream	|BufferedOutputStream	|BufferedReader	|BufferedWriter|
 |Filtering	|FilterInputStream	|FilterOutputStream	|FilterReader	|FilterWriter|
-|Parsing	|PushbackInputStream StreamTokenizer |	  	|PushbackReader LineNumberReader	 | |
-|Strings	 |	| 	|StringReader	|StringWriter|
-|Data	|DataInputStream	|DataOutputStream	 	| | |
-|Data - Formatted |	| 	|PrintStream	 |	|PrintWriter|
-|Objects	|ObjectInputStream	|ObjectOutputStream	 	 | | |
-|Utilities	|SequenceInputStream|
+|Parsing	|PushbackInputStream StreamTokenizer |	 - 	|PushbackReader LineNumberReader	 |- |
+|Strings	 | -	| 	-|StringReader	|StringWriter|
+|Data	|DataInputStream	|DataOutputStream	 	| -|- |
+|Data - Formatted |-	|PrintStream	 |	-|PrintWriter|
+|Objects	|ObjectInputStream	|ObjectOutputStream	 	 |- |- |
+|Utilities	|SequenceInputStream| -|-|-|
  
 
