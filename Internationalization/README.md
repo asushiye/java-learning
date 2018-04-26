@@ -14,7 +14,22 @@ chapter-09-01
 		Java's Internationalization Classes
 
 ## Java Internationalization: Locale
-chapter-09-01
+chapter-09-02
+
+		Locale Standards
+		Locale Contents
+		Creating a Locale
+
+
+## Internationalization
+chapter-09-03
+		ResourceBundle
+		NumberFormat
+		DecimalFormat
+		DateFormat
+		SimpleDateFormat
+		Internationalization: Time Zones
+		Internationalization: Character Methods
 
 
 

@@ -1,5 +1,5 @@
 # Java Internationalization: Locale
-chapter-09-03
+chapter-09-02
 
 
 java.util.Locale类用于表示“地理，政治或文化”区域，以将给定的文本，数字，日期或操作本地化。 
