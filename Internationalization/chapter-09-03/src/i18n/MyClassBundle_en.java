@@ -1,0 +1,14 @@
+package i18n;
+
+import java.util.ListResourceBundle;
+
+public class MyClassBundle_en extends ListResourceBundle {
+    @Override
+    protected Object[][] getContents() {
+        return contents;
+    }
+    private Object[][] contents = {
+            { "price"   , new Double(10.00) },
+            { "currency", "EUR" },
+    };
+}
