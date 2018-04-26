@@ -3,7 +3,7 @@
 # Java IO Tutorial
 chapter-10-01
 
-# byte stream
+# Java File Access
 chapter-10-02
 
 # char stream

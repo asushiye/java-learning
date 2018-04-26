@@ -1,6 +1,12 @@
 # Java IO Tutorial
 chapter-10-01
 
+		Source and Destination
+		Streams data flow
+		Java IO Purposes and Features
+		Java IO Class Overview Table
+
+
 Java IO is an API that comes with Java which is targeted at reading and writing data (input and output). 
 
 For instance, read data from-file or over network, and write to-file or write-response back over the network.
