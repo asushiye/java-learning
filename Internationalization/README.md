@@ -23,6 +23,7 @@ chapter-09-02
 
 ## Internationalization
 chapter-09-03
+
 		ResourceBundle
 		NumberFormat
 		DecimalFormat
