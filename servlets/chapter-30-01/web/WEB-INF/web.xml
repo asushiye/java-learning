@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaeehttp://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+
+    <servlet>
+        <servlet-name>SimpleServlet</servlet-name>
+        <servlet-class>SimpleServlet</servlet-class>
+        <init-param>
+            <param-name>iniParam</param-name>
+            <param-value>SimpleServlet</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SimpleServlet</servlet-name>
+        <url-pattern>/yesOrNo</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>myParam</param-name>
+        <param-value>Context param the value </param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>myFilter</filter-name>
+        <filter-class>SimpleServletFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>myFilter</filter-name>
+        <url-pattern>*.hello</url-pattern>
+    </filter-mapping>
+
+</web-app>
