@@ -11,14 +11,14 @@
 Java JDBC Thin Driver have three mode
 
 Oracle JDBC Thin using a ServiceName
-> jdbc:oracle:thin:@//<host>:<port>/<service_name> 
+> jdbc:oracle:thin:@//host:port/<service_name> 
 > recommmend to database cluster
 
 Oracle JDBC Thin using an SID
-> jdbc:oracle:thin:@<host>:<port>:<SID> 
+> jdbc:oracle:thin:@host:port:<SID> 
 
 Oracle JDBC Thin using a TNSName:
-> jdbc:oracle:thin:@<TNSName> 
+> jdbc:oracle:thin:@TNSName 
 
 ```
 Class.forName("oracle.jdbc.driver.OracleDriver"); 
