@@ -13,8 +13,10 @@ Java JDBC Thin Driver have three mode
 Oracle JDBC Thin using a ServiceName
 > jdbc:oracle:thin:@//<host>:<port>/<service_name> 
 > recommmend to database cluster
+
 Oracle JDBC Thin using an SID
 > jdbc:oracle:thin:@<host>:<port>:<SID> 
+
 Oracle JDBC Thin using a TNSName:
 > jdbc:oracle:thin:@<TNSName> 
 
@@ -39,6 +41,8 @@ Connection conn= DriverManager.getConnection(url,user,password);
 ```
 
 ## h2
+
+```
 Class.forName("org.h2.Driver")
 String url="jdbc:h2:tcp://localhost/mem:testmemdb";   // tcp 模式链接远程
 String url="jdbc:h2:file:~/testmemdb";   // localhost 
@@ -46,6 +50,7 @@ String url="jdbc:h2:file:E:/H2/testmemdb";   // window only
 String user="test"; 
 String password="test"; 
 Connection conn= DriverManager.getConnection(url,user,password);
+```
 
 ## sqlserver
 
