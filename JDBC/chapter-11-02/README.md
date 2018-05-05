@@ -16,12 +16,21 @@ A JDBC driver is a set of Java classes that implement the JDBC interfaces, targe
 
 There are 4 different types of JDBC drivers:
 
-- Type 1: JDBC-ODBC bridge driver![\chapter-11-01\driver-type-1](..\chapter-11-01\driver-type-1.png)
-- Type 2: Java + Native code driver![\chapter-11-01\driver-type-2](..\chapter-11-01\driver-type-2.png)
-- Type 3: All Java + Middleware translation driver![\chapter-11-01\driver-type-3](..\chapter-11-01\driver-type-3.png)
+- Type 1: JDBC-ODBC bridge driver
+
+![driver-type-1](driver-type-1.png)
+
+- Type 2: Java + Native code driver
+
+![driver-type-2](driver-type-2.png)
+
+- Type 3: All Java + Middleware translation driver
+
+![driver-type-3](driver-type-3.png)
+
 - Type 4: All Java driver.
 
-![\chapter-11-01\driver-type-4](..\chapter-11-01\driver-type-4.png)
+![driver-type-4](driver-type-4.png)
 
 Today, most JDBC drivers are type 4 drivers which connects directly to the database.
 
@@ -55,7 +64,7 @@ Closing the Connection
 
 Once you are done using the database connection you should close it. This is done by calling the Connection.close() method, like this:
 
-```connection.close();```
+```
 connection.close();
 ```
 
