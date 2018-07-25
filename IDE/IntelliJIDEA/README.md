@@ -3,6 +3,9 @@
 		概况
 		快捷键
 		注释配置
+			文件头注释模板
+			方法头注释模板
+			验证注释模板
 
 ## 快捷键
 
@@ -141,6 +144,38 @@ no applicableContext **define**
 
 
 注释模板也配置好了，我们可以愉快的使用了
+
+
+### 验证注释模板
+
+创建一个TestAnnotation类，并添加方法printlnValue
+
+```
+package user.client;
+
+import java.io.Serializable;
+
+/**
+ * @author : zhenyun.su
+ * @since : 2018-07-25
+ * @see Serializable
+ */
+
+public class TestAnnotation implements Serializable {
+
+    /*
+     * @comment :
+     * @params  :
+     * [value]
+     * @return  : void
+     */
+    public void printlnValue(String value){
+        System.out.println("TestAnnotation.printlnValue"+value);
+    }
+}
+```
+
+在方法体里面 执行add+enter/tab, 生成注释，才会自动添加参数和返回值，这个需要优化
 
 但是按简洁之道，尽量减少代码注释，好的命令风格就可以减少注释。
 
