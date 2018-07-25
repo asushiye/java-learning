@@ -6,6 +6,9 @@
 			文件头注释模板
 			方法头注释模板
 			验证注释模板
+		导出导入配置信息
+			导出配置信息
+			导入配置信息
 
 ## 快捷键
 
@@ -185,5 +188,31 @@ public class TestAnnotation implements Serializable {
 	设置主题：Appearance -> Theme[IntelliJ]
 	设置背景图：Appearance -> backgroup image
 	快捷键： Default
+
+
+## 导出导入配置信息
+
+### 导出配置信息
+
+
+
+启动idea  -> 选择项目的欢迎界面 -> configure
+
+![exportAndImportSetting](exportAndImportSetting.png)
+
+选择 Export Setting
+
+或者 打开idea主界面后 -> file -> Export Setting
+
+选择所有，选择保存路径 D:\7_Computer\3_Personal Set\idea 填写 settings-yyyymmdd.jar
+
+### 导入配置信息
+
+Import Setting
+
+一样的导入时，选择文件 settings-yyyymmdd.jar进行导入
+
+可根据需要，选择对应分类进行导入。
+
 
 
