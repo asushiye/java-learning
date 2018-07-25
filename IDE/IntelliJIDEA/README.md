@@ -182,7 +182,8 @@ public class TestAnnotation implements Serializable {
 
 ## 个性化设置
 
-	设置主题：Appearance -> Theme[Darcula]
+	设置主题：Appearance -> Theme[IntelliJ]
 	设置背景图：Appearance -> backgroup image
+	快捷键： Default
 
 
