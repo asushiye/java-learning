@@ -25,5 +25,6 @@
 | Java ZIP                         | chapter-21 |
 | java-servlets                    | chapter-30 |
 | -                                | -          |
+| Java IDE	                   | chapter-80 |
 | Java Coding Standards            | chapter-99 |
 | -                                | -          |
