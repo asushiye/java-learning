@@ -1,12 +1,13 @@
 # Java Collections  
 
-# chapter-02-01
+## Collection interfaces   ----- 接口方法  
 
-Java Collections  and collections interfaces
+		Overview of Java Collections
+		Iterable interface
+		collection interface
+		集合方法实例
 
-# chapter-02-02
-
-Java Collections  and collections implementions
+## Collections implementions   ------  集合实现
 
 
 

@@ -1,14 +1,12 @@
-# Java Collections  and collections implementions
+# collection implementions
 
 		Java Collections - List
 		Java Collections - Set
 		Java Collections - SortedSet
 
-下面还未整理
-		Java Collections - NavigableSet
-		Java Collections - Map
-		Java Collections - SortedMap
+collection implementions class
 
+下面将介绍常用集合实现类
 
 ## Java Collections - List
 
@@ -18,6 +16,9 @@ List Implementations
 > * java.util.LinkedList
 > * java.util.Vector
 > * java.util.Stack
+
+ArrayList Class hierarchy
+![arrayList](arrayList.png)
 
 ```
 List listA = new ArrayList();
@@ -81,6 +82,9 @@ Set Implementations
 > * java.util.LinkedHashSet
 > * java.util.TreeSet
 
+HashSet Class hierarchy
+![hashset](hashset.png)
+
 ```
 Set setA = new EnumSet();
 Set setB = new HashSet();
@@ -130,3 +134,7 @@ put out set item for sorted aec
     }
 ```
 
+## Java hashMap
+
+hashMap Class hierarchy
+![hashMap](hashMap.png)

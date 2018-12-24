@@ -1,48 +1,37 @@
-# Java Collections  and collections interface
-
-
-The Java Collections API's provide Java developers with a set of classes and interfaces that makes it easier to handle collections of objects
+# collections interface
 
 		Overview of Java Collections
-		The Central Java Collection Interfaces
-		Java Collections and Generics
-		Java Collections and the equals() and hashCode() Methods
+		Iterable interface
+		collection interface
+		集合方法实例
 
 
 ## Java Collections - Overview
- it is useful to have an overview of the interfaces it contains
+ The Java Collections API's provide Java developers with a set of classes and interfaces that makes it easier to handle collections of objects
 
+ it is useful to have an overview of the interfaces it contains
 
  there are two "groups" of interfaces: Collection's and Map's.
 
-###the Collection interface hierarchy
+interface hierarchy 
 
+list interface hierarchy
 
->Iterable -> iterator()
+![list](list.png)
 
->>Collection -> size()
+set interface hierarchy
 
->>>List    Set(SortedSet, NavigableSet)   Queue(Deque)
+![set](set.png)
 
+map intrface hierarchy
+![map](map.png)
 
-###the Map interface hierarchy
->Map->(keySet() values())
->>SortedMap
->>>NavigableMap
+集合根接口iterable
 
-
-## Java Collections - Iterable
+## Iterable interface
 
 The Iterable interface (*java.lang.Iterable*) is one of the root interfaces of the Java collection classes. 
 The Collection interface extends Iterable, so all subtypes of Collection also implement the Iterable interface
-
-```
-List list = new ArrayList();
-
-for(Object o : list){
-    //do something o;    
-}
-```
 
 The Iterable interface has only one method:
 ```
@@ -51,17 +40,50 @@ public interface Iterable<T> {
 }
 ```
 
-## Java Collections - Collection
+iterable 提供返回iterator迭代器，通过迭代器可以实现集合的遍历
+
+```
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+```
+
+如下遍历
+```
+    while (xxx.hasNext){
+        statement;
+	xxx.next;
+    }
+```
+
+## collection interface
 
 The Collection interface (java.util.Collection) is one of the root interfaces of the Java collection classes. 
 
-1. Collection Subtypes
-2. Adding and Removing Elements
-3. Checking if a Collection Contains a Certain Element
-4. Collection Size
-5. Iterating a Collection
+collection接口主要提供如下方法
 
-### 1. Collection Subtypes
+1. Adding and Removing Elements
+2. Checking if a Collection Contains a Certain Element
+3. Collection Size
+4. Iterating a Collection
+5. Collection Subtypes
+
+### collection主要方法
+
+|方法|描述|
+|-|-|
+|add|添加一个元素|
+|addAll|添加所有元素|
+|remove|移除一个元素|
+|removeAll|移除所有元素|
+|iterator|返回迭代器|
+|size|集合大小|
+|clear|清空集合|
+|contains|集合是否包含某个元素|
+|isEmpty|集合是否为空|
+
+
+### Collection Subtypes
 
 * List
 * Set
@@ -70,6 +92,7 @@ The Collection interface (java.util.Collection) is one of the root interfaces of
 * Queue
 * Deque
 
+## 集合方法实例
 
 ```
 public class MyCollectionUtil {
@@ -99,7 +122,7 @@ public class MyMain {
 
 ```
 
-### Adding and Removing Elements
+#### Adding and Removing Elements
 
 ```
 public class MyCollectionUtil {
@@ -152,7 +175,7 @@ addAll Collection from other collection
 ```
 
 
-### Checking if a Collection Contains a Certain Element and collection size
+#### Checking if a Collection Contains a Certain Element and collection size
 
 ```
         System.out.println(collection.contains(1));
@@ -161,7 +184,6 @@ addAll Collection from other collection
 	int numberOfElements = collection.size();
 ```
 
-## Java Collections - Generic Collections
 
 refer to：JavaGenerics
 
