@@ -32,7 +32,5 @@ public class MyMain {
         System.out.println(collection.contains(1));
         int numberOfElements = collection.size();
 
-
-
     }
 }
