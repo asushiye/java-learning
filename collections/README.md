@@ -22,6 +22,13 @@
 		Map实现类
 		集合实现类比较
 
+## Collections utils   ------  集合工具类
+
+		Collections
+
+
+增强学习： **数据结构**
+
 
 
 

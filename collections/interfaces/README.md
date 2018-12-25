@@ -20,9 +20,6 @@ interface hierarchy
 ![collection](collection.png)
 
 
-map intrface hierarchy
-![map](map.png)
-
 JDK提供的集合接口不限于上面列出来的
 
 集合根接口iterable

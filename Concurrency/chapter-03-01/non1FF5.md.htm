@@ -2,11 +2,6 @@
 
 		Multithreading		
 		Benefits
-		Cost
-		Concurrecy Model
-			并行工作者模式
-			流水线并发模型
-
 
 ## Multithreading
 
@@ -55,7 +50,7 @@ The reason multithreading is still used in spite of its challenges is that multi
 
 ## Concurrecy Model
 
-### 并行工作者模式
+1. 并行工作者模式
 
 第一个并发模型就是我所说的并行工作模型。 
 
@@ -84,7 +79,7 @@ The reason multithreading is still used in spite of its challenges is that multi
 
 并行工作者模式作业执行顺序是不确定的，这使得很难保证执行作业A前，执行作业B的需求。
 
-### 流水线并发模型
+2. 流水线并发模型
 
 #### 流水线并发模型概念
 第二个并发模型就是我所说的流水线并发模型。
@@ -136,14 +131,8 @@ The reason multithreading is still used in spite of its challenges is that multi
 
 ![channel](channel.png)
 
-哪种并发模型最好？
 
-如果作业相互独立并没有共享状态的话，并行工作者模型比较好
-如果作业不是平行的也不是独立的，流水线并行模型比较
 
-当然两种也可以一起使用
-
-通过上面了解多线并发模型思想和分布式系统相似。
 
 
 

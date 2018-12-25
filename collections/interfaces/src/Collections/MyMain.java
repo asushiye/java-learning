@@ -31,6 +31,5 @@ public class MyMain {
         collection.removeAll(set);
         System.out.println(collection.contains(1));
         int numberOfElements = collection.size();
-
     }
 }
