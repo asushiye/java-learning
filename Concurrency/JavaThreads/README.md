@@ -42,7 +42,19 @@ public class TestMain {
 
 ### Runnable接口
 
-实现接口类
+
+```
+@FunctionalInterface
+public interface Runnable {
+
+    public abstract void run();
+}
+
+```
+
+下面通过三种方式来实现这个接口
+
+1 实现接口类
 ```
 public class MyRunnable implements Runnable {
     @Override
@@ -61,7 +73,7 @@ public class MyRunnable implements Runnable {
     }
 ```
 
-匿名类实现接口
+2 匿名类实现接口
 
 ```
     public static void Anonymous_Runable_test(){
