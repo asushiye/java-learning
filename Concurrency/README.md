@@ -53,8 +53,12 @@
 			能保证不同线程可见性
 			不能保证共享数据竞争
 			
+## Java ThreadLocal   ------ 本地线程
 
-
+		ThreadLocal概念
+		ThreadLocal实现
+		ThreadLocal实例
+		ThreadLocal初始化
 
 
 

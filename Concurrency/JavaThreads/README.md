@@ -7,6 +7,7 @@
 			获取当前线程实例
 			暂停线程
 			停止线程
+			等候线程执行结束
 
 
 ## 概念
@@ -178,3 +179,22 @@ try {
     e.printStackTrace();
 }
 ```
+
+### 等候线程执行结束
+
+通过thread.join()设置主线程等候子线程多久，才继续往下执行，无参数表示直到子线程执行结束。
+
+```
+    public static void lambda_Runable_test(){
+        Runnable runnable = () -> { System.out.println("Lambda Runnable running"); };
+        Thread thread =  new Thread(runnable,"Lambda");
+        thread.start();
+        try {
+            thread.join(2000);
+        } catch (InterruptedException e) {
+        }
+        System.out.println(thread.getName());
+    }
+```
+
+这里设置2秒了，表示主线程等候2秒，2秒后即使子线程没有结束，主线程也往下执行。

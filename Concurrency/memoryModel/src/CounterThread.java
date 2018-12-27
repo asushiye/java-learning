@@ -15,7 +15,11 @@ public class CounterThread extends Thread {
     @Override
     public void run() {
         for (int i = 1; i <= 100; i++) {
-            counter.add1(i);
+            counter.add(i);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+            }
         }
         System.out.println(this.getName()+" counter= "+counter.getCount()+" ;");
     }

@@ -5,11 +5,11 @@
 
 public class TestMain {
     public static void main(String[] args) {
-        TestMain.thread_subClass_test();
-        TestMain.implement_runable_test();
-        TestMain.Anonymous_Runable_test();
+//        TestMain.thread_subClass_test();
+//        TestMain.implement_runable_test();
+//        TestMain.Anonymous_Runable_test();
         TestMain.lambda_Runable_test();
-        TestMain.currectThread_test();
+//        TestMain.currectThread_test();
     }
 
     public static void thread_subClass_test() {
@@ -38,6 +38,10 @@ public class TestMain {
         Runnable runnable = () -> { System.out.println("Lambda Runnable running"); };
         Thread thread =  new Thread(runnable,"Lambda");
         thread.start();
+        try {
+            thread.join(2000);
+        } catch (InterruptedException e) {
+        }
         System.out.println(thread.getName());
     }
 
