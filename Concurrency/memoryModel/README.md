@@ -16,6 +16,11 @@
 			单线程实例
 			多线程异常
 			同步线程
+		Volatile标识
+			能保证不同线程可见性
+			不能保证共享数据竞争
+
+			
 			
 ## JVM内存模型
 
@@ -474,14 +479,18 @@ public class TestMain {
 
 ```
 
-运行输入如下：
+运行结果如下：
 
 ```
 CounterThreadA counter= 9857 ;
 CounterThreadB counter= 9857 ;
 ```
-
 说明结果出现异常
+
+由于每个线程处理是对象和对象成员，因此它们存放在heap是共享数据，线程A和线程B操作临界区add和成员count时，
+
+没有同步标识，按照Java内存模型和计算内存结构，这就看计算机随机优先处理哪个线程，最后有cpu缓存刷新到RAM主存储的值为哪个？
+
 
 ### 同步线程
 
@@ -532,3 +541,59 @@ CounterThreadB counter= 10100 ;
 虽然同步机制是java的多线处理第一种机制，但是同步机制实现还不够方便，
 
 因此Java5以后提供了很多 **同步机制类**来帮助开发并发程序。
+
+
+## Volatile标识
+
+Java volatile关键字用于将Java变量标记为“存储在主存储器中”。 
+
+更确切地说，每次读取一个volatile变量都将从计算机的主内存中读取，而不是从CPU缓存中读取，
+
+并且每次写入volatile变量都将写入主内存，而不仅仅是CPU缓存。
+
+而从Java 5开始，volatile关键字不仅仅保证向主内存写入和读取volatile变量
+
+1. 能保证不同线程可见性
+2. 不能保证共享数据竞争
+
+### 1. 能保证不同线程可见性
+
+在没有volatile标识的变量，数据读写从CPU缓存操作的，两个线程则在两个CPU缓存中，不可见的，如下图：
+
+```
+public class SharedObject {
+
+    public int counter = 0;
+
+}
+```
+
+![novolatile](novolatile.png)
+
+
+若有volatile标识
+
+```
+public class SharedObject {
+
+    public volatile  int counter = 0;
+
+}
+```
+
+通过声明计数器变量volatile，对计数器变量的所有写操作都将立即写回主存储器。 此外计数器变量的所有读取都将直接从主存储器中读取。
+
+保证了不同线程对共享数据volatile可见性。
+
+### 2. 不能保证共享数据竞争
+
+从上面知道，可以保证线程B读取是线程A的写入的数据，但是还无法保证线程A和线程B同时写入时数据的一致性
+
+
+由于线程在读取或写入volatile变量时同一个时间点不会阻止其他线程读取或写入。
+
+为此必须在关键部分周围使用synchronized关键字，来保证同一个时间只有一个线程在操作。
+
+当然也可以使用java.util.concurrent包中的众多原子数据类型之一。例如，AtomicLong或AtomicReference或其他之一
+
+我们将在以后章节详细介绍
