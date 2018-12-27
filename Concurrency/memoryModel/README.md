@@ -7,6 +7,15 @@
 		Java内存模型与硬件内存架构之间的差距
 			共享对象，在不同线程中不可见
 			在读\写共享对象时产生竞争
+		synchronized blocks同步块
+			实例方法
+			静态方法
+			实例方法里面的代码块
+			静态方法里面的代码块
+		Synchronized  实例演示
+			单线程实例
+			多线程异常
+			同步线程
 			
 ## JVM内存模型
 
@@ -266,3 +275,256 @@ volatile关键字可以确保直接从主内存读取给定变量，并在更新
 
 2. 同步块还保证在同步块内访问的所有变量都将从主内存读入，当线程退出同步块时，无论变量是否声明为volatile，所有更新的变量都将再次刷回主内存
 
+## synchronized blocks同步块
+
+**synchronized**用于标记一个方法或一个代码块是一个同步块。同步块是为了避免竞争条件
+
+被标记的同步块在同一个时间只能有一个线程在执行，若其他线程也在要执行相同的同步块时会阻塞，直到之前的线程执行结束其他线程才能执行。
+
+synchronized 可以用标记四种代码块类型
+
+1. 实例方法
+2. 静态方法
+3. 实例方法里面的代码块
+4. 静态方法里面的代码块
+
+### 1. 实例方法
+
+```
+  public synchronized void add(int value){
+      this.count += value;
+  }
+```
+
+在实例方法声明之前，添加 **synchronized**关键字，表名为这个方法为同步方法
+
+类的每个实例中，指定同步方法的代码同一个时间只能由一个线程来操作。 
+
+如果存在多个实例，则一次一个线程可以在每个实例的同步实例方法内执行。 每个实例一个线程
+
+### 2. 静态方法
+
+和实例方法一样在静态方法 static前面添加 **synchronized**关键字，将静态方法标记为静态同步方法。
+
+```
+ public static synchronized void add(int value){
+      count += value;
+  }
+```
+
+由于每个类在Java VM中只存在一个类，因此在同一个类中的静态同步方法中只能执行一个线程。
+
+也就是在JVM中，同一时间只有一个线程来执行
+
+如果静态同步方法位于不同的类中， 每个类一个线程，无论它调用哪个静态同步方法。
+
+### 3. 实例方法里面的代码块
+
+我们没有对整个实例方法做同步，有时候需要对方法中部分对面做同步块，来解决多线程竞争条件问题。
+
+```
+public void add(int value){
+
+    synchronized(this){
+       this.count += value;   
+    }
+  }
+```
+
+实例使用Java synchronized块构造将代码块标记为已同步
+
+**this** 表示add方法的实例，通过在synchronized构造方法中传入this对象来表明是 **监控对象**
+
+我们可以在监控对象上指定代码为同步块，这样同一时间只有一个线程可以同步块代码执行。
+
+下面两个示例在调用它们的实例上同步。 因此，它们在同步方面是等效的：
+```
+  public class MyClass {
+  
+    public synchronized void log1(String msg1, String msg2){
+       log.writeln(msg1);
+       log.writeln(msg2);
+    }
+
+  
+    public void log2(String msg1, String msg2){
+       synchronized(this){
+          log.writeln(msg1);
+          log.writeln(msg2);
+       }
+    }
+  }
+```
+
+
+### 4. 静态方法里面的代码块
+
+ 和上面类似，下面两个示例的静态方法，指定同步块
+
+```
+  public class MyClass {
+
+    public static synchronized void log1(String msg1, String msg2){
+       log.writeln(msg1);
+       log.writeln(msg2);
+    }
+
+  
+    public static void log2(String msg1, String msg2){
+       synchronized(MyClass.class){
+          log.writeln(msg1);
+          log.writeln(msg2);  
+       }
+    }
+  }
+```
+
+**MyClass.class** 表示监控类，通过监控类来达到代码块同步的目的。
+
+## Synchronized  实例演示
+
+下面我们还是使用计数逻辑来演示多线程问题
+
+### 单线程实例
+
+计数器类
+```
+/**
+ * @author : zhenyun.su
+ * @since : 2018/12/27
+ */
+
+public class Counter {
+
+    private long count=0;
+
+    public long getCount() {
+        return count;
+    }
+
+    public void add(int value){
+        this.count += value;
+    }
+}
+
+```
+计数器线程类
+```
+
+public class CounterThread extends Thread {
+
+    protected Counter counter = null;
+
+    public CounterThread(String name, Counter counter) {
+        super(name);
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 100; i++) {
+            counter.add(i);
+        }
+        System.out.println(this.getName()+" counter= "+counter.getCount()+" ;");
+    }
+}
+```
+测试代码
+```
+
+public class TestMain {
+
+    public static void main(String[] args) {
+        TestMain.thread_test();
+    }
+
+    public static void thread_test(){
+        Counter counter = new Counter();
+        CounterThread counterThreadA = new CounterThread("CounterThreadA",counter);
+        counterThreadA.start();
+        System.out.println("---thread_test---");
+    }
+}
+```
+
+运行输入 10100
+
+### 多线程异常
+
+下面我们创建两个线程执行
+```
+
+public class TestMain {
+
+    public static void main(String[] args) {
+//       TestMain.thread_test();
+        TestMain.mutil_thread_test();
+    }
+
+    public static void mutil_thread_test(){
+        Counter counter = new Counter();
+        CounterThread counterThreadA = new CounterThread("CounterThreadA",counter);
+        CounterThread counterThreadB = new CounterThread("CounterThreadB",counter);
+        counterThreadA.start();
+        counterThreadB.start();
+
+        System.out.println("---mutil_thread_test---");
+    }
+}
+
+```
+
+运行输入如下：
+
+```
+CounterThreadA counter= 9857 ;
+CounterThreadB counter= 9857 ;
+```
+
+说明结果出现异常
+
+### 同步线程
+
+给计数器add方法添加同步标记 **synchronized**
+```
+public class Counter {
+
+    private long count=0;
+
+    public long getCount() {
+        return count;
+    }
+
+    public synchronized void add(int value){
+        this.count += value;
+    }
+}
+```
+
+重新运行mutil_thread_test
+
+输出结果
+```
+CounterThreadA counter= 5050 ;
+CounterThreadB counter= 10100 ;
+```
+
+不管运行几次都会有10100的结果
+
+当然我们也可以将实例方法的同步，修改为代码块的同步，如下
+
+```
+    public synchronized void add(int value){
+        this.count += value;
+    }
+
+    public void add1(int value){
+        synchronized(this){
+        this.count += value;
+        }
+    }
+```
+
+经测试结果一样
+
+提示： 多线程的监控，可以通过VisualVM工具来监控
