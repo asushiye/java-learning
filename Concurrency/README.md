@@ -95,3 +95,16 @@
 		阻塞队列实现逻辑
 
 ## thread pool   ------  线程池
+
+## Compare and Swap ----- 比较和交换
+
+## Anatomy of a Synchronizer   ------   同步器的剖析
+
+## Non-blocking Algorithms   ------    非阻塞算法 
+
+## Amdahl's Law   ------  阿姆达尔定律
+
+
+
+
+
