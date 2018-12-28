@@ -78,7 +78,7 @@
 			2. 锁定超时
 			3. 死锁检测	
 
-# Java lock   ------ java 锁
+## Java lock   ------ java 锁
 
 		饥饿和公平 - Starvation and Fairness
 			Java中饥饿的原因
@@ -89,4 +89,9 @@
 		信号量 - Semaphore 
 		滑倒的条件  - Slipped Conditions
 
-# Java Blocking Queues  ----- 阻塞队列
+## Java Blocking Queues  ----- 阻塞队列
+
+		什么是阻塞队列
+		阻塞队列实现逻辑
+
+## thread pool   ------  线程池
