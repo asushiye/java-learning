@@ -78,3 +78,15 @@
 			2. 锁定超时
 			3. 死锁检测	
 
+# Java lock   ------ java 锁
+
+		饥饿和公平 - Starvation and Fairness
+			Java中饥饿的原因
+			用Java实现公平
+		锁 - lock
+		读写锁 - read / write lock  
+		重入锁定 - Reentrance Lockout
+		信号量 - Semaphore 
+		滑倒的条件  - Slipped Conditions
+
+# Java Blocking Queues  ----- 阻塞队列
