@@ -9,10 +9,8 @@ public class MyUseCheckException {
 
     public static void main(String[] args) {
         try {
-            MyUseCheckException.testException(Boolean.TRUE);
-            MyRunning myRunning = new MyRunning();
-            new Thread(myRunning).start();
-        }catch (MyCheckException e) {
+            UserException.getException("运行报错");
+        }catch (UserException e) {
             System.out.println(e.getMessage());
         }
     }
