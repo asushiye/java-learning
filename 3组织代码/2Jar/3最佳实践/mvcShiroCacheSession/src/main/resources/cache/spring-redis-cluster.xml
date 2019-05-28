@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+	<!--集群Redis-->
+	<bean id="redisManager" class="org.crazycake.shiro.RedisClusterManager">
+		<property name="host" value="192.168.184.48:7000,192.168.184.49:7000,192.168.184.32:7000"/>
+		<!-- optional properties
+        <property name="timeout" value="10000"/>
+        <property name="soTimeout" value="10000"/>
+        <property name="maxAttempts" value="2"/>
+        <property name="password" value="123456"/>-->
+	</bean>
+
+	<!-- Redis-based cache configuration -->
+	<bean id="shiroCacheManager" class="org.crazycake.shiro.RedisCacheManager">
+		<property name="redisManager" ref="redisManager" />
+		<!-- optional properties
+        <property name="expire" value="1800"/>
+        <property name="keyPrefix" value="shiro:cache:" />
+        <property name="principalIdFieldName" value="id" />
+        -->
+	</bean>
+
+	<!-- Redis-based session configuration -->
+	<bean id="shiroSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+		<property name="redisManager" ref="redisManager" />
+		<!-- optional properties
+        <property name="expire" value="-2"/>
+        <property name="keyPrefix" value="shiro:session:" />
+        -->
+	</bean>
+</beans>

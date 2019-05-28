@@ -1,0 +1,10 @@
+.project
+.classpath
+.springBeans
+.settings/
+target/
+out/
+
+#IntelliJ Stuff
+.idea
+*.iml

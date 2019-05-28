@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/data/jpa
+       http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 加载数据源-->
+    <bean id="dDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${dbmsUrl}" />
+        <property name="username" value="${dbmsUsername}" />
+        <property name="password" value="${dbmsPassword}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${initialSize}" />
+        <property name="minIdle" value="${minIdle}" />
+        <property name="maxActive" value="${maxActive}" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${maxWait}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="${validationQuery}" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat" />
+    </bean>
+
+    <!-- 配置JPA实体管理工厂 -->
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dDataSource"/>
+        <property name="packagesToScan" value="com.morange.**.entity"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="false" />
+                <property name="database" value="${dbmsDataBase}"/>
+                <property name="databasePlatform" value="${dbmsDatabasePlatform}"/>
+            </bean>
+        </property>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.connection.autocommit">${hibernate.connection.autocommit}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Jpa 事务管理 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- 扫描repository类 -->
+    <jpa:repositories base-package="com.morange.**.repository"
+                      entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager">
+    </jpa:repositories>
+
+    <!-- 通过注解来驱动事务操作，使@Transactional注解的方法拥有事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
+
+</beans>

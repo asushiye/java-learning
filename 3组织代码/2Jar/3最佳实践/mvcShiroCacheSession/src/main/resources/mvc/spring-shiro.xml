@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 配置realm-安全数据源 -->
+    <bean id="shiroAuthorizingRealm" class="com.morange.shiro.realm.ShiroAuthorizingRealm">
+        <property name="cacheManager" ref="shiroCacheManager"></property>
+        <!-- 开启缓存 -->
+        <property name="cachingEnabled" value="true"></property>
+        <!-- 开启身份缓存 -->
+        <property name="authenticationCachingEnabled" value="true"/>
+        <!-- 开启授权缓存 -->
+        <property name="authorizationCachingEnabled" value="true"/>
+        <!-- 缓存AuthenticationInfo信息的缓存名称 -->
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <!-- 缓存AuthorizationInfo信息的缓存名称 -->
+        <property name="authorizationCacheName" value="authorizationCache"/>
+    </bean>
+
+    <!--配置缓存管理器， 请查看spring-context.xml导入缓存-->
+
+    <!--配置Session管理器-->
+    <bean id="shiroWebSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="cacheManager" ref="shiroCacheManager"></property>
+        <property name="sessionDAO" ref="shiroSessionDAO"></property>
+        <property name="sessionIdCookieEnabled" value="true"></property>
+        <property name="sessionIdCookie" ref="sessionIdCookie"></property>
+        <!--<property name="globalSessionTimeout" value="3600000"></property>-->
+        <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"></property>-->
+        <!--<property name="sessionValidationSchedulerEnabled" value="false"></property>-->
+        <!--<property name="deleteInvalidSessions" value="false"></property>-->
+    </bean>
+
+    <!--Shiro会话标识，默认为JSESSIONID，这与Web容器(JETTY, TOMCAT)默认会话标识JSESSIONID冲突，这里自定义Shiro会话标识-->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="ASESSIONID"/>
+    </bean>
+
+    <!--<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">-->
+        <!--<property name="interval" value="3600000"></property>-->
+    <!--</bean>-->
+
+    <!-- 安全管理器 -->
+    <bean id="defaultWebSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroAuthorizingRealm"/>
+        <property name="cacheManager" ref="shiroCacheManager"></property>
+        <property name="sessionManager" ref="shiroWebSessionManager"></property>
+        <!--<property name="subjectDAO" ref="defaultSubjectDAO"></property>-->
+    </bean>
+
+<!--    <bean id="defaultSubjectDAO" class="org.apache.shiro.mgt.DefaultSubjectDAO">
+        <property name="sessionStorageEvaluator" ref="shiroSessionStorageEvaluator"></property>
+    </bean>
+
+    <bean id="shiroSessionStorageEvaluator" class="com.morange.sys.session.ShiroSessionStorageEvaluator"></bean>-->
+
+    <bean id="myFilter1" class="com.morange.sys.filter.MyFilter1"></bean>
+    <bean id="myFilter2" class="com.morange.sys.filter.MyFilter2"></bean>
+
+    <!-- Shiro 的Web过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="defaultWebSecurityManager"/>
+        <property name="unauthorizedUrl" value="/403.jsp"/>
+        <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
+        <property name="filters">
+            <util:map>
+                <entry key="auth" value-ref="myFilter1"/>
+                <entry key="anon" value-ref="myFilter2"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /login=anon
+                /statics/** = anon
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- 开启shiro注解支持 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="defaultWebSecurityManager"/>
+    </bean>
+</beans>

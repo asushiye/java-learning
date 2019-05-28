@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 扫描bean-->
+    <context:component-scan base-package="com.morange"></context:component-scan>
+
+    <!-- 导入属性配置-->
+    <import resource="property/spring-property.xml"></import>
+
+    <!--导入数据库配置-->
+    <import resource="dbms/spring-dbms.xml"></import>
+
+    <!--导入缓存配置-->
+    <!--<import resource="cache/spring-cache.xml"></import>-->
+
+    <!--导入Shiro配置-->
+    <import resource="mvc/spring-shiro.xml"></import>
+
+    <!--导入MVC配置-->
+    <import resource="mvc/spring-mvc.xml"></import>
+
+    <!--导入统一异常处理配置-->
+    <!--<import resource="mvc/spring-exception.xml"></import>-->
+
+</beans>
