@@ -11,13 +11,13 @@
 
 ### 什么是Jar
 
-JAR(Java Archive）是一种软件包文件格式，
+jar是可复用的java库。
 
-用于聚合大量的Java类文件、相关的元数据和资源（文本、图片等）文件，以便开发Java平台应用软件或库。
+它是将Java类文件、相关的元数据和资源文件组成一个Jar文件，是代码更加方便使用和管理。
 
-以ZIP格式构建，以.jar为文件扩展名, 可使用JDK自带的jar命令创建或提取JAR文件。
+jar以ZIP格式构建.jar为文件扩展名, 可使用JDK自带的jar命令创建或提取JAR文件。
 
-Jar可以将java项目代码，进行模块化管理
+Jar可以将java项目代码进行模块化管理
 
 ### Jar目录结构
 ![spring-jar](spring-jar.png)
