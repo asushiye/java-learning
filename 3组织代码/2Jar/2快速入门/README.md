@@ -146,6 +146,9 @@ public class Main {
 }
 ```
 
+执行`mvn package`，即可打包，并生成`\simple-1.0-SNAPSHOT.jar`
+
+如何想控制jar生成，可添加jar插件
 
 pom.xml添加maven构建jar插件
 ```xml
@@ -190,8 +193,8 @@ pom.xml添加maven构建jar插件
     </build>
 </project>
 ```
-
 maven-compiler-plugin 用于指定编译的Jdk版本
+
 maven-jar-plugin 用于配置Jar
 
 #### 执行打包
