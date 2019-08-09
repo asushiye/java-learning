@@ -13,10 +13,12 @@
 
 里氏代换原则
 
+迪米特法则
+
 
 下面三个链接结合起来一起来看
-https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/creational.html
+https://www.runoob.com/design-pattern/design-pattern-tutorial.html
 
 http://c.biancheng.net/design_pattern/
 
-https://www.runoob.com/design-pattern/design-pattern-tutorial.html
+https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/creational.html
