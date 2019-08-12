@@ -6,7 +6,9 @@ import creational.build.ProductABuilder;
 import creational.build.ProductBBuilder;
 import creational.entity.AbstractProductA;
 import creational.entity.AbstractProductB;
-import creational.singleton.ProductFactory;
+import creational.singleton.SingletonEnum;
+import creational.singleton.SingletonObject;
+import creational.singleton.SynchronizedObject;
 
 /**
  * @author : zhenyun.su
@@ -78,9 +80,12 @@ public class ClientCreational {
     }
     public static void singletonFactory() {
         System.out.println("===========4.单实例模式===========");
-        ProductFactory productFactory = new ProductFactory();
-        creational.singleton.Product product = productFactory.getInstane();
-        product.server();
+        SingletonObject singletonObject = SingletonObject.getInstance();
+        singletonObject.show();
 
+        SynchronizedObject synchronizedObject = SynchronizedObject.getInstance();
+        synchronizedObject.show();
+
+//        SingletonEnum singletonEnum = SingletonEnum.
     }
 }

@@ -9,11 +9,8 @@ package creational.build;
 public class ProductBBuilder extends ProductBuilder {
 
     @Override
-    public void buildPart1(){
+    public void build(){
         this.product.setName("productB");
-    };
-    @Override
-    public void buildPart2(){
         this.product.setTitle("build productB");
     };
 }

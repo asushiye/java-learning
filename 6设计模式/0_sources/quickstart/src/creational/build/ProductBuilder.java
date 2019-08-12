@@ -11,8 +11,7 @@ public abstract class ProductBuilder {
     public ProductBuilder() {
         this.product = new Product();
     }
-    public abstract void buildPart1();
-    public abstract void buildPart2();
+    public abstract void build();
     public Product getInstance(){
         return this.product;
     }
