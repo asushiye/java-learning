@@ -25,7 +25,7 @@ public class Test {
         //适配器模式实战演练
         motorAdapterTest();
         //动态配置来完成适配
-        motorDynamicAdapterTest("structure.adapter.demo.ElectricAdapter");
+        motorDynamicAdapterTest("structure.chain.demo.ElectricAdapter");
         //双向适配器
         twoWayAdapterTest();
     }
