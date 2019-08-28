@@ -24,18 +24,238 @@
 
 ## 代码实现
 
+### 定义菜单组合抽象类
+```java
+package headfirst.composite.scene;
+import java.util.Iterator;
+/**
+ * @author : zhenyun.su
+ * @comment :
+ * @since : 2019/8/27
+ */
+public abstract class MenuComponent {
+    public void add(MenuComponent menuComponent){
+        throw new UnsupportedOperationException("can not add MenuComponent");
+    }
+    public void remove(MenuComponent menuComponent){
+        throw new UnsupportedOperationException("can not remove MenuComponent");
+    }
+    public MenuComponent getChild(int i){
+        throw new UnsupportedOperationException("can not get child MenuComponent");
+    }
+
+    public Object getData(){
+        throw new UnsupportedOperationException("can not get Menu Data");
+    }
+
+    public void print(){
+        throw new UnsupportedOperationException("can not print Menu Data");
+    }
+    public Iterator createIterator(){
+        throw new UnsupportedOperationException("can not get iterator");
+    }
+}
+```
+
+### 定义菜单项
+```java
+package headfirst.composite.scene;
+import java.util.Iterator;
+/**
+ * @author : zhenyun.su
+ * @comment :  为菜单项提供空迭代器
+ * @since : 2019/8/27
+ */
+public class MenuItem extends MenuComponent {
+    private Object data;
+    @Override
+    public Object getData(){
+        return data;
+    }
+    public MenuItem(Object data) {
+        this.data = data;
+    }
+    @Override
+    public void print(){
+        System.out.println(data.toString());
+    }
+    @Override
+    public Iterator createIterator() {
+        return new NullIterator();
+    }
+}
+```
+
+### 定义菜单
+
+```java
+package headfirst.composite.scene;
+import java.util.ArrayList;
+import java.util.Iterator;
+/**
+ * @author : zhenyun.su
+ * @comment :
+ * @since : 2019/8/27
+ */
+public class Menu extends MenuComponent{
+    private ArrayList<MenuComponent> menuComponents = new ArrayList<>();
+    private Object data;
+    public Menu(Object data) {
+        this.data = data;
+    }
+    @Override
+    public void add(MenuComponent menuComponent) {
+        menuComponents.add(menuComponent);
+    }
+    @Override
+    public void remove(MenuComponent menuComponent) {
+        menuComponents.remove(menuComponent);
+    }
+    @Override
+    public MenuComponent getChild(int i) {
+        return menuComponents.get(i);
+    }
+    @Override
+    public void print() {
+        System.out.println("-------------");
+        System.out.println(data.toString());
+    }
+    @Override
+    public Iterator createIterator() {
+        return new CompositeIterator(menuComponents.iterator());
+    }
+}
+```
+
+### 定义组合迭代器
+用于遍历该节点下所有组合节点和叶子节点
+```java
+package headfirst.composite.scene;
+import java.util.Iterator;
+import java.util.Stack;
+/**
+ * @author : zhenyun.su
+ * @comment :
+ * @since : 2019/8/27
+ */
+public class CompositeIterator implements Iterator {
+    private Stack stack= new Stack();
+    public CompositeIterator(Iterator iterator) {
+        this.stack.push(iterator);
+    }
+    @Override
+    public boolean hasNext() {
+        if (stack.empty()){
+            return false;
+        }else{
+            Iterator iterator = (Iterator) stack.peek();
+            if (!iterator.hasNext()){
+                stack.pop();
+                return hasNext();
+            }else{
+                return true;
+            }
+        }
+    }
+    @Override
+    public Object next() {
+        if (hasNext()) {
+            Iterator iterator = (Iterator) stack.peek();
+            MenuComponent menuComponent = (MenuComponent)iterator.next();
+            if (menuComponent instanceof Menu){
+                stack.push(menuComponent.createIterator());
+            }
+            return menuComponent;
+        }
+        return null;
+    }
+    @Override
+    public void remove() {
+        throw  new UnsupportedOperationException();
+    }
+}
+
+```
+
+### 定义空迭代器
+
+用于处理叶子节点的迭代器
+```java
+public class NullIterator implements Iterator {
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+    @Override
+    public Object next() {
+        return null;
+    }
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
+}
+```
+
+### 女服务员
+
+```java
+public class Waitress {
+    MenuComponent allMenus;
+    public Waitress(MenuComponent allMenus) {
+        this.allMenus = allMenus;
+    }
+    public void printIterator(){
+        allMenus.print();
+        Iterator iterator = allMenus.createIterator();
+        while (iterator.hasNext()){
+            MenuComponent menuComponent = (MenuComponent)iterator.next();
+            menuComponent.print();
+        }
+    }
+}
+```
+
+### 编写测试
+
+```java
+    public static void main(String[] args) {
+        //早餐菜单
+        MenuComponent breakfastMenu = new Menu(new MenuData("breakfastMenu","breakfast Menu"));
+        breakfastMenu.add(new MenuItem(new MenuItemData("noodle", "Onion oil noodles", true, 6.0f)));
+        breakfastMenu.add(new MenuItem(new MenuItemData("milk", "Pure milk", false, 3.5f)));
+        breakfastMenu.add(new MenuItem(new MenuItemData("Hot dog", "Hot dog", true, 5.0f)));
+        breakfastMenu.add(new MenuItem(new MenuItemData("Meat bag", "Meat bag", true, 2.0f)));
+        //咖啡子菜单
+        MenuComponent coffeeSubMenu = new Menu(new MenuData("coffeeSubMenu","lunch coffee subMenu"));
+        coffeeSubMenu.add(new MenuItem(new MenuItemData("Mocha Coffee", "Mocha Coffee", false, 25.0f)));
+        coffeeSubMenu.add(new MenuItem(new MenuItemData("Blue Mountain Coffee", "Blue Mountain Coffee", false, 45.5f)));
+        //午餐菜单
+        MenuComponent lunchMenu = new Menu(new MenuData("lunchMenu","lunch Menu"));
+        lunchMenu.add(new MenuItem(new MenuItemData("Beef Rice", "Beef Rice", false, 11.0f)));
+        lunchMenu.add(new MenuItem(new MenuItemData("beef noodle", "beef noodle", false, 12.5f)));
+        lunchMenu.add(new MenuItem(new MenuItemData("Potato rice", "Potato rice", true, 9.0f)));
+        lunchMenu.add(coffeeSubMenu);
+
+        MenuComponent allMenu = new Menu(new MenuData("allMenu","all Menu"));
+        allMenu.add(breakfastMenu);
+        allMenu.add(lunchMenu);
+
+        Waitress waitress = new Waitress(allMenu);
+
+        waitress.printIterator();
+    }
+```
 
 ## 模式定义
 
-模板方法模式(Template Pattern)定义：在一个方法中定义一个算法框架，而将一些步骤实现放在子类中。
+组合模式(composite Pattern)定义：允许你将对象组合树形结构来表现*整体和部分*层次结构，
 
-模板方法使子类在不变算法结构下，重新实现算法中某些步骤。
+组合能让客户以一致的方式处理个别对象以及对象集合。
 
-算法结构是在抽象类存在一个包含多个已实现的方法和抽象方法，完成一个功能的模板方法
+1. 使用组合模式让我们能用树形结构的方式创建对象结构，树里面包含了组合以及个别的对象。
+2. 使用组合结构我们能把相同操作应用在组合和个别对象上。
 
-其中抽象方法，需要子类中完成，子类不改变算法结构。
-
-抽象类的模板方法关注算法本身，子类提供完整的实现，将代码复用最大化。
 
 ## 深度和其他模式差异及主要应用在哪些场景
 

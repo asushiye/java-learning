@@ -35,8 +35,7 @@ public class Test {
         allMenu.add(breakfastMenu);
         allMenu.add(lunchMenu);
 
-        Waitress waitress = new Waitress(lunchMenu);
-//        waitress.printMenu();
+        Waitress waitress = new Waitress(allMenu);
 
         waitress.printIterator();
     }
