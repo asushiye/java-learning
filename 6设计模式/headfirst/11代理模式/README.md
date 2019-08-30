@@ -177,6 +177,8 @@ public class OwnerInvocationHandler implements InvocationHandler {
 }
 ```
 
+![java-proxy1](java-proxy1.png)
+
 访问他人代理
 ```java
 public class NotOwnerInvocationHandler implements InvocationHandler {
