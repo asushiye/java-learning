@@ -1,19 +1,17 @@
-# java language Ä¿Â¼½á¹¹
+# java language ç›®å½•ç»“æ„
 
-# chapter-01-01
-your first java app
+# 1ç¬¬ä¸€ä¸ªjavaç¨‹åº
 
-# chapter-01-02
+# 2javaæ ¸å¿ƒæ¦‚å¿µ
 java core concept
-
-		1¡¢Variables (java variables and java data type )
-		2¡¢Operations (Variables Operation¡¢condition Operation¡¢)
-		3¡¢Class + Object
-		  3.1¡¢Fields
-		  3.2¡¢Constructor
-		  3.1¡¢Method
-		4¡¢interface
-		5¡¢package
+		1ã€Variables (java variables and java data type )
+		2ã€Operations (Variables Operationã€condition Operationã€)
+		3ã€Class + Object
+		  3.1ã€Fields
+		  3.2ã€Constructor
+		  3.1ã€Method
+		4ã€interface
+		5ã€package
 
 
 # chapter-01-03
@@ -39,7 +37,3 @@ Java Modules
 
 # chapter-01-10
 Java Exercises
-
-
-
-

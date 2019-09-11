@@ -1,16 +1,7 @@
-# Java Coding Standards 
+# Java Coding Standards
 
 java coding standards refer to alibaba java coding standards
 
 ## chapter-99-01
 
-Ò»¡¢±à³Ì¹æÔ¼
-
-
-
-
-
-
-
-
-
+ä¸€ã€ç¼–ç¨‹è§„çº¦

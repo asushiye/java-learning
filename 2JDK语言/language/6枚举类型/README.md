@@ -1,13 +1,18 @@
-# chapter-01-06
+# 6枚举类型
+    what is java enums
+    define
+    Enums in if Statements
+    Enums in switch Statements
+    Enum Iteration
+    Enum Fields and method
+    语法最齐全实例
 
-# Java Enums
+Java Enum is a special Java type used to define collections of constants
 
-  Java Enum is a special Java type used to define collections of constants
+a Java enum type is a special kind of Java class. An enum can contain constants, methods etc
 
-  a Java enum type is a special kind of Java class. An enum can contain constants, methods etc
-
-define
-```
+## define
+```java
 public enum Level {
     HIGH,
     MEDIUM,
@@ -15,10 +20,10 @@ public enum Level {
 }
 ```
 
-Enums in if Statements
+## Enums in if Statements
 
-```
-Level level = ...  //assign some Level constant to it
+```java
+Level level = Level.HIGH;  //assign some Level constant to it
 
 if( level == Level.HIGH) {
 
@@ -29,10 +34,10 @@ if( level == Level.HIGH) {
 }
 ```
 
-Enums in switch Statements
+## Enums in switch Statements
 
-```
-Level level = ...  //assign some Level constant to it
+```java
+Level level = Level.HIGH  //assign some Level constant to it
 
 switch (level) {
     case HIGH   : ...; break;
@@ -41,43 +46,42 @@ switch (level) {
 }
 
 ```
-Enum Iteration
 
-```
+## Enum Iteration
+
+```java
 for (Level level : Level.values()) {
     System.out.println(level);
 }
 ```
 
-Enum Fields and method
-```
+## Enum Fields and method
+```java
 public enum Level {
     HIGH  (3),  //calls constructor with value 3
     MEDIUM(2),  //calls constructor with value 2
     LOW   (1)   //calls constructor with value 1
     ; // semicolon needed when fields / methods follow
 
-
     private final int levelCode;
 
     Level(int levelCode) {
         this.levelCode = levelCode;
     }
-    
+
     public int getLevelCode() {
         return this.levelCode;
     }
-    
 }
 ```
-```
+
+```java
 Level level = Level.HIGH;
 System.out.println(level.getLevelCode());
 ```
+
+## 语法最齐全实例
 package
 java.lang.Enum
 
-JDK  ��䰸��
-
 java.util.concurrent.TimeUntil
-
