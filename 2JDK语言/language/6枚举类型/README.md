@@ -58,26 +58,26 @@ for (Level level : Level.values()) {
 ## Enum Fields and method
 ```java
 public enum Level {
-    HIGH  (3),  //calls constructor with value 3
-    MEDIUM(2),  //calls constructor with value 2
-    LOW   (1)   //calls constructor with value 1
-    ; // semicolon needed when fields / methods follow
+    HIGH (3),
+    MEDIUM (2) ,
+    LOW (1);
 
-    private final int levelCode;
+    private int level;
 
-    Level(int levelCode) {
-        this.levelCode = levelCode;
+    Level(int level) {
+        this.level = level;
     }
 
-    public int getLevelCode() {
-        return this.levelCode;
+    public int getLevel() {
+        return level;
     }
 }
 ```
 
 ```java
 Level level = Level.HIGH;
-System.out.println(level.getLevelCode());
+System.out.println(level); //结果为 HIGH
+System.out.println(level.getLevel());  //结果为3
 ```
 
 ## 语法最齐全实例

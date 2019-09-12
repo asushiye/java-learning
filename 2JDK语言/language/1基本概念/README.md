@@ -1,5 +1,6 @@
 # 1基本概念
 
+
 ## java工作方式
 
 ![work](work.png)

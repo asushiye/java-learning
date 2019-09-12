@@ -1,31 +1,25 @@
-# chapter-01-08
-
-Java Lambda Expressions
-
-Lambda±í´ïÊ½Ìá¹©ÁËÒ»¸ö¸ü¼Ó¼òÁ·µÄº¯ÊýÊ½Óï·¨À´Ð´ÄäÃû·½·¨.
-
-		Java Lambdas and the Single Method Interface
+# 8Lambda
+    Why Lambda
+			define interface
+			interface implementation
+		Lambda syntax
 			Matching Lambdas to Interfaces
-		Lambda Type Inference
-		Lambda Parameters
-			Zero Parameters
-			One Parameter
-			Multiple Parameters
-			Parameter Types
-		Lambda Function Body
-		Returning a Value From a Lambda Expression
-		Lambdas as Objects
+			Lambda Parameters
+				Zero Parameters
+				One Parameter
+				Multiple Parameters
+				Parameter Types
+			Lambda Function Body
+			Returning a Value From a Lambda Expression
+			Lambdas as Objects
 
-## Java Lambdas and the Single Method Interface
+## Why Lambda
 
-lambda expressionÊÇÒ»¸öÄäÃûº¯Êý£¬
-Ê¹ÓÃÔËËã·û ->£¬¸ÃÔËËã·û¶ÁÎª¡°goes to¡±¡£
+java8ç‰¹æ€§
 
-Óï·¨ÈçÏÂ£º
-ÐÎ²ÎÁÐ±í -> º¯ÊýÌå
-º¯ÊýÌå¶àÓÚÒ»ÌõÓï¾äµÄ¿ÉÓÃ´óÀ¨ºÅÀ¨Æð¡£
-
-```
+### define interface
+Java Lambdas and the Single Method Interface
+```java
 public interface LambdaService {
     public void printService();
 }
@@ -37,56 +31,78 @@ public class LambdaController {
 }
 ```
 
-### In Java 7 you could add an event listener using an anonymous interface implementation, like this:
+### interface implementation
 
-```
+#### In Java 7
+
+In Java 7 you could add an event listener using an anonymous interface implementation, like this:
+
+```java
 public class MyLambda {
     public static void main(String[] args){
+
         LambdaController lambdaController = new LambdaController();
         lambdaController.addService(new LambdaService(){
             public void printService(){
                 System.out.println("In Java 7 you would have to implement this interface ");
             };
         });
+
     }
 }
 ```
 
-### In Java 8 you can add an event listener using a Java lambda expression, like this:
+#### In Java 8
 
-```
+In Java 8 you can add an event listener using a Java lambda expression, like this:
+
+```java
 public class MyLambda {
     public static void main(String[] args){
+
         LambdaController lambdaController = new LambdaController();
         lambdaController.addService(()->System.out.println("In java 8 using a Java lambda expression "));
     }
 }
 ```
 
-The lambda expression is matched against the parameter type of the addStateListener() method's parameter. 
-If the lambda expression matches the parameter type (in this case the StateChangeListener interface) , 
+The lambda expression is matched against the parameter type of the addStateListener() method's parameter.
+
+If the lambda expression matches the parameter type (in this case the StateChangeListener interface) ,
+
 then the lambda expression is turned into a function that implements the same interface as that parameter.
+
+lambdaæžå¤§ç®€åŒ–ä»£ç ã€‚ä¹Ÿè®©ç­–ç•¥æ¨¡å¼æ›´åŠ ç®€å•
 
 ## Lambda syntax
 
 ### Matching Lambdas to Interfaces
 
-A single method interface is also sometimes referred to as a functional interface. Matching a Java lambda expression against a functional interface is divided into these steps:
+A single method interface is also sometimes referred to as a functional interface.
+
+Matching a Java lambda expression against a functional interface is divided into these steps:
 
 * Does the interface have only one method?
+* æŽ¥å£æ˜¯å¦åªæœ‰ä¸€ä¸ªæ–¹æ³•
 * Does the parameters of the lambda expression match the parameters of the single method?
+* æ–¹æ³•çš„å‚æ•°æ˜¯å¦å’Œlambdaå‚æ•°åŒ¹é…
 * Does the return type of the lambda expression match the return type of the single method?
+* æ–¹æ³•çš„è¿”å›žå€¼å’Œlambdaè¿”å›žå€¼åŒ¹é…
 
 ### Zero Parameters
 
-If the method you are matching your lambda expression against takes no parameters, then you can write your lambda expression like this:
+If the method you are matching your lambda expression against takes no parameters,
+
+then you can write your lambda expression like this:
 
 `() -> System.out.println("Zero parameter lambda");`
 
 ### One Parameter
+
 `param -> System.out.println("One parameter: " + param);`
 
 ### Multiple Parameters
+
 `(p1, p2) -> System.out.println("Multiple parameters: " + p1 + ", " + p2);`
 
 ### Parameter Types
@@ -95,9 +111,8 @@ If the method you are matching your lambda expression against takes no parameter
 
 ### Lambda Function Body
 
-```
- (oldState, newState) -> System.out.println("State changed")
-
+```java
+  (oldState, newState) -> System.out.println("State changed")
 
   (oldState, newState) -> {
     System.out.println("Old state: " + oldState);
@@ -105,9 +120,11 @@ If the method you are matching your lambda expression against takes no parameter
   }
 ```
 
+å¤šä¸ªè¯­å¥ä½¿ç”¨èŠ±æ‹¬å·{}
+
 ### Returning a Value From a Lambda Expression
 
-```
+```java
 (param) -> {
     System.out.println("param: " + param);
     return "return value";
@@ -122,19 +139,17 @@ If the method you are matching your lambda expression against takes no parameter
 
 You can assign a lambda expression to a variable and pass it around, like you do with any other object
 
-```
+```java
 public interface MyComparator {
-
     public boolean compare(int a1, int a2);
-
 }
 
 public class MyLambda {
     public static void main(String[] args){
+
         MyComparator myComparator = (a1, a2) ->{return a1 > a2; } ;
         boolean result = myComparator.compare(2, 5);
         System.out.println(result);
     }
 }
-
 ```

@@ -34,6 +34,3 @@ Java Lambda Expressions
 
 # chapter-01-09
 Java Modules
-
-# chapter-01-10
-Java Exercises

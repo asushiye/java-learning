@@ -1,17 +1,25 @@
-Ê¹ÓÃidea 2017.4°æ±¾¹¤¾ß
+# ç¬¬ä¸€ä¸ªjavaç¨‹åº
+    åˆ›å»ºä½ çš„ç¬¬ä¸€ä¸ªjavaç¨‹åº
+    javaé¡¹ç›®ç»“æ„
+      javaæºä»£ç å’ŒClassç›®å½•
+      ç¼–è¯‘javaæºä»£ç 
 
 
-# create, compile and run your first Java app,
+## åˆ›å»ºä½ çš„ç¬¬ä¸€ä¸ªjavaç¨‹åº
+ä½¿ç”¨idea 2017.4ç‰ˆæœ¬å·¥å…·
 
-´´½¨ÄãµÄµÚÒ»¸öjava³ÌĞò
+èœå• new -> project æŒ‰é»˜è®¤ä¸‹ä¸€æ­¥ï¼Œé€‰æ‹©é¡¹ç›®è·¯å¾„
 
->Æô¶¯Idea  ²Ëµ¥ new -> project °´Ä¬ÈÏÏÂÒ»²½£¬Ñ¡ÔñÏîÄ¿Â·¾¶
+åœ¨srcç›®å½•ä¸‹,æ–°å¢package myfirstapp
 
-
-ÔÚsrcÄ¿Â¼ÏÂ
-```
-package mypackage;
-
+æ–°å¢MyJavaAppç±»
+```java
+package myfirstapp;
+/**
+ * @author : zhenyun.su
+ * @comment :  è¿è¡Œæ—¶ï¼Œé…ç½®program arguments hello world
+ * @since : 2019/9/12
+ */
 public class MyJavaApp {
     public static void main(String[] args){
         System.out.println("your first java app");
@@ -21,32 +29,48 @@ public class MyJavaApp {
 }
 ```
 
+å³å‡»ç¼–è¾‘çª—å£ï¼Œé€‰æ‹© run MyJavaApp
 
-ÓÒ»÷±à¼­´°¿Ú£¬Ñ¡Ôñ run MyJavaApp
-»òÕß
+è®¾ç½®å‘½ä»¤è¡Œå‚æ•°`hello world`
+
 Run Configuration
-ÅäÖÃ application ÔÚprogram arguments£º Hello World
+é…ç½® application åœ¨program argumentsï¼š Hello World
 
-
-# a basic Java project is structured, how the Java code is compiled, and how to execute the finished Java program
-
-## java source and class directories
-
-package ÊÇ½«Ò»×éÏà¹Øjava file·ÅÔÚÒ»¸öÎÄ¼ş¼Ğ
-
-java source ÎÄ¼şÒ»°ã·ÅÔÚsrcÎÄ¼ş¼ĞÖĞ¡£Èç¹ûmaven½¨¹¹£¬Ôò·ÅÔÚsrc/main/javaÄ¿Â¼ÏÂ javaÄ¿Â¼ÏÂ¾ÍÄã´æ·ÅÏîÄ¿µÄÂ·¾¶¡£
-
-## compiling the java source code 
-
+æ§åˆ¶å°è¾“å‡ºç»“æœï¼š
 ```
-java sdk
+your first java app
+hello
+world
+```
 
-cd chapter-01-01
+## javaé¡¹ç›®ç»“æ„
 
-mkdir out 
+a basic Java project is structured,
 
+how the Java code is compiled,
+
+and how to execute the finished Java program
+
+### javaæºä»£ç å’ŒClassç›®å½•
+
+package æ˜¯å°†ä¸€ç»„ç›¸å…³javaæ–‡ä»¶æ”¾åœ¨ä¸€ä¸ªæ–‡ä»¶å¤¹
+
+é»˜è®¤çº¦å®šjava source æ–‡ä»¶ä¸€èˆ¬æ”¾åœ¨srcæ–‡ä»¶å¤¹ä¸­ã€‚
+
+å¦‚æœmavenå»ºæ„ï¼Œåˆ™æ”¾åœ¨src/main/javaç›®å½•ä¸‹ javaç›®å½•ä¸‹å°±ä½ å­˜æ”¾é¡¹ç›®çš„è·¯å¾„ã€‚
+
+### ç¼–è¯‘javaæºä»£ç 
+
+ä¸‹é¢ä½¿ç”¨JDKå·¥å…·æ¥ç¼–è¯‘å’Œè¿è¡Œ
+```
+mkdir out
 javac src/mypackage/*.java -d out
+java -cp out myfirstapp.MyJavaApp hello zhenyun.su
+```
 
-java -cp out mypackage.MyJavaApp hello world
-
+è¾“å‡ºç»“æœ
+```
+your first java app
+hello
+zhenyun.su
 ```
