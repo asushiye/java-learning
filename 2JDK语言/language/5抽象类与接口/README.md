@@ -9,6 +9,22 @@ A Java abstract class is a class which cannot be instantiated,
 
 meaning you cannot create new instances of an abstract class.
 
+我不能让animal这样的父类去实例化，因为没有animal这样的父类存在，将animal定义为抽象类比较合适
+
+1. 如果不想让某个类被实例化，就定义为抽象类
+2. 抽象类可以有抽象方法和非抽象方法
+3. 如果类带有抽象方法，则这个类必须为抽象类
+4. 抽象的方法必须在子类中实现
+5. java所有的类都是Object直接或间接的继承
+6. 方法可以声明Object参数或返回值
+7. 对应Object引用变量，必须强制转换为实际的类型，才能使用方法
+8. java不允许多重继续，这会导致如何选择执行哪个方法的问题。
+9. 接口就好像是100%的抽象类
+10. class可以实现多个接口
+11. 实现某接口的类，必须实现它所有的方法。
+12. 子类要调用父类的方法，使用super关键字
+
+
 ## The Purpose of Abstract Classes
 
 The purpose of abstract classes is to function as base classes
