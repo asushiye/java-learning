@@ -8,6 +8,6 @@ package object;
 
 public class Duck extends Animal {
     public Duck() {
-
+        super(12);
     }
 }
