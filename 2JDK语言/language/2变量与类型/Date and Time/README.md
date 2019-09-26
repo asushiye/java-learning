@@ -1,14 +1,20 @@
 # Java Date and Time
 
-refer to web: https://www.timeanddate.com/time/zones/
+## 1时区
+		时区概念
+		时区设置
+			windows系统
+			Centos系统
+			mysql时区设置
+			JDBC客户连接
 
+在了解时间之前，需要了解下时区， 不同时区，时间值不一样。
 
 ## java date and time
 
 当我们第一次学习java日期和时间，怎么样使用时会比较混乱，因此提供很多类来操作日期；
 
 我们把这些类罗列出来，主要分为java 7 Date Time  api 和java 8 Date Time  api
-
 
 ## Java7 date and time api
 		日期

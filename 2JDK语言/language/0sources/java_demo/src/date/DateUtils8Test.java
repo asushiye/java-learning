@@ -11,6 +11,15 @@ import java.time.format.DateTimeFormatter;
 
 public class DateUtils8Test {
     public static void main(String[] args) throws Exception {
+        System.out.println("------------------zoneid---------------------");
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZoneId zoneId1 = ZoneId.of("Asia/Shanghai");
+        ZoneId zoneId2 = ZoneId.of("UTC+9");
+        System.out.println(zoneId.toString());
+        System.out.println(zoneId1.toString());
+        System.out.println(zoneId2.toString());
+
+
         System.out.println("------------------instant---------------------");
         Instant instant = Instant.now();
         System.out.println(instant.getEpochSecond());
@@ -36,11 +45,6 @@ public class DateUtils8Test {
         System.out.println(duration.toMillis());
 
         System.out.println("------------------localDateTime---------------------");
-        ZoneId zoneId = ZoneId.of("Asia/Shanghai");
-        ZoneId zoneId2 = ZoneId.of("UTC+9");
-        System.out.println(zoneId.toString());
-        System.out.println(zoneId2.toString());
-
         LocalDateTime localDateTime3 = LocalDateTime.now();
         LocalDateTime localDateTime2 = LocalDateTime.ofInstant(Instant.now(), zoneId);
         LocalDateTime localDateTime1 = LocalDateTime.of(2019, 01, 01, 13, 0, 3, 23000000);
@@ -83,12 +87,14 @@ public class DateUtils8Test {
         Instant instant2= zonedDateTime1.toInstant();
         System.out.println(zonedDateTime1.toLocalDateTime().toString());
         System.out.println(instant2.toEpochMilli());
-        ZoneId zoneId1 = zonedDateTime1.getZone();
+        ZoneId zoneId4 = zonedDateTime1.getZone();
         System.out.println(zonedDateTime1.getYear());
 
         System.out.println("------------------DateTimeFormatter---------------------");
         System.out.println(DateTimeFormatter.ISO_INSTANT.format(instant));
         System.out.println(zonedDateTime1.format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+
+        DateTimeFormatter.ISO_ZONED_DATE_TIME.format(zonedDateTime1);
 
         System.out.println(localDateTime1.format(DateTimeFormatter.BASIC_ISO_DATE));
         System.out.println(localDateTime1.format(DateTimeFormatter.ISO_DATE_TIME));
@@ -106,7 +112,5 @@ public class DateUtils8Test {
         LocalDateTime localDateTime = LocalDateTime.parse("2019-01-01 14:01:25.100", dateFormatter);
         System.out.println(localDateTime.toString());
 
-        ZonedDateTime zonedDateTime4 = ZonedDateTime.parse("2019-01-01 14:01:25.100",  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s.SSS"));
-        System.out.println(zonedDateTime4.toString());
     }
 }

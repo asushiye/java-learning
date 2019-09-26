@@ -1,13 +1,12 @@
 package date;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author : zhenyun.su
- * @comment : 日期类java.util.Date
- * @since : 2019/9/6
+ * @comment : 日期类java.time.LocalDateTime
+ * @since : 2019/9/26
  * 主要提供三大类方法，
  *      一类，获取日期 - getDate()
  *      二类，获取日期字符串 - getDateString()
@@ -26,58 +25,51 @@ public final class DateUtils8 {
     /**
      * @comment : 获取当前日期
      */
-    public static Date getDate() {
-        return new Date();
+    public static LocalDateTime getDate() {
+        return LocalDateTime.now();
     }
 
     /**
      * @comment : 时间戳转换日期
      */
-    public static Date getDate(Long timestamp) {
-        return new Date(timestamp);
-    }
-
-    /**
-     * @comment : 时间戳转换日期
-     */
-    public static Date getDate(long timestamp) {
-        return new Date(Long.valueOf(timestamp));
+    public static LocalDateTime getDate(Long timestamp) {
+        Instant instant =  Instant.ofEpochMilli(timestamp);
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
     /**
      * @comment : 字符串转换日期
      */
-    public static Date getDate(final String sdate, String format) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        return simpleDateFormat.parse(sdate);
+    public static LocalDateTime getDate(final String sDate, final String format) {
+        return LocalDateTime.parse(sDate, DateTimeFormatter.ofPattern(format));
     }
 
     /**
      * @comment : 按格式获取当前日期字符串
      */
     public static String getDateString(String format) {
-        return (new SimpleDateFormat(format)).format(new Date());
+        return getDateString(getDate(), format);
     }
 
     /**
      * @comment : 按格式和日期，获取日期字符串
      */
-    public static String getDateString(Date date, String format) {
-        return (new SimpleDateFormat(format)).format(date);
+    public static String getDateString(LocalDateTime date, String format) {
+        return date.format( DateTimeFormatter.ofPattern(format));
     }
 
     /**
      * @comment :  10位秒-时间戳转换日期字符串
      */
     public static String getDateStringBySecond(Long timestamp, String format) {
-        return (new SimpleDateFormat(format)).format(getDate(Long.valueOf(timestamp + "000")));
+        return getDateStringByMillisecond(Long.valueOf(timestamp + "000"), format);
     }
 
     /**
      * @comment :  13位毫秒-时间戳转换日期字符串
      */
     public static String getDateStringByMillisecond(Long timestamp, String format) {
-        return (new SimpleDateFormat(format)).format(getDate(timestamp));
+        return getDate(timestamp).format(DateTimeFormatter.ofPattern(format));
     }
 
     /**
@@ -90,8 +82,9 @@ public final class DateUtils8 {
     /**
      * @comment : 获取日期的时间戳，精确到毫秒,总共13位，前10位秒. 从1970.1.1 00:00:00 GMT 开始统计
      */
-    public static Long getTimestamp(Date date) {
-        return date.getTime();
+    public static Long getTimestamp(LocalDateTime date) {
+        Instant instant = date.atZone(ZoneId.systemDefault()).toInstant();
+        return instant.toEpochMilli();
     }
 
     /**
@@ -120,5 +113,35 @@ public final class DateUtils8 {
      */
     public static Long getTimestampBySecond(Long timestamp, int second) {
         return timestamp + second * 1000;
+    }
+
+    public static void main(String[] args) {
+        //2019-01-01 12:10:2.235 为例 1546315802235
+        System.out.println(getDate());
+        System.out.println(getDate(1546315802235L));
+        LocalDateTime localDateTime = getDate("2019-01-01 12:10:02.235", "yyyy-MM-dd HH:mm:ss.SSS");
+        System.out.println(localDateTime);
+        System.out.println(localDateTime.toLocalDate());
+        System.out.println(localDateTime.toLocalTime());
+        System.out.println(localDateTime.getYear());
+        System.out.println(getDate("2019-01-01 12:10:02", "yyyy-MM-dd HH:mm:ss"));
+
+        String today = getDateString("yyyy-MM-dd HH:mm:ss");
+        String sdate = getDateString(localDateTime, "yyyy-MM-dd HH:mm:ss");
+        System.out.println("today= "+today+"; sdate= "+sdate);
+        System.out.println(getDateStringBySecond(1546315802L,"yyyy-MM-dd HH:mm:ss"));
+        System.out.println(getDateStringByMillisecond(1546315802235L,"yyyy-MM-dd HH:mm:ss.SSS"));
+
+        System.out.println(getTimestamp());
+        Long timestamp = getTimestamp(localDateTime);
+        System.out.println(timestamp);
+        System.out.println(getTimestampByDay(timestamp, 2));
+        System.out.println(getTimestampByDay(timestamp, -2));
+        System.out.println(getTimestampByHour(timestamp, 2));
+        System.out.println(getTimestampByHour(timestamp, -2));
+        System.out.println(getTimestampByMinute(timestamp, 2));
+        System.out.println(getTimestampByMinute(timestamp, -2));
+        System.out.println(getTimestampBySecond(timestamp, 2));
+        System.out.println(getTimestampBySecond(timestamp, -2));
     }
 }
