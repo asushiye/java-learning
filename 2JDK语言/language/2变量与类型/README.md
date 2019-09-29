@@ -202,6 +202,9 @@ Double d=x x可以是Integer 或int
         int x= Integer.parseInt(value);  //2
         long l = Long.parseLong(value);  //2
         double d = Double.parseDouble(value);  //2.0
+        int y = Integer.valueOf(value); //2
+        long l = Long.valueOf(value);  //2.0
+
 ```
 
 如果value值，不是数值，则抛出 **NumberFormatExcetion**异常

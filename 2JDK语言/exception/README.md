@@ -1,4 +1,4 @@
-# Java Exception Handling  
+# Java Exception Handling
 
 ## Basic Exception Handling in Java
 
@@ -28,9 +28,3 @@
 				运行时异常类及子类 runtimeException
 				非运行时异常类及子类
 		设计自己异常类
-
-
-
-
-
-

@@ -19,7 +19,6 @@ public class DateUtils8Test {
         System.out.println(zoneId1.toString());
         System.out.println(zoneId2.toString());
 
-
         System.out.println("------------------instant---------------------");
         Instant instant = Instant.now();
         System.out.println(instant.getEpochSecond());

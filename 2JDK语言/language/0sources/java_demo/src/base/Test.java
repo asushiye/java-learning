@@ -25,6 +25,9 @@ public class Test {
         long l1 = Long.parseLong(value);
         double d = Double.parseDouble(value);
 
+
+
+
         Integer v1 = 22;
         Double v2 = 22.2;
         Boolean v3 = true;

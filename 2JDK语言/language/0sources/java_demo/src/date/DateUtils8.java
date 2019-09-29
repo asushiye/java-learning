@@ -80,7 +80,8 @@ public final class DateUtils8 {
     }
 
     /**
-     * @comment : 获取日期的时间戳，精确到毫秒,总共13位，前10位秒. 从1970.1.1 00:00:00 GMT 开始统计
+     * @comment : 获取日期的时
+     * 间戳，精确到毫秒,总共13位，前10位秒. 从1970.1.1 00:00:00 GMT 开始统计
      */
     public static Long getTimestamp(LocalDateTime date) {
         Instant instant = date.atZone(ZoneId.systemDefault()).toInstant();
