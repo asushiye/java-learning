@@ -1,58 +1,166 @@
-# Java ByteArray, Piped,  Buffered
-chapter-10-03
+package io.bytes;
 
-		ByteArrayInputStream, ByteArrayOutputStream
-		PipedInputStream, PipedOutputStream
-		BufferedInputStream, BufferedOutputStream
-		DataInputStream, DataOutputStream
-		ObjectInputStream	ObjectOutputStream
-		PrintStream (only use to output byte stream)
-		SequenceInputStream(only use to input byte stream)
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
-## ByteArrayInputStream, ByteArrayOutputStream
+import java.io.*;
 
-The ByteArrayInputStream class of the Java IO API allows you to read data from byte arrays as streams. 
+public class MyStream {
 
+    private static final String FILE_FULL_NAME="src\\io\\bytes\\data.txt";
+    private static final String FILE_DATA_NAME="src\\io\\bytes\\brnaly.txt";
+    private static final String FILE_OBJECT_NAME="object.bin";
+    private static final String FILE_PRINT_NAME="PRINT.txt";
+    private static final String FILE_DIR="file";
+    private static final String FILE_NAME="attribute.txt";
+    private static final String FILE_NEW_NAME="attribute-1.txt";
 
-The ByteArrayOutputStream class of the Java IO API allows you to capture data written to a stream in an array
+    public static void main(String[] args) {
 
-Here is a simple example:
-
-```
-    public static void byteArrayInputAndOutputStream() throws Exception{
-
-        ByteArrayInputStream byteArrayInputStream = null;
-        ByteArrayOutputStream byteArrayOutputStream = null;
         try{
-            byte[] bdata = {1, 2,3,4,5 };
-            byteArrayInputStream = new ByteArrayInputStream(bdata);
-            int data = byteArrayInputStream.read();
-            while (data != -1){
-                System.out.println(data);
-                data = byteArrayInputStream.read();
+            MyStream.writeFileFromFileOutputStream("zhenyun.su".getBytes());
+            MyStream.readFileFromFileInputStream();
+//            MyStream.readFileAttributeFromFile();
+//            MyStream.randomAccessFileUtil();
+//            MyStream.pipedInputAndOutputStream();
+//            MyStream.bufferInputAndOutputStream();
+//
+            MyStream.dataInputAndOutputStream();
+//            MyStream.objectInputAndOutputStream();
+//            MyStream.printStreamUtil();
+//            MyStream.sequenceInputStreamUtil();
+        }catch (IOException e) {
+            System.err.println(e.getMessage());
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void writeFileFromFileOutputStream(byte[] b) throws IOException {
+        FileOutputStream fileOutputStream = null;
+        try{
+            fileOutputStream = new FileOutputStream(FILE_FULL_NAME, true);
+            fileOutputStream.write(b);
+        }finally {
+            if (fileOutputStream != null) {
+                fileOutputStream.close();
             }
-            byteArrayOutputStream =  new ByteArrayOutputStream();
-            byteArrayOutputStream.write("zhenyun.su".getBytes());
-            byte[] bytes = byteArrayOutputStream.toByteArray();
-            System.out.println(new String(bytes));
+        }
+    }
+
+    public static void readFileFromFileInputStream() throws Exception{
+
+        //Reads a byte of data from this input stream
+        FileInputStream fileInputStream = null;
+        try{
+            fileInputStream = new FileInputStream(FILE_FULL_NAME);
+            int data = fileInputStream.read();
+            while (data != -1){
+                char cData = (char)data;
+                System.out.println(cData);
+                data = fileInputStream.read();
+            }
+        }finally {
+            if (fileInputStream != null){
+                fileInputStream.close();
+            }
+        }
+
+        //Reads up to byte.length bytes of data from this input stream
+        InputStream InputStream = null;
+        try{
+            InputStream = new FileInputStream(FILE_FULL_NAME);
+
+            byte[] byteData =  new byte[6];
+            int bData = InputStream.read(byteData);
+            while (bData != -1){
+                System.out.println(new String(byteData));
+                java.util.Arrays.fill(byteData, (byte) 0);
+                bData = InputStream.read(byteData);
+            }
+        }finally {
+            if (InputStream != null){
+                InputStream.close();
+            }
+        }
+
+    }
+
+    public static void readFileAttributeFromFile() throws IOException {
+        File file = null;
+        try{
+            file =  new File(FILE_DIR+FILE_NAME);
+            boolean fileExists = file.exists();
+            System.out.println("file.exists: "+fileExists);
+
+            boolean isDirectory = file.isDirectory();
+            System.out.println("file.isDirectory: "+isDirectory);
+            boolean dirCreated = file.mkdir();
+            System.out.println("file.mkdir: "+dirCreated);
+
+            boolean dirCreatedAll = file.mkdirs();
+            System.out.println("file.mkdirs: "+dirCreatedAll);
+
+            long length = file.length();
+            System.out.println("file.length: "+length);
+
+            System.out.println("file.Name: "+file.getName());
+            System.out.println("file.Path: "+file.getPath());
+            System.out.println("file.canWrite: "+file.canWrite());
+
+            boolean renameTo = file.renameTo(new File("FILE_DIR+FILE_NEW_NAME"));
+            System.out.println("file.renameTo: "+renameTo);
+
+            String[] fileNames = file.list();
+            if (fileNames != null){
+                for (String fileName: fileNames){
+                    System.out.println("file.list: "+fileName);
+                }
+            }
+
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File fileItem : files) {
+                    System.out.println("file.listFiles: " + fileItem.getName());
+                }
+            }
+
+            boolean isDelete = file.delete();
+            System.out.println("file.delete: "+isDelete);
+
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void randomAccessFileUtil() throws IOException{
+        RandomAccessFile file = null;
+        try{
+            file = new RandomAccessFile(FILE_FULL_NAME,"rw");
+            file.seek(2);
+            long pointer = file.getFilePointer();
+            System.out.println("file.seek:"+pointer);
+            int aByte = file.read();
+            while (aByte != -1){
+                System.out.println((char)aByte);
+                aByte = file.read();
+            }
+
+            file.write(" is good".getBytes());
+
+            file.seek(0);
+            byte[] bdata = new byte[100];
+            int aByte1 = file.read(bdata);
+            System.out.println(new String(bdata));
 
         }catch (Exception e){
             System.err.println(e.getMessage());
         }finally {
-            byteArrayInputStream.close();
-            byteArrayOutputStream.close();
+            if (file != null) {
+                file.close();
+            };
         }
     }
 
-```
-
-## PipedInputStream, PipedOutputStream
-
-The PipedInputStream class makes it possible to read the contents of a pipe as a stream of bytes. 
-
-Pipes are communication channels between threads inside the same JVM
-
-```
     public static void pipedInputAndOutputStream() throws IOException{
 
         PipedInputStream pipedInputStream = null;
@@ -78,46 +186,8 @@ Pipes are communication channels between threads inside the same JVM
                 pipedInputStream.close();
             };
         }
-```
+    }
 
-
-## BufferedInputStream, BufferedOutputStream
-
-
-BufferedInputStream类为输入流提供缓冲。 缓冲可以加快IO的速度。 
-
-BufferedInputStream并不是一次从网络或磁盘读取一个字节，而是一次将更大的数据块读入内部缓冲区。 
-
-当你从BufferedInputStream中读取一个字节时，你可以从它的内部缓冲区读取它。 
-
-当缓冲区被完全读取时，BufferedInputStream将另一个更大的数据块读入缓冲区。 
-
-这通常比从InputStream一次读取单个字节快得多，特别是对于磁盘访问和更大的数据量。
-
-```
-            int bufferSize= 8 * 1024;
-            bufferedInputStream = new BufferedInputStream(new FileInputStream(FILE_FULL_NAME), bufferSize);
-            byte[] bdata = new byte[1024];
-            int data = bufferedInputStream.read(bdata);
-            System.out.println(new String(bdata));
-```
-
-BufferedOutputStream类为输出流提供缓冲。 
-
-缓冲可以加快IO的速度。 不是一次只写一个字节到网络或磁盘，而是每次写入一个更大的块。 
-
-这通常要快得多，特别是对于磁盘访问和更大的数据量。
-
-```
-            int bufferSize= 8 * 1024;
-            bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(FILE_FULL_NAME), bufferSize);
-            bufferedOutputStream.write("zhenyun.su is great".getBytes());
-            bufferedOutputStream.flush();
-```
-
-example
-
-```
     public static void bufferInputAndOutputStream() throws IOException{
 
         BufferedOutputStream bufferedOutputStream = null;
@@ -143,17 +213,7 @@ example
             };
         }
     }
-```
 
-## DataInputStream, DataOutputStream
-
-The Java DataInputStream class enables you to read Java primitives (int, float, long etc.) from an InputStream instead of only raw bytes. 
-
-You wrap an InputStream in a DataInputStream and then you can read Java primitives from the DataInputStream. That is why it is called DataInputStream - because it reads data (numbers) instead of just bytes.
-
-
-
-```
     public static void dataInputAndOutputStream() throws IOException{
         DataOutputStream dataOutputStream = null;
         try{
@@ -162,6 +222,7 @@ You wrap an InputStream in a DataInputStream and then you can read Java primitiv
             dataOutputStream.writeFloat(1.2F);
             dataOutputStream.writeDouble(2.3);
             dataOutputStream.writeUTF("zhenyun.su");
+            dataOutputStream.write("hello".getBytes());
         }catch (Exception e){
             System.err.println(e.getMessage());
         }finally {
@@ -185,23 +246,6 @@ You wrap an InputStream in a DataInputStream and then you can read Java primitiv
             };
         }
     }
-```
-
-## ObjectInputStream	ObjectOutputStream
-
-The Java ObjectInputStream class (java.io.ObjectInputStream) enables you to read Java objects from an InputStream instead of just raw bytes. 
-
-The Java ObjectOutputStream class (java.io.ObjectOutputStream) enables you to write Java objects to an OutputStream instead of just raw bytes. 
-
-You wrap an OutputStream in a ObjectOutputStream and then you can write objects to it.
-
-```
-
-public class MyClass implements Serializable {
-    String Name;
-    Integer age;
-}
-
 
     public static void objectInputAndOutputStream() throws IOException{
         ObjectOutputStream objectOutputStream = null;
@@ -236,15 +280,7 @@ public class MyClass implements Serializable {
             }
         }
     }
-```
 
-## PrintStream
-
-The Java PrintStream class (java.io.PrintStream) enables you to write formatted data to an underlying OutputStream. 
-
-The PrintStream class can format primitive types like int, long etc. formatted as text, rather than as their byte values
-
-```
     public static void printStreamUtil() throws  IOException{
         PrintStream printStream =null;
         try {
@@ -261,22 +297,8 @@ The PrintStream class can format primitive types like int, long etc. formatted a
                 printStream.close();
             }
         }
-
     }
-```
 
-
-## SequenceInputStream
-
-The Java SequenceInputStream combines two or more other InputStream's into one. 
-
-First the SequenceInputStream will read all bytes from the first InputStream, then all bytes from the second InputStream. 
-
-That is the reason it is called a SequenceInputStream, since the InputStream instances are read in sequence
-
-> InputStream + InputStream = SequenceInputStream
-
-```
     public static void sequenceInputStreamUtil() throws  IOException{
 
         SequenceInputStream sequenceInputStream = null;
@@ -304,29 +326,4 @@ That is the reason it is called a SequenceInputStream, since the InputStream ins
             }
         }
     }
-```
-
-Combining More Than Two InputStreams
-
-
-
-```
-InputStream input1 = new FileInputStream("c:\\data\\file1.txt");
-InputStream input2 = new FileInputStream("c:\\data\\file2.txt");
-InputStream input3 = new FileInputStream("c:\\data\\file3.txt");
-
-Vector<InputStream> streams = new Vector<>();
-streams.add(input1);
-streams.add(input2);
-streams.add(input3);
-
-SequenceInputStream sequenceInputStream =
-    new SequenceInputStream(streams.elements()))
-    
-int data = sequenceInputStream.read();
-while(data != -1){
-    System.out.println(data);
-    data = sequenceInputStream.read();
 }
-sequenceInputStream.close();
-```

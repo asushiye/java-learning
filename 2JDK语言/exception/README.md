@@ -15,7 +15,6 @@
 		Catch or Propagate Exceptions?   - 异常即使处理还是向上传播异常？
 		example
 
-
 ## java exception  - java异常机制
 
 		异常概念
