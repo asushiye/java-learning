@@ -1,21 +1,21 @@
 # collection implementions
 
 		class -OverView
-		ListÊµÏÖÀà
-		SetÊµÏÖÀà
-		MapÊµÏÖÀà
-		¼¯ºÏÊµÏÖÀà±È½Ï
+		Listå®ç°ç±»
+		Setå®ç°ç±»
+		Mapå®ç°ç±»
+		é›†åˆå®ç°ç±»æ¯”è¾ƒ
 
 ## class -OverView
 
 collection implementions class
 
-ÏÂÃæ½«½éÉÜ³£ÓÃ¼¯ºÏÊµÏÖÀà
+ä¸‹é¢å°†ä»‹ç»å¸¸ç”¨é›†åˆå®ç°ç±»
 
 ![implementions](implementions.png)
 
 
-## ListÊµÏÖÀà
+## Listå®ç°ç±»
 
 List Implementations
 
@@ -80,7 +80,7 @@ for(Object object : listA) {
 }
 ```
 
-## SetÊµÏÖÀà
+## Setå®ç°ç±»
 
 Set Implementations
 
@@ -141,9 +141,7 @@ put out set item for sorted aec
     }
 ```
 
-## MapÊµÏÖÀà
+## Mapå®ç°ç±»
 
 hashMap Class hierarchy
 ![hashMap](hashMap.png)
-
-

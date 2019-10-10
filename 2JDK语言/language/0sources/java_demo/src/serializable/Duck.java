@@ -1,6 +1,8 @@
 package serializable;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author : zhenyun.su
@@ -11,6 +13,10 @@ import java.io.Serializable;
 public class Duck implements Serializable {
     static final long serialVersionUID = -623843412345623425L;
     private String name;
+    private ArrayList dd;
+    private Set d;
+    private Queue e;
+    private HashMap e1;
     public void print(){
         System.out.println(name);
     }

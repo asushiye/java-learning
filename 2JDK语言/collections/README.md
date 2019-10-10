@@ -1,4 +1,4 @@
-# Java Collections  
+# Java Collections
 
 ## Collections concept  ------ 集合框架概念
 
@@ -6,7 +6,7 @@
 		JDK集合框架，提供哪些功能
 		常用集合接口和结合类一览表
 
-## Collection interfaces   ----- 接口方法  
+## Collection interfaces   ----- 接口方法
 
 		interface - Overview
 		Iterable interface
@@ -28,10 +28,3 @@
 
 
 增强学习： **数据结构**
-
-
-
-
-
-
-

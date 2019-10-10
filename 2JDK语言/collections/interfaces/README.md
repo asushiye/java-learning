@@ -4,7 +4,7 @@
 		Iterable interface
 		collection interface
 		map interface
-		¼¯ºÏ·½·¨ÊµÀı
+		é›†åˆæ–¹æ³•å®ä¾‹
 
 
 ## interface - Overview
@@ -15,28 +15,28 @@
 
  there are two "groups" of interfaces: Collection's and Map's.
 
-interface hierarchy 
+interface hierarchy
 
 ![collection](collection.png)
 
 
-JDKÌá¹©µÄ¼¯ºÏ½Ó¿Ú²»ÏŞÓÚÉÏÃæÁĞ³öÀ´µÄ
+JDKæä¾›çš„é›†åˆæ¥å£ä¸é™äºä¸Šé¢åˆ—å‡ºæ¥çš„
 
-¼¯ºÏ¸ù½Ó¿Úiterable
+é›†åˆæ ¹æ¥å£iterable
 
 ## Iterable interface
 
-The Iterable interface (*java.lang.Iterable*) is one of the root interfaces of the Java collection classes. 
+The Iterable interface (*java.lang.Iterable*) is one of the root interfaces of the Java collection classes.
 The Collection interface extends Iterable, so all subtypes of Collection also implement the Iterable interface
 
 The Iterable interface has only one method:
 ```
 public interface Iterable<T> {
-  public Iterator<T> iterator();    
+  public Iterator<T> iterator();
 }
 ```
 
-iterable Ìá¹©·µ»Øiteratorµü´úÆ÷£¬Í¨¹ıµü´úÆ÷¿ÉÒÔÊµÏÖ¼¯ºÏµÄ±éÀú
+iterable æä¾›è¿”å›iteratorè¿­ä»£å™¨ï¼Œé€šè¿‡è¿­ä»£å™¨å¯ä»¥å®ç°é›†åˆçš„éå†
 
 ```
 public interface Iterator<E> {
@@ -44,7 +44,7 @@ public interface Iterator<E> {
     E next();
 ```
 
-ÈçÏÂ±éÀú
+å¦‚ä¸‹éå†
 ```
     while (xxx.hasNext){
         statement;
@@ -54,24 +54,24 @@ public interface Iterator<E> {
 
 ## collection interface
 
-The Collection interface (java.util.Collection) is one of the root interfaces of the Java collection classes. 
+The Collection interface (java.util.Collection) is one of the root interfaces of the Java collection classes.
 
-collection½Ó¿ÚÖ÷ÒªÌá¹©ÈçÏÂ·½·¨
+collectionæ¥å£ä¸»è¦æä¾›å¦‚ä¸‹æ–¹æ³•
 
-|·½·¨|ÃèÊö|
+|æ–¹æ³•|æè¿°|
 |-|-|
-|add|Ìí¼ÓÒ»¸öÔªËØ|
-|addAll|Ìí¼ÓËùÓĞÔªËØ|
-|remove|ÒÆ³ıÒ»¸öÔªËØ|
-|removeAll|ÒÆ³ıËùÓĞÔªËØ|
-|iterator|·µ»Øµü´úÆ÷|
-|size|¼¯ºÏ´óĞ¡|
-|clear|Çå¿Õ¼¯ºÏ|
-|contains|¼¯ºÏÊÇ·ñ°üº¬Ä³¸öÔªËØ|
-|isEmpty|¼¯ºÏÊÇ·ñÎª¿Õ|
+|add|æ·»åŠ ä¸€ä¸ªå…ƒç´ |
+|addAll|æ·»åŠ æ‰€æœ‰å…ƒç´ |
+|remove|ç§»é™¤ä¸€ä¸ªå…ƒç´ |
+|removeAll|ç§»é™¤æ‰€æœ‰å…ƒç´ |
+|iterator|è¿”å›è¿­ä»£å™¨|
+|size|é›†åˆå¤§å°|
+|clear|æ¸…ç©ºé›†åˆ|
+|contains|é›†åˆæ˜¯å¦åŒ…å«æŸä¸ªå…ƒç´ |
+|isEmpty|é›†åˆæ˜¯å¦ä¸ºç©º|
 
 
-Collection ×Ó½Ó¿ÚÈçÏÂ
+Collection å­æ¥å£å¦‚ä¸‹
 
 * List
 * Set
@@ -80,19 +80,19 @@ Collection ×Ó½Ó¿ÚÈçÏÂ
 * Queue
 * Deque
 
-List ºÍset µÄÊ¹ÓÃ²Î¿¼collectionÍ¨ÓÃ½Ó¿Ú£¬ÏÂÃæ½éÉÜÏÂqueueºÍdeque
+List å’Œset çš„ä½¿ç”¨å‚è€ƒcollectioné€šç”¨æ¥å£ï¼Œä¸‹é¢ä»‹ç»ä¸‹queueå’Œdeque
 
-QueueºÍDeque½Ó¿Ú¼Ì³ĞCollection½Ó¿Ú£¬ÊµÏÖFIFO£¨ÏÈ½øÏÈ³ö£©µÄ¼¯ºÏ
+Queueå’ŒDequeæ¥å£ç»§æ‰¿Collectionæ¥å£ï¼Œå®ç°FIFOï¼ˆå…ˆè¿›å…ˆå‡ºï¼‰çš„é›†åˆ
 
-¶şÕßµÄÇø±ğÔÚÓÚ£¬QueueÖ»ÄÜÔÚ¶ÓÎ²Èë¶Ó£¬¶ÓÍ·³ö¶Ó£¬¶øDeque½Ó¿ÚÔòÔÚ¶ÓÍ·ºÍ¶ÓÎ²¶¼¿ÉÒÔÖ´ĞĞ³ö/Èë¶Ó²Ù×÷
+äºŒè€…çš„åŒºåˆ«åœ¨äºï¼ŒQueueåªèƒ½åœ¨é˜Ÿå°¾å…¥é˜Ÿï¼Œé˜Ÿå¤´å‡ºé˜Ÿï¼Œè€ŒDequeæ¥å£åˆ™åœ¨é˜Ÿå¤´å’Œé˜Ÿå°¾éƒ½å¯ä»¥æ‰§è¡Œå‡º/å…¥é˜Ÿæ“ä½œ
 
-### Queue 
+### Queue
 
-* add(E)/offer(E)£ºÈë¶Ó£¬¼´Ïò¶ÓÎ²×·¼ÓÔªËØ£¬¶şÕßµÄÇø±ğÔÚÓÚÈç¹û¶ÓÁĞÊÇÓĞ½çµÄ£¬add·½·¨ÔÚ¶ÓÁĞÒÑÂúµÄÇé¿öÏÂ»áÅ×³öIllegalStateException£¬¶øoffer·½·¨Ö»»á·µ»Øfalse
-* remove()/poll()£º³ö¶Ó£¬¼´´Ó¶ÓÍ·ÒÆ³ı1¸öÔªËØ£¬¶şÕßµÄÇø±ğÔÚÓÚÈç¹û¶ÓÁĞÊÇ¿ÕµÄ£¬remove·½·¨»áÅ×³öNoSuchElementException£¬¶øpollÖ»»á·µ»Ønull
-* element()/peek()£º²é¿´¶ÓÍ·ÔªËØ£¬¶şÕßµÄÇø±ğÔÚÓÚÈç¹û¶ÓÁĞÊÇ¿ÕµÄ£¬element·½·¨»áÅ×³öNoSuchElementException£¬¶øpeekÖ»»á·µ»Ønull
+* add(E)/offer(E)ï¼šå…¥é˜Ÿï¼Œå³å‘é˜Ÿå°¾è¿½åŠ å…ƒç´ ï¼ŒäºŒè€…çš„åŒºåˆ«åœ¨äºå¦‚æœé˜Ÿåˆ—æ˜¯æœ‰ç•Œçš„ï¼Œaddæ–¹æ³•åœ¨é˜Ÿåˆ—å·²æ»¡çš„æƒ…å†µä¸‹ä¼šæŠ›å‡ºIllegalStateExceptionï¼Œè€Œofferæ–¹æ³•åªä¼šè¿”å›false
+* remove()/poll()ï¼šå‡ºé˜Ÿï¼Œå³ä»é˜Ÿå¤´ç§»é™¤1ä¸ªå…ƒç´ ï¼ŒäºŒè€…çš„åŒºåˆ«åœ¨äºå¦‚æœé˜Ÿåˆ—æ˜¯ç©ºçš„ï¼Œremoveæ–¹æ³•ä¼šæŠ›å‡ºNoSuchElementExceptionï¼Œè€Œpollåªä¼šè¿”å›null
+* element()/peek()ï¼šæŸ¥çœ‹é˜Ÿå¤´å…ƒç´ ï¼ŒäºŒè€…çš„åŒºåˆ«åœ¨äºå¦‚æœé˜Ÿåˆ—æ˜¯ç©ºçš„ï¼Œelementæ–¹æ³•ä¼šæŠ›å‡ºNoSuchElementExceptionï¼Œè€Œpeekåªä¼šè¿”å›null
 
-### Deque 
+### Deque
 
 * addFirst(E) / addLast(E) / offerFirst(E) / offerLast(E)
 * removeFirst() / removeLast() / pollFirst() / pollLast()
@@ -101,30 +101,30 @@ QueueºÍDeque½Ó¿Ú¼Ì³ĞCollection½Ó¿Ú£¬ÊµÏÖFIFO£¨ÏÈ½øÏÈ³ö£©µÄ¼¯ºÏ
 
 ### map interface
 
-map²»Ïñcollection±¾ÉíÊÇ¼¯ºÏ£¬map³ÉÔ±°üº¬¼¯ºÏµÄÊµÏÖ
+mapä¸åƒcollectionæœ¬èº«æ˜¯é›†åˆï¼Œmapæˆå‘˜åŒ…å«é›†åˆçš„å®ç°
 
-MapÓÃÓÚ´æ´¢¼üÖµ¶Ô£¬ÎªÆäÖĞµÄÃ¿¸ö¶ÔÏóÖ¸¶¨ÁËÒ»¸ökey£¬²¢Ê¹ÓÃEntry±£´æÃ¿¸ökey-value¶Ôµ½ **set¼¯ºÏ**ÖĞ
+Mapç”¨äºå­˜å‚¨é”®å€¼å¯¹ï¼Œä¸ºå…¶ä¸­çš„æ¯ä¸ªå¯¹è±¡æŒ‡å®šäº†ä¸€ä¸ªkeyï¼Œå¹¶ä½¿ç”¨Entryä¿å­˜æ¯ä¸ªkey-valueå¯¹åˆ° **seté›†åˆ**ä¸­
 
-ÎÒÃÇ¿ÉÒÔÍ¨¹ıkey¿ìËÙ¶¨Î»µ½¶ÔÏó(value)¡£
+æˆ‘ä»¬å¯ä»¥é€šè¿‡keyå¿«é€Ÿå®šä½åˆ°å¯¹è±¡(value)ã€‚
 
-Map½Ó¿ÚµÄÖ÷Òª·½·¨°üÀ¨£º
+Mapæ¥å£çš„ä¸»è¦æ–¹æ³•åŒ…æ‹¬ï¼š
 
-* size()			- ¼¯ºÏÄÚµÄ¶ÔÏóÊıÁ¿
-* put(K,V)			- ÏòMapÄÚÌí¼Óµ¥¸ö¶ÔÏó
-* putAll(Map)		- ÏòMapÄÚÌí¼ÓÅúÁ¿¶ÔÏó
-* get(K)			- ·µ»ØKey¶ÔÓ¦µÄ¶ÔÏó
-* remove(K)		- É¾³ıKey¶ÔÓ¦µÄ¶ÔÏó
-* containsKey(K)	- ÅĞ¶ÏMapÖĞÊÇ·ñ´æÔÚÖ¸¶¨key
-* containsValue(V)	- ÅĞ¶ÏMapÖĞÊÇ·ñ´æÔÚÖ¸¶¨value
-* keySet()			- ·µ»Ø°üº¬MapÖĞËùÓĞkeyµÄSet
-* values()			- ·µ»Ø°üº¬MapÖĞËùÓĞvalueµÄCollection
-* entrySet()		- ·µ»Ø°üº¬MapÖĞËùÓĞkey-value¶ÔµÄEntrySet
+* size()			- é›†åˆå†…çš„å¯¹è±¡æ•°é‡
+* put(K,V)			- å‘Mapå†…æ·»åŠ å•ä¸ªå¯¹è±¡
+* putAll(Map)		- å‘Mapå†…æ·»åŠ æ‰¹é‡å¯¹è±¡
+* get(K)			- è¿”å›Keyå¯¹åº”çš„å¯¹è±¡
+* remove(K)		- åˆ é™¤Keyå¯¹åº”çš„å¯¹è±¡
+* containsKey(K)	- åˆ¤æ–­Mapä¸­æ˜¯å¦å­˜åœ¨æŒ‡å®škey
+* containsValue(V)	- åˆ¤æ–­Mapä¸­æ˜¯å¦å­˜åœ¨æŒ‡å®švalue
+* keySet()			- è¿”å›åŒ…å«Mapä¸­æ‰€æœ‰keyçš„Set
+* values()			- è¿”å›åŒ…å«Mapä¸­æ‰€æœ‰valueçš„Collection
+* entrySet()		- è¿”å›åŒ…å«Mapä¸­æ‰€æœ‰key-valueå¯¹çš„EntrySet
 
-map¼¯ºÏ±éÀú·½·¨£¬¿ÉÒÔÍ¨¹ımap.entryset µÄsetµü´úÆ÷½øĞĞ±éÀú£¬Ò²¿ÉÒÔÊ¹ÓÃ map.foreach À´±éÀú
+mapé›†åˆéå†æ–¹æ³•ï¼Œå¯ä»¥é€šè¿‡map.entryset çš„setè¿­ä»£å™¨è¿›è¡Œéå†ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨ map.foreach æ¥éå†
 
 
 
-## ¼¯ºÏ·½·¨ÊµÀı
+## é›†åˆæ–¹æ³•å®ä¾‹
 
 ```
 public class MyCollectionUtil {
@@ -217,6 +217,4 @@ addAll Collection from other collection
 ```
 
 
-refer to£ºJavaGenerics
-
-
+refer toï¼šJavaGenerics
