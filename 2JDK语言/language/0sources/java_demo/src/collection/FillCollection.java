@@ -10,14 +10,14 @@ import java.util.Map;
  */
 
 public class FillCollection {
-    static Collection fill(Collection<String> collection){
+    public static Collection fill(Collection<String> collection){
         collection.add("rat");
         collection.add("dog");
         collection.add("cat");
         return collection;
     }
 
-    static Map fill(Map<String, String> map){
+    public static Map fill(Map<String, String> map){
         map.put("name", "zhenyun.su");
         map.put("country", "china");
         map.put("post", "programmer");

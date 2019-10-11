@@ -1,5 +1,7 @@
 package base;
 
+import java.math.BigDecimal;
+
 /**
  * @author : zhenyun.su
  * @comment :
@@ -8,6 +10,11 @@ package base;
 
 public class Test {
     public static void main(String[] args) {
+//        base();
+        bigDecimal();
+    }
+
+    public static void base() {
         int a=888;
         Integer count = new Integer(a);
         boolean yes=true;
@@ -39,5 +46,19 @@ public class Test {
         double two = 1000334245.1234;
         String sformat = String.format("the rank is %,10d out of %,3.2f", one, two);
         System.out.println(sformat);
+    }
+
+    public static void bigDecimal() {
+        BigDecimal amount = new BigDecimal(0);
+        BigDecimal amount1 = new BigDecimal(25);
+        BigDecimal amount2 = new BigDecimal(26);
+        amount = amount.add(amount1);
+        amount = amount.add(amount2);
+        amount = amount.add(amount2);
+
+        System.out.println(amount);
+        System.out.println(amount.compareTo(amount1));
+        System.out.println(amount.compareTo(amount));
+        System.out.println(amount1.compareTo(amount));
     }
 }
