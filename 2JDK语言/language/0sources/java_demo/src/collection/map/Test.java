@@ -12,7 +12,14 @@ public class Test {
     public static void main(String[] args) {
 //        quickStart();
 //        map();
-        nestMap();
+//        nestMap();
+        Stack<String> s = new Stack<>();
+        s.push("sss");
+        s.push("ddd");
+        System.out.println(s);
+        System.out.println("s.peek():"+s.peek()+"; s:"+s);
+        System.out.println("s.pop():"+s.pop()+"; s:"+s);
+
     }
 
     public static void quickStart() {
@@ -36,8 +43,6 @@ public class Test {
         System.out.println("map.clear()");
 //        map.clear();
         System.out.println("map.isEmpty(): "+map.isEmpty());
-
-
         System.out.println("map.get(): "+map.get("name"));  // 获取name键的值，若没有返回null
         System.out.println("map.getOrDefault(): "+map.getOrDefault("title", "not title")); // 获取name键的值，若没有返回默认值
         System.out.println("map.containsKey: "+map.containsKey("name"));
