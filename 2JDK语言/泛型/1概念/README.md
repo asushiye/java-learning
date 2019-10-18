@@ -1,5 +1,4 @@
 # 1概念
-
     为什么java需要引入泛型
     认识泛型
     泛型在类中应用
@@ -9,6 +8,16 @@
         编程测试代码
       堆栈类 - LinkedStack
       随机列表 - RandomList (391页)
+    泛型在接口中应用
+      实现咖啡对象生成器 - CoffeeGenerator
+      实现咖啡迭代器 - CoffeeIterator
+    泛型在方法中应用
+      类型参数推断
+      在类中定义泛型方法
+      可变类型与泛型方法
+      一个通用生成器 - Generator
+
+
 
 ## 为什么java需要引入泛型
 
@@ -322,3 +331,354 @@ public class LinkedStack <T> {
 ### 随机列表 - RandomList
 
 java编程思想(391页)
+
+从特定类型的列表中随机获取元素
+
+```java
+public class RandomList<T> {
+    private ArrayList<T>  list = new ArrayList<>();
+    private Random random = new Random();
+    public void add(T item){
+        list.add(item);
+    }
+    public T select(){
+        return list.get(random.nextInt(list.size()));
+    }
+    public int size(){
+        return list.size();
+    }
+    public boolean remove(T item){
+        return list.remove(item);
+    }
+    @Override
+    public String toString(){
+        return list.toString();
+    }
+}
+```
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        RandomList<String> randomList = new RandomList<>();
+        for(String item: "hello su zhen yun".split(" ")){
+            randomList.add(item);
+        }
+        String item = randomList.select();
+        System.out.println("get "+item+" from "+randomList.toString());
+        randomList.remove(item);
+        System.out.println("randomList: "+randomList.toString());
+    }
+}
+```
+
+随机输出：`su` 每次执行值可能不同
+
+
+## 泛型在接口中应用
+
+泛型也可以应用在接口中，例如对象生成器Generator，专门用于负责创建对象的接口，
+
+实际上这是工厂方法设计模式的一种应用，只不过工厂方法设计模式需要参数来决定创建哪种对象，而这个不需要
+
+### 实现咖啡对象生成器 - CoffeeGenerator
+
+生成器接口
+```java
+public interface Generator<T> {
+    T next();
+}
+```
+
+定义类
+```java
+public abstract class Coffee {
+    private static long counter = 0;
+    private final long id=counter++;
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName()+" "+id;
+    }
+}
+
+public class Coffee1 extends Coffee {}
+public class Coffee2 extends Coffee {}
+public class Coffee3 extends Coffee {}
+public class Coffee4 extends Coffee {}
+```
+
+实现咖啡生成器类
+```java
+public class CoffeeGenerator implements Generator<Coffee> {
+    private Class[] types = {Coffee1.class, Coffee2.class, Coffee3.class, Coffee4.class};
+    private static Random random = new Random(47);
+
+    public CoffeeGenerator() { }
+
+    public int size(){
+        return types.length;
+    }
+
+    @Override
+    public Coffee next() {
+        try {
+            return (Coffee)types[random.nextInt(types.length)].newInstance();
+        }catch (Exception e){
+            throw  new RuntimeException(e);
+        }
+    }
+}
+```
+
+随机生成咖啡对象，生成6个
+```java
+public class Test {
+    public static void main(String[] args) {
+        CoffeeGenerator coffeeGenerator = new CoffeeGenerator();
+        for (int i = 0; i <6 ; i++) {
+            System.out.println(coffeeGenerator.next().toString());
+        }
+    }
+}
+```
+执行结果
+```
+Coffee3 0
+Coffee2 1
+Coffee3 2
+Coffee1 3
+Coffee1 4
+Coffee3 5
+```
+
+### 实现咖啡迭代器 - CoffeeIterator
+
+1. 在咖啡生成器增加对可迭代接口Iterable<Coffee>实现，返回迭代器Iterator
+2. 在咖啡生成器中，添加内部咖啡迭代器
+
+实现一个咖啡迭代器CoffeeIterator，时咖啡生成器具有遍历功能
+
+```java
+public class CoffeeGenerator implements Generator<Coffee>, Iterable<Coffee> {
+    private Class[] types = {Coffee1.class, Coffee2.class, Coffee3.class, Coffee4.class};
+    private static Random random = new Random(47);
+
+    public CoffeeGenerator() { }
+
+    public int size(){
+        return types.length;
+    }
+
+    @Override
+    public Coffee next() {
+        try {
+            return (Coffee)types[random.nextInt(types.length)].newInstance();
+        }catch (Exception e){
+            throw  new RuntimeException(e);
+        }
+    }
+
+    private int total=0;
+
+    public CoffeeGenerator(int total) {
+        this.total = total;
+    }
+    class CoffeeIterator implements Iterator<Coffee> {
+        int count = CoffeeGenerator.this.total;
+        @Override
+        public boolean hasNext() {
+            return count > 0;
+        }
+        @Override
+        public Coffee next() {
+            count --;
+            return CoffeeGenerator.this.next();
+        }
+        @Override
+        public void remove() {
+            throw  new UnsupportedOperationException();
+        }
+    }
+
+    @Override
+    public Iterator<Coffee> iterator() {
+        return new CoffeeIterator();
+    }
+}
+```
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("according to for, print coffee------------");
+        CoffeeGenerator coffeeGenerator = new CoffeeGenerator();
+        for (int i = 0; i <6 ; i++) {
+            System.out.println(coffeeGenerator.next().toString());
+        }
+
+        System.out.println("according to Iterator, print coffee------------");
+        for (Coffee c: new CoffeeGenerator(5)){
+            System.out.println(c.toString());
+        }
+    }
+}
+```
+
+输出如下
+```
+according to for, print coffee------------
+Coffee3 0
+Coffee2 1
+Coffee3 2
+Coffee1 3
+Coffee1 4
+Coffee3 5
+according to Iterator, print coffee------------
+Coffee1 6
+Coffee2 7
+Coffee3 8
+Coffee3 9
+Coffee2 10
+```
+
+
+## 泛型在方法中应用
+
+泛型方法与所在类是不是泛型类，是没有关系的，可以独立于类而产生变化。
+
+基本指导原则：无论何时，只要你能做到，就应用尽量使用泛型方法，
+
+也就是说如果泛型方法可以取代整个类的泛型化，那么就只使用方法的泛型，而不用将类也定为泛型类。
+
+
+### 在类中定义泛型方法
+```java
+public class GenericMethods {
+    public <T> void getClassName(T x){
+        System.out.println(x.getClass().getName()+" value:"+x);
+    }
+}
+```
+泛型参数放在返回值前面
+
+GenericMethods类，并不需要参数化，在这个只要方法拥有类型参数就行
+```java
+public class Test {
+    public static void main(String[] args) {
+        GenericMethods genericMethods = new GenericMethods();
+        genericMethods.getClassName(1);
+        genericMethods.getClassName(1L);
+        genericMethods.getClassName(1.0f);
+        genericMethods.getClassName(1.0d);
+        genericMethods.getClassName("hello");
+        genericMethods.getClassName('c');
+    }
+}
+```
+
+在使用泛型类，创建对象时需要指定类型参数，而使用泛型方法，通常不用指定参数类型，
+
+因为编译器能为我们找出具体类型。这称为类型参数推断(type argument inference)
+
+输出
+```
+java.lang.Integer value:1
+java.lang.Long value:1
+java.lang.Float value:1.0
+java.lang.Double value:1.0
+java.lang.String value:hello
+java.lang.Character value:c
+```
+
+### 类型参数推断
+
+利用泛型方法，编译器帮助我们实现类型参数的推断
+
+下面定义集合对象创建工具，利用静态泛型方法来返回对应集合对象
+```java
+package generic.method;
+
+import java.util.*;
+
+public final class CollectionNewUtils {
+    public static <T> ArrayList<T> arrayList(){
+        return new ArrayList<T>();
+    }
+    public static <T> LinkedList<T> linkedList(){
+        return new LinkedList<T>();
+    }
+    public static <T> HashSet<T> hashSet(){
+        return new HashSet<T>();
+    }
+    public static <T> TreeSet<T> treeSet(){
+        return new TreeSet<T>();
+    }
+    public static <T> LinkedHashSet<T> linkedHashSet(){
+        return new LinkedHashSet<T>();
+    }
+    public static <T> PriorityQueue<T> priorityQueue(){
+        return new PriorityQueue<>();
+    }
+    public static <T, K> HashMap<T,K> hashMap(){
+        return new HashMap<T, K>();
+    }
+    public static <T, K> TreeMap<T,K> treeMap(){
+        return new TreeMap<T, K>();
+    }
+    public static <T, K> LinkedHashMap<T,K> linkedHashMap(){
+        return new LinkedHashMap<T, K>();
+    }
+}
+```
+
+利用编译器类型参数推断，给引用变量赋值
+```java
+    public static void collectionNew() {
+        GenericMethods genericMethods = new GenericMethods();
+
+        ArrayList<String> arrayList= CollectionNewUtils.arrayList();
+        genericMethods.getExClassName(arrayList);
+
+        LinkedList<Integer> linkedList= CollectionNewUtils.linkedList();
+        genericMethods.getExClassName(linkedList);
+    }
+```
+
+方法`CollectionNewUtils.arrayList()` 并没有给出具体的泛型类型，编译器通过引用变量的类型推断出集合对象元素类型。
+
+注意： 类型参数推断，只对**赋值操作有效**， 其他时候不起作用。
+
+如果你将一个泛型方法调用结果作为参数，传递给另一个方法。这是编译器不会执行类型参数推断
+
+```java
+  public void printList(ArrayList<String> list){  }
+
+  printList(CollectionNewUtils.arrayList()); //# 编译器不能推断出正确类型，只能以Object类型赋值 list
+```
+
+### 可变类型与泛型方法
+
+```java
+public class GenericVarargs {
+    public static <T> List<T> makeList(T...args){
+        List<T> result= Arrays.asList(args);
+        return result;
+    }
+}
+```
+
+```java
+    public static void genericVarargs() {
+        List<String> list = GenericVarargs.makeList("su", "zhen", "yun");
+        System.out.println("list:"+list);
+    }
+```
+
+结果：`list:[su, zhen, yun]`
+
+
+### 一个通用生成器 - Generator
+
+java编程思想 - 页397
