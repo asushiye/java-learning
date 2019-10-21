@@ -14,4 +14,12 @@ public class GenericMethods {
     public <T> void getExClassName(T x){
         System.out.println(x.getClass().getName());
     }
+
+    public <T> T create(Class<T> t){
+        try{
+            return t.newInstance();
+        }catch(Exception e){
+            throw  new RuntimeException(e);
+        }
+    };
 }

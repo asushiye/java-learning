@@ -1,5 +1,6 @@
 package generic.method;
 
+import generic.inter.Coffee1;
 import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
@@ -42,4 +43,5 @@ public class Test {
         List<String> list = GenericVarargs.makeList("su", "zhen", "yun");
         System.out.println("list:"+list);
     }
+
 }

@@ -15,7 +15,9 @@
       类型参数推断
       在类中定义泛型方法
       可变类型与泛型方法
-      一个通用生成器 - Generator
+      通用生成器 - Generator
+      通用元祖工具 - Tuple
+      通用Sets工具 - Sets
 
 
 
@@ -682,3 +684,260 @@ public class GenericVarargs {
 ### 一个通用生成器 - Generator
 
 java编程思想 - 页397
+
+通用生成器 - BasicGenerator
+```java
+public class BasicGenerator<T> implements Generator<T> {
+    private Class<T> type;
+
+    public BasicGenerator(Class<T> type) {
+        this.type = type;
+    }
+
+    @Override
+    public T next() {
+        try{
+            return type.newInstance();
+        }catch(Exception e){
+            throw  new RuntimeException(e);
+        }
+    }
+
+    public static <T> Generator<T> create(Class<T> type){
+        return new BasicGenerator<T>(type);
+    }
+}
+```
+
+`BasicGenerator(Class<T> type)`由构造器泛型参数来决定，创建何种类型对象。
+
+`T next()` 按类型创建对象，`newInstance()`创建的类必须由默认构建方法（无参数构建方法）
+
+编写测试代码
+```java
+    public static void basicGenerator() {
+        Generator<Coffee1> generator = BasicGenerator.create(Coffee1.class);
+        for (int i = 0; i < 3; i++) {
+            Coffee1 coffee1 = generator.next();
+            System.out.println(coffee1.toString());
+        }
+    }
+```
+
+输出
+```
+Coffee1 0
+Coffee1 1
+Coffee1 2
+```
+
+更加简化通用生成器
+```java
+public class ObjectGenerator {
+    public static <T> T create(Class<T> t){
+        try{
+            return t.newInstance();
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    };
+}
+```
+
+```java
+    public static void objectGeneratorTest() {
+        Coffee coffee2 = ObjectGenerator.create(Coffee2.class);
+        System.out.println(coffee2.toString());
+        Coffee coffee3 = ObjectGenerator.create(Coffee3.class);
+        System.out.println(coffee3.toString());
+    }
+```
+
+大家只是学习下，实际上并没有简化代码
+
+### 通过元祖工具 - Tuple
+
+```java
+public class Tuple {
+    public static <A, B> TwoTuple<A, B> tuple(A a, B b){
+        return new TwoTuple<A, B>(a, b);
+    }
+
+    public static <A, B, C> ThreeTuple<A, B, C> tuple(A a, B b, C c){
+        return new ThreeTuple<A, B, C>(a, b, c);
+    }
+
+    public static <A, B, C,D> FourTuple<A, B, C,D> tuple(A a, B b, C c, D d){
+        return new FourTuple<A, B, C, D>(a, b, c, d);
+    }
+}
+```
+
+```java
+    public static void tupleUtilTest() {
+        TwoTuple<String, Integer> twoTuple = Tuple.tuple("zhenyun.su", 25);
+        ThreeTuple<Integer, String, Long> threeTuple = Tuple.tuple(24, "hello", 23L);
+        FourTuple<Integer, String, Long, Double> fourTuple = Tuple.tuple(24, "hello", 23L, 3.3);
+        System.out.println("TwoTuple:" + twoTuple);
+        System.out.println("ThreeTuple:" + threeTuple);
+        System.out.println("FourTuple:" + fourTuple);
+    }
+```
+
+```
+TwoTuple:TwoTuple{first=zhenyun.su, secord=25}
+ThreeTuple:ThreeTuple{three=23, first=24, secord=hello}
+FourTuple:FourTuple{four=3.3, three=23, first=24, secord=hello}
+```
+
+
+### 通用Sets工具 - Sets
+
+利用泛型方法，完成集合的并集，交集，删除，除去交集的集合等等集合操作
+```java
+public class Sets {
+    //并集
+    public static <T> Set<T> union(Set<T> a, Set<T> b){
+        Set<T> result = new HashSet<T>(a);
+        result.addAll(b);
+        return result;
+    }
+
+    //交集
+    public static <T> Set<T> intersection(Set<T> a, Set<T> b){
+        Set<T> result = new HashSet<T>(a);
+        result.retainAll(b);
+        return result;
+    }
+    //去除集合中其他集合元素
+    public static <T> Set<T> difference(Set<T> a, Set<T> b){
+        Set<T> result = new HashSet<T>(a);
+        result.removeAll(b);
+        return result;
+    }
+    //去除交集元素的两个集合元素
+    public static <T> Set<T> complement(Set<T> a, Set<T> b){
+        return difference(union(a, b), intersection(a, b));
+    }
+}
+```
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Set<Integer> a = new HashSet<Integer>(Arrays.asList(1,2,3));
+        Set<Integer> b = new HashSet<Integer>(Arrays.asList(3,4,5));
+        System.out.println("a: "+ a+"; b: "+ b);
+        System.out.println("Sets.union(a, b): "+ Sets.union(a, b));
+        System.out.println("Sets.intersection(a, b): "+ Sets.intersection(a, b));
+        System.out.println("Sets.difference(a, b): "+ Sets.difference(a, b));
+        System.out.println("Sets.complement(a, b): "+ Sets.complement(a, b));
+    }
+}
+```
+
+```
+a: [1, 2, 3]; b: [3, 4, 5]
+Sets.union(a, b): [1, 2, 3, 4, 5]   //并集时，去除了重复元素
+Sets.intersection(a, b): [3]
+Sets.difference(a, b): [1, 2]
+Sets.complement(a, b): [1, 2, 4, 5]
+```
+
+## 泛型是用擦除来实现的
+
+泛型是用擦除来实现的， 这意味着在使用泛型时，任何具体类型信息都被擦除掉，你唯一知道是你在使用一个对象，
+
+因此List<String>和List<Integer>在运行时，事实上一个同一个类型，List
+
+如何理解擦除及应该如何处理它，是学习java泛型的最大障碍
+
+```java
+public class HasF {
+    public void f(){
+        System.out.println("HasF.f()");
+    };
+}
+```
+
+```java
+public class Mainpulator<T> {
+    T obj;
+
+    public Mainpulator(T obj) {
+        this.obj = obj;
+    }
+
+    public void print(){
+        obj.f(); // 编译报错，找不到 f()方法
+    }
+
+    public static void main(String[] args) {
+        HasF hf= new HasF();
+        Mainpulator<HasF> mainpulator = new Mainpulator<>(hf);
+        mainpulator.print();
+    }
+}
+```
+
+由于有了擦除，java编译器无法将print()方法中用obj上调用f()这个需求映射到HasF拥有f()。
+
+为了调用f(),需要协助泛型类，给定泛型类的边界，以告知编译器能接受边界类型。
+
+
+```java
+public class Mainpulator<T extends HasF> {
+    T obj;
+
+    public Mainpulator(T obj) {
+        this.obj = obj;
+    }
+
+    public void print(){
+        obj.f(); // 正常编译
+    }
+
+    public static void main(String[] args) {
+        HasF hf= new HasF();
+        Mainpulator<HasF> mainpulator = new Mainpulator<>(hf);
+        mainpulator.print();
+    }
+}
+```
+
+给Mainpulator泛型类定义泛型类型为HasF继承。
+
+下面我们使用接口作为泛型参数类型，来举例子
+```java
+public interface Animal {
+    void eat();
+    void swiming();
+}
+
+
+public class Duck implements Animal {
+    @Override
+    public void eat() {
+        System.out.println("duck eat");
+    }
+
+    @Override
+    public void swiming() {
+        System.out.println("duck swiming");
+    }
+}
+
+public class GenercDuck {
+    public static <T extends Animal> void genercDuck(T a){
+        a.eat();
+    }
+
+    public static void main(String[] args) {
+        GenercDuck.genercDuck(new Duck());
+    }
+}
+```
+
+在GenercDuck类的泛型方法genercDuck,指定参数 T为 Animal边界类型，
+
+这样T类型参数a才能方法中调用Animal方法
