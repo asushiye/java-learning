@@ -1,4 +1,4 @@
-package concurrent;
+package concurrent.quickstart;
 
 import java.util.concurrent.TimeUnit;
 

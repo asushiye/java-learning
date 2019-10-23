@@ -1,4 +1,4 @@
-package concurrent;
+package concurrent.quickstart;
 
 /**
  * @author : zhenyun.su
