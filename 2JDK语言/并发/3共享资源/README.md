@@ -21,12 +21,7 @@
 先看下面实例，共享受限资源问题
 
 ## 如何引发共享资源问题
-## 解决共享资源竞争
-### synchronized同步
-### 使用显性Lock对象
-### 原子性和可视性
-#### volatile - 原子操作
-#### 原子类 - 原子操作
+
 定义个获取偶数的共享资源对象，定义多个线程对共享资源进行增量和读取操作，
 
 并判断共享资源的计数值是否为偶数，如果不是，则退出线程执行。
@@ -431,3 +426,21 @@ public class ThreadLocalJob implements Runnable {
 使用Threadlocal保证资源不会出现竞争。
 
 ### 终止任务
+
+
+```java
+public class Count {
+    private int count = 0;
+    private Random random = new Random(47);
+    public synchronized int value(){
+        return count;
+    }
+    public synchronized int increment(){
+        int temp = count;
+        if (random.nextBoolean()){
+            Thread.yield();
+        }
+        return (count = ++temp);
+    }
+}
+```
