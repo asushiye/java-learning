@@ -16,9 +16,12 @@ import java.util.concurrent.*;
 public class Test {
     public static void main(String[] args) throws Exception {
 //        termination();
-//        interrupt();
+//        interrupt1();
+//        interrupt2();
+//        interrupt3();
 //        blockedTermination();
-        IOBlockedInterrupt();
+//        IOBlockedInterrupt();
+        interruptJob();
     }
 
     public static void termination()  {
@@ -41,19 +44,50 @@ public class Test {
         System.out.println("Total Value: "+Entrance.getTotalValue());
         System.out.println("Sum of Entrance: "+Entrance.sumEntrance());
     }
-    public static void interrupt(){
+    public static void interrupt3(){
+        System.out.println("NoBlocked is Interrupting");
         ExecutorService executorService = Executors.newCachedThreadPool();
         Future<?> future= executorService.submit(new NoBlocked());
-        System.out.println("NoBlocked is Interrupting");
         try{
-            TimeUnit.MILLISECONDS.sleep(1);
+            TimeUnit.MICROSECONDS.sleep(10);
         }catch(Exception e){
             System.out.println("NoBlocked exception"+e.getMessage());
         }
         future.cancel(true);
+
         System.out.println("NoBlocked is Interrupted");
         System.exit(0);
     }
+
+    public static void interrupt2(){
+        System.out.println("NoBlocked is Interrupting");
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(new NoBlocked());
+        try{
+            TimeUnit.MICROSECONDS.sleep(10);
+        }catch(Exception e){
+            System.out.println("NoBlocked exception"+e.getMessage());
+        }
+        executorService.shutdownNow();
+        System.out.println("NoBlocked is Interrupted");
+        System.exit(0);
+    }
+
+    public static void interrupt1(){
+        System.out.println("NoBlocked is Interrupting");
+        Thread thread = new Thread(new NoBlocked());
+        thread.start();
+        try{
+            TimeUnit.MICROSECONDS.sleep(10);
+        }catch(Exception e){
+            System.out.println("NoBlocked exception"+e.getMessage());
+        }
+        thread.interrupt();
+
+        System.out.println("NoBlocked is Interrupted");
+        System.exit(0);
+    }
+
 
     public static void testBlocked(Runnable a){
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -88,6 +122,17 @@ public class Test {
             TimeUnit.SECONDS.sleep(1);
             System.out.println("Closing "+ socketInput.getClass().getSimpleName());
             socketInput.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void interruptJob() {
+        Thread thread = new Thread(new InterruptJob());
+        try{
+            thread.start();
+            TimeUnit.MILLISECONDS.sleep(1500);
+            thread.interrupt();
         }catch(Exception e){
             e.printStackTrace();
         }

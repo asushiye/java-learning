@@ -9,7 +9,7 @@ package concurrent.termination;
 public class NoBlocked implements Runnable {
     @Override
     public void run() {
-        while(true)
-        System.out.println("NoBlocked is Run()");
+        while(!Thread.interrupted())
+          System.out.println("NoBlocked is Run()");
     }
 }

@@ -4,6 +4,7 @@
     中断
       运行时中断
       阻塞时中断
+      检查中断 - 中断的最佳实践
 
 ## 使用标识来终止任务
 
@@ -197,19 +198,57 @@ java提供中断处理方法
 
 ### 运行时中断
 
+线程处于运行时状态时，可通过判断中断状态，来退出执行，终止线程。
 
 ```java
 public class NoBlocked implements Runnable {
     @Override
     public void run() {
-        while(true)
-        System.out.println("NoBlocked is Run()");
+        while(!Thread.interrupted())
+          System.out.println("NoBlocked is Run()");
     }
 }
 ```
 
+下面使用三种方式来中断正常运行的线程
+
+#### thread.interrupt
 ```java
-    public static void interrupt(){
+    public static void interrupt1(){
+        System.out.println("NoBlocked is Interrupting");
+        Thread thread = new Thread(new NoBlocked());
+        thread.start();
+        try{
+            TimeUnit.MICROSECONDS.sleep(10);
+        }catch(Exception e){
+            System.out.println("NoBlocked exception"+e.getMessage());
+        }
+        thread.interrupt();
+        System.out.println("NoBlocked is Interrupted");
+        System.exit(0);
+    }
+```
+
+#### executorService.shutdownNow()
+```java
+    public static void interrupt2(){
+        System.out.println("NoBlocked is Interrupting");
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(new NoBlocked());
+        try{
+            TimeUnit.MICROSECONDS.sleep(10);
+        }catch(Exception e){
+            System.out.println("NoBlocked exception"+e.getMessage());
+        }
+        executorService.shutdownNow();
+        System.out.println("NoBlocked is Interrupted");
+        System.exit(0);
+    }
+```
+
+#### future.cancel(true)
+```java
+    public static void interrupt3(){
         ExecutorService executorService = Executors.newCachedThreadPool();
         Future<?> future= executorService.submit(new NoBlocked());
         System.out.println("NoBlocked is Interrupting");
@@ -229,9 +268,7 @@ public class NoBlocked implements Runnable {
 NoBlocked is Interrupting
 NoBlocked is Run()
 NoBlocked is Run()
-NoBlocked is Run()
 NoBlocked is Interrupted
-NoBlocked is Run()
 ```
 
 如果屏蔽`TimeUnit.MILLISECONDS.sleep(1);`代码则直接输出
@@ -240,13 +277,15 @@ NoBlocked is Interrupting
 NoBlocked is Interrupted
 ```
 
-### 阻塞时中毒
+正常运行的线程，获取到中断通知时，通过判断中断状态来终止线程，那如果被阻塞的线程怎么来终止线程的呢？
+
+### 阻塞时中断
 
 线程会由于多种原因导致进入阻塞状态，而有时我们想终止被阻塞的任务。
 
 有哪些原因呢?
-1. 调用sleep(millisecords)使任务进入阻塞状态，在这种情况下，任务在指定时间内不会运行。
-2. 调用wait()将线程挂起。直到线程等到通知，调用notify()和notifyAll()方法后，重新进入就绪状态
+1. 调用sleep(millisecords)使任务进入阻塞状态，此时任务不会运行，可由中断，而产生中断异常退出
+2. 调用wait()将线程挂起。当然wait()必须在synchronized同步控制中,此时任务不会运行，可由中断，而产生中断异常退出 （更多wait使用，看线程协作）
 3. 任务在等待某个输入或输出的完成
 4. 任务试图在某个对象上调用同步控制的方法，但是对象锁不可用，因为另外一个任务已经获取到这个对象锁。
 
@@ -361,9 +400,33 @@ Aborting with system.exit(0)
 
 BlockedSleep类已经被中断，并抛出中断异常，而BlockedIO类和BlockedSynchronized类并没有被中断
 
-说明，任务由于sleep()的阻塞是可以被中断的，并且通过异常方式退出线程，
+#### 结论
 
-而任务由于等待IO操作的阻塞和等待其他线程释放锁的阻塞都不能被中断。
+线程由于sleep()而阻塞是可以被中断的，以通过中断异常方式，终止线程，
+
+线程由于等待IO操作的阻塞或等待其他线程释放锁的阻塞都不能被中断，而不能终止线程
+
+另外， 线程挂起 wait()的线程，以通过中断异常方式，终止线程，
+
+修改BlockedSleep代码
+```java
+public class BlockedSleep implements Runnable {
+    @Override
+    public void run() {
+        try{
+            synchronized(this){
+              wait();  //解锁，挂起线程
+            }
+        }catch(InterruptedException e){
+            System.out.println("BlockedSleep InterruptedException ");
+        }
+        System.out.println("BlockedSleep exit Run()");
+    }
+}
+```
+重新验证，效果和之前一样的
+
+#### 完成IO操作或释放锁
 
 但是有时，我们确实想让IO读写的阻塞线程中断调，这样其他线程也能对IO设备进行读写操作。
 
@@ -408,3 +471,105 @@ BlockedIo exit Run()
 ```
 
 2. BlockedSynchronized类的阻塞是不能被打断的，但是若使用ReentrantLock上阻塞是可以被中断，并抛出异常。
+
+
+### 检查中断 - 中断的最佳实践
+
+中断的操作是在线程外来执行的，这是线程有可能是运行状态，也可能是阻塞状态，
+
+对运行状态线程必须通过检查线程中断状态来终止线程
+
+对阻塞状态线程必须通过中断异常方式来终止线程
+
+
+由于我们不知道什么时候终止线程，因此在具有中断操作的代码中，必须添加**try-fianlly**来完整执行完代码,例如释放资源
+
+定义资源
+```java
+public class InterruptResource {
+    private int id;
+    public InterruptResource(int id) {
+        this.id = id;
+        System.out.println("need resource "+ id);
+    }
+    public void cleanResource(){
+        System.out.println("clean resource "+ id);
+    }
+}
+
+```
+定义任务
+```java
+public class InterruptJob implements Runnable {
+    private volatile double d= 0.0;
+    @Override
+    public void run() {
+        try{
+            while (!Thread.interrupted()){
+                InterruptResource resource1 = new InterruptResource(1);
+                try{
+                    System.out.println("thread sleeping");
+                    TimeUnit.SECONDS.sleep(1);
+                    InterruptResource resource2 = new InterruptResource(2);
+                    try{
+                        System.out.println("thread calculating");
+                        for (int i = 0; i < 10000; i++) {
+                            d= d+(Math.PI+Math.E)/d;
+                        }
+                        System.out.println("thread calculated, value "+d);
+                    }finally{
+                        resource2.cleanResource();
+                    }
+                }finally{
+                    resource1.cleanResource();
+                }
+            }
+            System.out.println("Exiting via normal interrupted");
+        }catch(InterruptedException e){
+            System.out.println("Exiting via exception interrupted, error: "+e.getMessage());
+        }
+    }
+}
+```
+
+创建线程来执行
+```java
+    public static void interruptJob() {
+        Thread thread = new Thread(new InterruptJob());
+        try{
+            thread.start();
+            TimeUnit.MILLISECONDS.sleep(1500);
+            thread.interrupt();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+```
+
+输出结果有两种情况
+
+1. 当现在执行到sleep(),处于阻塞状态时中断,中断异常退出
+```
+need resource 1
+thread sleeping
+need resource 2
+thread calculating
+thread calculated
+clean resource 2
+clean resource 1
+need resource 1
+thread sleeping
+clean resource 1
+Exiting via exception interrupted, error: sleep interrupted
+```
+2. 当线程执行到数值运算，处于运行状态时中断，检查中断状态退出
+```
+need resource 1
+thread sleeping
+need resource 2
+thread calculating
+thread calculated
+clean resource 2
+clean resource 1
+Exiting via normal interrupted
+```
