@@ -1,15 +1,13 @@
-# 8新类库中构件
+# 1倒数锁存器
+
     概述
-    死锁如何形成
-    死锁如何防止
+    最佳实践
 
 ## 概述
 
 java.util.concurrent引入大量新类，来解决并发编程的问题。
 
-学习使用他们有利于编写出简单而健壮的代码
-
-## CountDownLatch
+其中倒数锁存器CountDownLatch 使我们本章要讲解
 
 倒数的锁存器用于简单控制，一部分线程执行完后，才能执行其他线程
 
@@ -20,6 +18,9 @@ java.util.concurrent引入大量新类，来解决并发编程的问题。
 另外创建2个线程，调用CountDownLatch.await()挂起任务，
 
 当锁存器的计数值为0时，这两个线程则被唤醒执行
+
+
+## 最佳实践
 
 ```java
 package concurrent.latch;
@@ -127,6 +128,3 @@ CountDownLatch被用来触发一次，计数值是不能被重置的
 ## CyclicBarrier
 
 和CountDownLatch类似，不过CountDownLatch 只触发一次的事件，而CyclicBarrier可以多次重用
-
-
-## DelayQueue
