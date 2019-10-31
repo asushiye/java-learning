@@ -10,7 +10,8 @@ package collection.set;
 
 public class Test {
     public static void main(String[] args) {
-        quickstart();
+//        quickstart();
+        forprint();
     }
 
     public static void quickstart() {
@@ -81,4 +82,24 @@ public class Test {
         }
     }
 
+    public static void forprint() {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 5; i++) {
+            set.add(i);
+        }
+
+//        set.forEach(item->{
+//            set.remove(2);
+//            System.out.println(item+" set "+set);
+//        });
+
+        for (Integer item:set){
+            System.out.println(item+" set "+set);
+            if (item == 2){
+                set.remove(item);  //在循环在使用remove方法时，需要条件，并且跳出循序
+                System.out.println(item+" set "+set);
+                return ;
+            }
+        }
+    }
 }
