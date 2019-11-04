@@ -1,4 +1,4 @@
-# 8Lambda
+# 8个匿名函数
     Why Lambda
 			define interface
 			interface implementation

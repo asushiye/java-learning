@@ -1,5 +1,4 @@
 # 数字与静态
-
 		静态方法
 			通过Math引出静态方法
 			静态方法和非静态方法差异
@@ -81,6 +80,7 @@ public class MyMin{
 	}
 }
 ```
+
 静态方法min2使用参数one和two来判断最小的值，并返回最小值，没有使用到对象中实例变量a或b；
 
 非静态方法min1使用实例变量a和b来判断最小的值，并返回最小值。实例变量直接影响方法结果
@@ -118,6 +118,7 @@ public class Duck{
   public int getSize(){return this.size;};
 }
 ```
+
 当每new一个Duck实例时，count累加1；如果count不是静态变量时，每个duck实例的count值都是0，没法统计实例个数。
 
 这就是静态变量功用：被所有实例对象共享。

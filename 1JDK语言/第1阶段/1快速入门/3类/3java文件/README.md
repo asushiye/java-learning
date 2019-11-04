@@ -1,5 +1,4 @@
-# 3java文件语法
-
+# 3java文件
 		Java Files
 		Java Syntax
 		  Package Declaration
@@ -13,6 +12,7 @@
 		comments and annotations
 
 ## 1. Java Files
+
 java code inside a java files, type for  **class, abstract class, interface, enum, annotation**
 
 ## 2. Java Syntax
