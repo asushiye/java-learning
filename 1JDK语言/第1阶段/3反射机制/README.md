@@ -18,11 +18,9 @@ chapter-18-03
 chapter-18-04
 		Generics
 		Arrays
-		
 
 
 chapter-18-05
-		Dynamic Proxies 
+		Dynamic Proxies
 		Dynamic Class Loading and Reloading
 		Modules
-

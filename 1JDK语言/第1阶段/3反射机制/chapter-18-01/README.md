@@ -6,12 +6,12 @@ chapter-18-01
 		JavaReflection class
 
 
-Java·´ÉäÊ¹µÃ¿ÉÒÔÔÚÔËĞĞÊ±¼ì²éÀà£¬½Ó¿Ú£¬×Ö¶ÎºÍ·½·¨£¬¶øÎŞĞèÔÚ±àÒëÊ±ÖªµÀÀàÃû£¬·½·¨µÈ¡£
-Ò²¿ÉÒÔÊµÀı»¯ĞÂ¶ÔÏó£¬µ÷ÓÃ·½·¨, ²¢Ê¹ÓÃ·´ÉäÀ´»ñÈ¡/ÉèÖÃ×Ö¶ÎÖµ¡£
+Javaåå°„ä½¿å¾—å¯ä»¥åœ¨è¿è¡Œæ—¶æ£€æŸ¥ç±»ï¼Œæ¥å£ï¼Œå­—æ®µå’Œæ–¹æ³•ï¼Œè€Œæ— éœ€åœ¨ç¼–è¯‘æ—¶çŸ¥é“ç±»åï¼Œæ–¹æ³•ç­‰ã€‚
+ä¹Ÿå¯ä»¥å®ä¾‹åŒ–æ–°å¯¹è±¡ï¼Œè°ƒç”¨æ–¹æ³•, å¹¶ä½¿ç”¨åå°„æ¥è·å–/è®¾ç½®å­—æ®µå€¼ã€‚
 
-Java Reflection is quite powerful and can be very useful. 
+Java Reflection is quite powerful and can be very useful.
 
-For instance, Java Reflection can be used to map properties in JSON files to getter / setter methods in Java objects, like Jackson, GSON, Boon etc. 
+For instance, Java Reflection can be used to map properties in JSON files to getter / setter methods in Java objects, like Jackson, GSON, Boon etc.
 
 does. Or, Reflection can be used to map the column names of a JDBC ResultSet to getter / setter methods in a Java object.
 
@@ -47,7 +47,7 @@ Field[] fields   = myObjectClass.getFields();
 
 ## JavaReflection class
 
-Using Java Reflection you can inspect Java classes at runtime. 
+Using Java Reflection you can inspect Java classes at runtime.
 
 Inspecting classes is often the first thing you do when using Reflection. From the classes you can obtain information about
 
@@ -67,7 +67,7 @@ The Class Object
 
 Class Name
 `String className = myObjectClass.getName();`   //packagename+classname
-`String simpleClassName = myObjectClass.getSimpleName();`  // only classname without the pacakge name 
+`String simpleClassName = myObjectClass.getSimpleName();`  // only classname without the pacakge name
 
 Modifiers
 You can access the modifiers of a class via the Class object. The class modifiers are the keywords "public", "private", "static" etc. You obtain the class modifiers like this:
