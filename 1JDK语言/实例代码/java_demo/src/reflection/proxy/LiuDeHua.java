@@ -1,3 +1,5 @@
+package reflection.proxy;
+
 public class LiuDeHua implements Person {
     @Override
     public String sing(String name) {

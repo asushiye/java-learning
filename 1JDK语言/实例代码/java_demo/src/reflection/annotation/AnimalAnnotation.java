@@ -1,32 +1,22 @@
-package reflection;
-
-import java.util.List;
+package reflection.annotation;
 
 /**
  * @author : zhenyun.su
  * @comment :
  * @since : 2019-11-05
  */
-
-public class Animal {
+@MyTypeAnnotation(name="myType", value="class")
+public class AnimalAnnotation {
+    @MyFieldAnnotation(name="myField", value="field")
     private String name;
     private Integer age;
-    private List<String> members;
 
-    public List<String> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<String> members) {
-        this.members = members;
-    }
-
-    public Animal(String name, Integer age) {
+    public AnimalAnnotation(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    public Animal() {
+    public AnimalAnnotation() {
     }
 
     @Override
@@ -37,7 +27,8 @@ public class Animal {
                 '}';
     }
 
-    public Boolean print(String value, Integer qty){
+    @MyMethodAnnotation(name="myMethod", value="method")
+    public Boolean print(@MyParameterAnnotation(name="myParam", value="param") String value, Integer qty){
         System.out.println("value: "+value+"; qty: "+qty);
         return true;
     }
