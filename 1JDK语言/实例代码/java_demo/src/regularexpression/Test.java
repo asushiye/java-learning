@@ -1,5 +1,6 @@
 package regularexpression;
 
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -34,5 +35,7 @@ public class Test {
         System.out.println("@qq.com".matches(mailRegex));
         System.out.println("zhen@qq".matches(mailRegex));
         System.out.println("zhenqq.com".matches(mailRegex));
+        int FINAL            = 0x0011;
+        System.out.println(FINAL);
     }
 }
