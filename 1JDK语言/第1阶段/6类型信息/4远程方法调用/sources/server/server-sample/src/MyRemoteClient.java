@@ -9,7 +9,7 @@ import java.rmi.Naming;
 public class MyRemoteClient {
     public static void main(String[] args) {
         try{
-            MyRemote myRemote = (MyRemote) Naming.lookup("rmi://127.0.0.1/RemoteHello");
+            MyRemote myRemote = (MyRemote) Naming.lookup("rmi://127.0.0.1:1099/RemoteHello");
             String s=myRemote.sayHello("zhenyun.su");
             System.out.println(s);
         }catch (Exception e){

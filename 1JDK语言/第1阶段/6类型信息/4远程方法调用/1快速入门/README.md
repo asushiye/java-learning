@@ -1,16 +1,28 @@
-# 1远程方法调用
+# 4远程方法调用
     RMI
     代码实现
+    编写远程服务
+      1. 定义远程服务接口
+      2. 实现远程服务接口类
+      3. 编写服务端启动远程服务
+      4. 使用rmic生成辅助对象(stub)
+      5. 将远程对象和辅助对象打包为jar
+      6. 启动远程服务
+    客户端调用远程服务
+      客户端项目加载sample.jar
+      客户端代码
+    内置启动远程服务
     工作方式
     常见错误
 
 ## RMI概念
 
+远程方法调用，就是从一个JVM能够调用其他JVM(可以本机其他JVM，或远程服务器JVM)中对象方法。
+
 ```
-Java RMI，远程方法调用(Remote Method Invocation)，
+Java RMI(Remote Method Invocation)，java远程方法调用。
 一种用于实现远程过程调用(RPC)(Remote procedure call)的Java API，
-能够传输基本类型的变量或可序列化后的Java对象。
-它的实现依赖于Java虚拟机(JVM)，因此它仅支持从一个JVM到另一个JVM的调用。
+支持基本类型的变量或可序列化后的Java对象的数据交互
 ```
 
 如何实现呢？ 借助辅助对象来帮我们实现远程数据交互。
@@ -31,9 +43,15 @@ RMI好处你不用写任何网络或I/O代码，客户程序调用远程方法�
 
 ## 代码实现
 
-### 制作远程服务
+### 编写远程服务
 
-#### 远程服务接口
+1. 定义远程服务接口
+2. 实现远程服务接口类
+3. 编写服务端启动远程服务
+4. 使用rmic生成辅助对象(stub)
+5. 将远程对象和辅助对象打包为jar
+
+#### 定义远程服务接口
 ```java
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -46,7 +64,7 @@ public interface MyRemote extends Remote {
 1. 远程调用，需要使用网络服务，因此必须抛出远程调用的异常，供客户端处理。
 2. 远程方法的变量数据类型和返回值数据类型，必须为基本数据类型或可序列化对象(Serializable)
 
-#### 实现远程服务接口
+#### 实现远程服务接口类
 
 ```java
 import java.rmi.Naming;
@@ -66,7 +84,13 @@ public class MyRemoteImp extends UnicastRemoteObject implements MyRemote {
 
     public MyRemoteImp() throws RemoteException {
     }
+}
+```
 
+#### 编写服务端启动远程服务
+
+```java
+public class MyRemoteServer {
     public static void main(String[] args) {
         try{
             MyRemote myRemote = new MyRemoteImp();
@@ -103,10 +127,15 @@ E:\rmi\sample\out\production\sample>rmic MyRemoteImp
 
 使用idea工具打包，生成sample.jar 包含下面三个类
 
+配置打包Jar: `project Structure -> Artifacts -> 新增 -> 选择Jar -> 选择`
+
+编译jar: `Build -> Build Artifacts`
+
 MyRemote.class ,MyRemoteImp.class及MyRemoteImp_Stub.class
 
 sample.jar提供客户端调用
-### 启动远程服务
+
+#### 启动远程服务
 
 启动rmiregistry服务，提供rmi注册服务
 
@@ -117,15 +146,14 @@ E:\rmi\sample\out\production\sample>rmiregistry
 
 执行远程服务对象，并注册到registry中
 ```
-java MyRemoteImp
+java MyRemoteServer
 ```
 
 ### 客户端调用远程服务
 
-客户端项目加载sample.jar
+#### 客户端项目加载sample.jar
 
-
-客户端代码
+#### 客户端代码
 ```java
 import java.rmi.Naming;
 /**
@@ -146,10 +174,46 @@ public class MyRemoteClient {
 }
 ```
 
+通过Naming.lookup()获取远程服务，rmiregistry默认端口1099，可以不写
+
 在服务端启用运程服务后，我们就可用验证
 
 经测试，客户端和服务端都输出：RMI Hello zhenyun.su
 
+### 内置启动远程服务
+
+1099
+```java
+public class MyRemoteServer {
+    public static void main(String[] args) {
+        try{
+            LocateRegistry.createRegistry(1099);
+            MyRemote myRemote = new MyRemoteImp();
+            Naming.rebind("RemoteHello",myRemote);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+1099 是默认端口，也可以使用端口
+
+```java
+public class MyRemoteClient {
+    public static void main(String[] args) {
+        try{
+            MyRemote myRemote = (MyRemote) Naming.lookup("rmi://127.0.0.1:1099/RemoteHello");
+            String s=myRemote.sayHello("zhenyun.su");
+            System.out.println(s);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+重新测试通过
 
 ## 工作方式
 

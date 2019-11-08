@@ -236,6 +236,8 @@ public class Candy implements Swimable, Driverable {
         System.out.println("clazz.getSimpleName(): "+clazz.getSimpleName());
         System.out.println("clazz.toString(): "+clazz.toString());
         System.out.println("clazz.getSuperclass(): "+clazz.getSuperclass());
+				ClassLoader classLoader= clazz.getClassLoader();
+        System.out.println(classLoader);
         for (Class inter: clazz.getInterfaces()){
             System.out.println("Interface: "+inter.getName());
         }
@@ -262,6 +264,7 @@ clazz.getSuperclass(): class java.lang.Object  默认父类为Object
 Interface: rtti.Swimable
 Interface: rtti.Driverable
 Constructor: rtti.Candy
+sun.misc.Launcher$AppClassLoader@18b4aac2
 Field: name
 Field: id
 Field: count

@@ -17,9 +17,9 @@ public class Test {
 //        forName();
 //        getclass();
 //            getId();
-//            getRtti();
+            getRtti();
 //            getSuperRtti();
-            getCastRttiDD();
+//            getCastRttiDD();
             System.out.println("after new Candy()");
         }
 
@@ -53,6 +53,8 @@ public class Test {
         System.out.println("clazz.getSimpleName(): "+clazz.getSimpleName());
         System.out.println("clazz.toString(): "+clazz.toString());
         System.out.println("clazz.getSuperclass(): "+clazz.getSuperclass());
+        ClassLoader classLoader= clazz.getClassLoader();
+        System.out.println(classLoader);
         for (Class inter: clazz.getInterfaces()){
             System.out.println("Interface: "+inter.getName());
         }

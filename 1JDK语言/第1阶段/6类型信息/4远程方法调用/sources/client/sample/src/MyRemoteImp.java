@@ -14,16 +14,6 @@ public class MyRemoteImp extends UnicastRemoteObject implements MyRemote {
         System.out.println("RMI Hello "+name);
         return "RMI Hello "+name;
     }
-
     public MyRemoteImp() throws RemoteException {
-    }
-
-    public static void main(String[] args) {
-        try{
-            MyRemote myRemote = new MyRemoteImp();
-            Naming.rebind("RemoteHello",myRemote);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

@@ -7,12 +7,13 @@ import java.lang.reflect.Proxy;
 public class LiuDeHuaProxy {
     public static Person getPersonProxy(Person person){
         InvocationHandler ldhInvocationHandler = new LdhInvocationHandler(person);
-        try {
-            return(Person) Proxy.newProxyInstance(
-                    LiuDeHuaProxy.class.getClassLoader(),
-                    person.getClass().getInterfaces(),
-                    ldhInvocationHandler
-            );
+        Class clazz = person.getClass();
+            try {
+                return(Person) Proxy.newProxyInstance(
+                        clazz.getClassLoader(),
+                        clazz.getInterfaces(),
+                        ldhInvocationHandler
+                );
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

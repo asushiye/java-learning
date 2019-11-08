@@ -172,10 +172,11 @@ public class LdhInvocationHandler implements InvocationHandler {
 public class LiuDeHuaProxy {
     public static Person getPersonProxy(Person person){
         InvocationHandler ldhInvocationHandler = new LdhInvocationHandler(person);
+        Class clazz = person.getClass();
         try {
             return(Person) Proxy.newProxyInstance(
-                    LiuDeHuaProxy.class.getClassLoader(),
-                    person.getClass().getInterfaces(),
+                    clazz.getClassLoader(),
+                    clazz.getInterfaces(),
                     ldhInvocationHandler
             );
         }catch (Exception e){
@@ -215,11 +216,11 @@ newProxyInstance方法用来返回一个代理对象，这个方法总共有3个
 * Class<?>[] interfaces用来指明生成哪个对象的代理对象，通过接口指定，
 * InvocationHandler h用来指明产生的这个代理对象要做什么事情。
 
+只接受接口，因此动态代理只能接受实现接口的类
+
 所以我们只需要调用newProxyInstance方法就可以得到某一个对象的代理对象了。
 
-
 java提供的动态代理并不是日常使用的工具，但是它可以非常好解决某些类型的问题。
-
 
 ## 下一步行动
 
@@ -229,5 +230,7 @@ JDK动态代理和CGLIB字节码生成的区别？
 
 1. JDK动态代理只能对实现了接口的类生成代理，而不能针对类
 2. CGLIB是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法
+
+关于CGLIB动态代理，请看 `spring_learning/2核心容器/3aop编程/2如何实现aop`
 
 下一步我们将在学习Spring 切面编程Aop中进一步了解。
