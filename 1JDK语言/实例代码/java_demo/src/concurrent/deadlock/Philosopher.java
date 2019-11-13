@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author : zhenyun.su
- * @comment :
+ * @comment : 哲学家
  * @since : 2019-10-28
  */
 

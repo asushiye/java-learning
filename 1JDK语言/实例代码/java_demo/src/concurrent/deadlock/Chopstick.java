@@ -2,7 +2,7 @@ package concurrent.deadlock;
 
 /**
  * @author : zhenyun.su
- * @comment :
+ * @comment : 筷子
  * @since : 2019-10-28
  */
 
