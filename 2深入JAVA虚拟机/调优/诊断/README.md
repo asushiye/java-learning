@@ -1,5 +1,4 @@
 ## 诊断
-
     创建java项目
       编写代码
       编译并运行
@@ -12,6 +11,9 @@
       JVisualVM - 可视化工具
     实战
       检测死锁
+        编写死锁代码
+        运行死锁程序
+        检测死锁
 
 ## 创建java项目
 
@@ -336,6 +338,118 @@ Thread 10: (state = BLOCKED)
 
 ### 检测死锁
 
-#### 开启死锁程序
+* 编写死锁代码
+* 运行死锁程序
+* 检测死锁
 
-请参考 1JDK语言 -> 第2阶段 -> 6并发 -> 7死锁 中实例
+#### 编写死锁代码
+
+```java
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @author : zhenyun.su
+ * @comment :
+ * @since : 2019-11-13
+ */
+
+public class LockTest {
+    private static final Object lock1 = new Object();
+    private static final Object lock2 = new Object();
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    synchronized (lock1) {
+                        System.out.println(Thread.currentThread().getName());
+                        TimeUnit.SECONDS.sleep(1);
+                        synchronized (lock2) {
+                            System.out.println(Thread.currentThread().getName());
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    synchronized (lock2) {
+                        System.out.println(Thread.currentThread().getName());
+                        TimeUnit.SECONDS.sleep(1);
+                        synchronized (lock1) {
+                            System.out.println(Thread.currentThread().getName());
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.setName("mythread1");
+        t2.setName("mythread2");
+        t1.start();
+        t2.start();
+    }
+}
+```
+
+#### 运行死锁程序
+
+```
+javac .\LockTest.java
+java LockTest
+```
+
+输出
+```
+mythread1
+mythread2
+```
+
+该程序已经造成死锁了，假如进程ID为 11204
+
+#### 检测死锁
+
+* 使用jstack命令
+* 使用jconsole
+* 使用jvisualvm
+*
+##### 使用jstack命令
+
+jstack -F 11204
+```
+Attaching to process ID 11204, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 25.91-b15
+Deadlock Detection:
+
+Found one Java-level deadlock:
+=============================
+
+"mythread1":
+  waiting to lock Monitor@0x0000000003307d78 (Object@0x00000000d5fe0110, a java/lang/Object),
+  which is held by "mythread2"
+"mythread2":
+  waiting to lock Monitor@0x00000000033056f8 (Object@0x00000000d5fe0100, a java/lang/Object),
+  which is held by "mythread1"
+
+Found a total of 1 deadlock.
+
+Thread 1: (state = BLOCKED)
+```
+
+
+##### 使用jconsole
+
+![deadlockjconsole](deadlockjconsole.png)
+
+
+##### 使用jvisualvm
+
+![lockjvisualvm1](lockjvisualvm1.png)
+
+![lockjvisualvm2](lockjvisualvm2.png)

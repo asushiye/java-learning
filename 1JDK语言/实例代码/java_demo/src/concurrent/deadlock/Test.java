@@ -24,10 +24,10 @@ public class Test {
         }
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < size; i++) {
-            executorService.execute(new Philosopher(chopsticks[i], chopsticks[(i + 1) % size], i, 0));
+            executorService.execute(new Philosopher(chopsticks[i], chopsticks[(i + 1) % size], i, 200));
         }
-        TimeUnit.SECONDS.sleep(5);
-        executorService.shutdownNow();
+//        TimeUnit.SECONDS.sleep(5);
+//        executorService.shutdownNow();
     }
     public static void fixDiningPhilosopher() throws InterruptedException{
         int size = 5;
