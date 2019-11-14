@@ -18,7 +18,7 @@ public class Test {
                 try{
                     while(!Thread.interrupted()){
                         i++;
-                        String s1 = new String("ok");
+                        String s1 = new String("success");
                         System.out.println(i+" "+Instant.now()+ " thread "+s1);
                         TimeUnit.SECONDS.sleep(1);
                     }

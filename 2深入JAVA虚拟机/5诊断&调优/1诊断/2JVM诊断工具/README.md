@@ -279,7 +279,7 @@ Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.91-b15 mixed mode):
 ```
 #### 查看死锁
 
-jstack -F 25004
+jstack -F 14232
 ```
 Attaching to process ID 25004, please wait...
 Debugger attached successfully.
@@ -332,7 +332,6 @@ Thread 10: (state = BLOCKED)
 ![jvisualvm2](jvisualvm2.png)
 
 ![jvisualvm3](jvisualvm3.png)
-
 
 ## 实战
 
