@@ -19,14 +19,14 @@
 		Volatile标识
 			能保证不同线程可见性
 			不能保证共享数据竞争
+		参考资源
 
-			
-			
+
 ## JVM内存模型
 
 Java内存模型指定Java虚拟机如何与计算机的内存（RAM）一起使用，
 
-如果要设计正确的并发程序，了解Java内存模型非常重要。 
+如果要设计正确的并发程序，了解Java内存模型非常重要。
 
 Java内存模型指定了不同线程如何以及何时可以看到其他线程写入共享变量的值，以及如何在必要时同步对共享变量的访问。
 
@@ -173,7 +173,7 @@ localVariable1变量将彼此完全分离，仅存在于每个线程的线程堆
 
 因此它们仍与对象一起存储在堆上。只有局部变量存储在线程堆栈中。
 
-##  硬件内存结构 Hardware Memory Architecture   
+##  硬件内存结构 Hardware Memory Architecture
 
 现在硬件内存结构和JVM内存模型是不一样的，所以理解JVM内存模型是如何在硬件内存结构上运行是很重要的。
 
@@ -211,7 +211,7 @@ CPU可以比主存储器更快地访问其高速缓冲存储器，但通常不�
 
 当CPU需要将结果写回主存储器时，它会将值从其内部寄存器刷新到高速缓冲存储器，并在某些时候将值刷新回主存储器。
 
-当CPU需要在缓存存储器中存储其他东西时，存储在高速缓存存储器中的值通常被刷回到主存储器。 
+当CPU需要在缓存存储器中存储其他东西时，存储在高速缓存存储器中的值通常被刷回到主存储器。
 
 CPU缓存可以一次将数据写入其内存的一部分，并一次刷新部分内存。它不必在每次更新时读/写完整缓存。
 
@@ -221,9 +221,9 @@ CPU缓存可以一次将数据写入其内存的一部分，并一次刷新部�
 
 ##   Java内存模型与硬件内存架构之间的差距
 
-如前所述，Java内存模型和硬件内存架构是不同的。 硬件内存架构不区分线程堆栈和堆。 
+如前所述，Java内存模型和硬件内存架构是不同的。 硬件内存架构不区分线程堆栈和堆。
 
-启动程序时线程堆栈和堆都位于主存储器中。 只需线程时，线程堆栈和堆的一部分有时可能存在于CPU高速缓存和内部CPU寄存器中。 
+启动程序时线程堆栈和堆都位于主存储器中。 只需线程时，线程堆栈和堆的一部分有时可能存在于CPU高速缓存和内部CPU寄存器中。
 
 这在图中说明
 
@@ -251,7 +251,7 @@ CPU缓存可以一次将数据写入其内存的一部分，并一次刷新部�
 
 ![jvmHardMemory2](jvmHardMemory2.png)
 
-要解决此问题，您可以使用Java的volatile关键字。 
+要解决此问题，您可以使用Java的volatile关键字。
 
 volatile关键字可以确保直接从主内存读取给定变量，并在更新时始终写回主内存。
 
@@ -274,9 +274,9 @@ volatile关键字可以确保直接从主内存读取给定变量，并在更新
 ![jvmHardMemory3](jvmHardMemory3.png)
 
 
-解决此问题，您可以使用Java synchronized同步块。 
+解决此问题，您可以使用Java synchronized同步块。
 
-1. 同步块保证在任何给定时间只有一个线程可以进入代码的给定关键部分。 
+1. 同步块保证在任何给定时间只有一个线程可以进入代码的给定关键部分。
 
 2. 同步块还保证在同步块内访问的所有变量都将从主内存读入，当线程退出同步块时，无论变量是否声明为volatile，所有更新的变量都将再次刷回主内存
 
@@ -303,7 +303,7 @@ synchronized 可以用标记四种代码块类型
 
 在实例方法声明之前，添加 **synchronized**关键字，表名为这个方法为同步方法
 
-类的每个实例中，指定同步方法的代码同一个时间只能由一个线程来操作。 
+类的每个实例中，指定同步方法的代码同一个时间只能由一个线程来操作。
 
 如果存在多个实例，则一次一个线程可以在每个实例的同步实例方法内执行。 每个实例一个线程
 
@@ -331,7 +331,7 @@ synchronized 可以用标记四种代码块类型
 public void add(int value){
 
     synchronized(this){
-       this.count += value;   
+       this.count += value;
     }
   }
 ```
@@ -345,13 +345,13 @@ public void add(int value){
 下面两个示例在调用它们的实例上同步。 因此，它们在同步方面是等效的：
 ```
   public class MyClass {
-  
+
     public synchronized void log1(String msg1, String msg2){
        log.writeln(msg1);
        log.writeln(msg2);
     }
 
-  
+
     public void log2(String msg1, String msg2){
        synchronized(this){
           log.writeln(msg1);
@@ -374,11 +374,11 @@ public void add(int value){
        log.writeln(msg2);
     }
 
-  
+
     public static void log2(String msg1, String msg2){
        synchronized(MyClass.class){
           log.writeln(msg1);
-          log.writeln(msg2);  
+          log.writeln(msg2);
        }
     }
   }
@@ -545,7 +545,7 @@ CounterThreadB counter= 10100 ;
 
 ## Volatile标识
 
-Java volatile关键字用于将Java变量标记为“存储在主存储器中”。 
+Java volatile关键字用于将Java变量标记为“存储在主存储器中”。
 
 更确切地说，每次读取一个volatile变量都将从计算机的主内存中读取，而不是从CPU缓存中读取，
 
@@ -597,3 +597,14 @@ public class SharedObject {
 当然也可以使用java.util.concurrent包中的众多原子数据类型之一。例如，AtomicLong或AtomicReference或其他之一
 
 我们将在以后章节详细介绍
+
+## 参考资源
+
+从JVM看java多线 -  锁
+https://blog.csdn.net/u013159507/article/details/82746292
+
+图解 偏向锁，轻量锁，重量锁
+https://blog.csdn.net/xvshu/article/details/88039489
+
+偏向锁，轻量级锁与重量级锁的区别与膨胀
+https://blog.csdn.net/choukekai/article/details/63688332

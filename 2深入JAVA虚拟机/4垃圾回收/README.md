@@ -16,6 +16,7 @@
     5执行垃圾回收及负面影响
       存在哪些垃圾回收动作
       什么容易情况导致stop-the-world
+    6垃圾收集器
     6参考资料
 
 ## 1什么是垃圾回收
@@ -352,6 +353,14 @@ stop-the-world会对系统性能产生影响，暂停时间越长，影响越大
 3. system.gc 的调用
 
 我们要尽量避免上面这种情况
+
+## 6垃圾收集器
+
+7个垃圾收集器
+https://www.cnblogs.com/cxxjohnson/p/8625713.html
+
+G1垃圾收集器
+https://www.jianshu.com/p/78e2d8579935
 
 ## 6参考资料
 
