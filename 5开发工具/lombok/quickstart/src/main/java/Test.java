@@ -20,7 +20,7 @@ public class Test {
         System.out.println(city.toString());
         System.out.println(city);
         System.out.println(city.hashCode());
-        System.out.println(city.equals(new City(2L, "102")));
+        System.out.println(city.equals(new City(2L, "102","广东",LocalDateTime.now())));
     }
     public static void cityBuilderTest() {
         CityBuilder city = new CityBuilder(2L, "102","北京", LocalDateTime.now());

@@ -229,7 +229,7 @@ maven目录存放了项目pom.xml文件和pom.properties
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -243,7 +243,7 @@ maven目录存放了项目pom.xml文件和pom.properties
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -260,17 +260,19 @@ maven目录存放了项目pom.xml文件和pom.properties
 
         </plugins>
     </build>
-
 ```
+
+生成jar包 和第三方库lib目录，只有同时存在这个两个文件，才能正常运行。
+
 ### maven-assembly-plugin 来实现
 ```xml
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -291,37 +293,54 @@ maven目录存放了项目pom.xml文件和pom.properties
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
-
 ```
 
-### maven-assembly-plugin 来实现
+### maven-shade-plugin 来实现
 ```xml
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.wqc.main.SpringStart</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <!-- 用这个maven打包插件 -->
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.2.1</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+            <configuration>
+                <!-- 默认值为true.注意这个属性,如果你用这个插件来deploy,或者发布到中央仓库，这个属性会缩减你的pom文件,会把你依赖的<dependency>干掉 -->
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+                <transformers>
+                    <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                        <resource>META-INF/spring.handlers</resource>
+                    </transformer>
+                    <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                        <resource>META-INF/spring.schemas</resource>
+                    </transformer>
+                    <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <!-- 这个是你的程序入口文件 -->
+                        <mainClass>com.alibaba.dubbo.container.Main</mainClass>
+                    </transformer>
+                </transformers>
+            </configuration>
+        </execution>
+    </executions>
+  </plugin>
+  <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>3.1.0</version>
+      <configuration>
+          <!-- 设置字符编码集 -->
+          <encoding>UTF-8</encoding>
+      </configuration>
+  </plugin>
 ```
 
 在使用不同java框架时，配置有一些差别，运行异常时可自行百度解决

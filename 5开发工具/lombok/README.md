@@ -1,5 +1,8 @@
 # lombok
 
+概述
+如何使用
+
 ## 概述
   避免重复写Getter/Setter、构造器方法、字符串输出的ToString方法和Equals/HashCode方法
 
@@ -25,6 +28,7 @@
 
 ### 注解说明
 
+
 ```
 @Getter/@Setter 类的属性自动生成所有字段的@Getter和所有非final字段的@Setter
 @ToString 自动生成一个toString方法
@@ -39,6 +43,10 @@
 @NonNull 能够为方法或构造函数的参数提供非空检查
 @Cleanup 能够自动释放资源
 ```
+
+具体的使用，请查看
+
+https://projectlombok.org/features/all
 
 ### 快速入门
 
