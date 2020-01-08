@@ -6,6 +6,7 @@
 			基于字符操作文件内容 - FileReader, FileWriter
 			随机访问文件 - RandomAccessFile
 		文件属性操作
+			获取路径
 			常见属性操作
 			实例
 
@@ -226,6 +227,34 @@ This is not possible with the FileInputStream or FileOutputStream.
 有时你需要访问文件属性，例如文件或文件夹大小，创建日期，修改日期，文件夹中文件列表
 
 java io为我们提供 **File** class.
+
+### 获取路径
+
+#### 获取当前工程编译后的类文件的路径
+
+```java
+File f = new File(TomcatLauncher.class.getResource("/").getPath());
+System.out.println(f);
+
+如果不加“/”，获取当前类的绝对路径
+
+File f = new File(TomcatLauncher.class.getResource("").getPath());
+System.out.println(f);
+```
+
+#### 获取当前类的所在工程路径
+```java
+    try{
+        File directory = new File("");//参数为空
+        String courseFile = directory.getCanonicalPath() ;
+        System.out.println(courseFile);
+
+				//或
+				System.out.println(System.getProperty("user.dir"));
+    }catch(Exception e){
+
+    }
+```
 
 ### 常见属性操作
 
