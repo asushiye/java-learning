@@ -13,7 +13,7 @@
     <properties>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.8</jdk.version>
-        <spring.version>5.1.6.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <spring-data.version>2.1.6.RELEASE</spring-data.version>
         <mysql.version>6.0.6</mysql.version>
         <druid.version>1.1.16</druid.version>
