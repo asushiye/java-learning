@@ -25,7 +25,7 @@
         <shiro.version>1.4.0</shiro.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <servlet-api.version>4.0.0</servlet-api.version>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
         <fastjson.version>1.2.57</fastjson.version>
         <walker.version>1.0-SNAPSHOT</walker.version>
     </properties>
