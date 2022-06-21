@@ -22,7 +22,7 @@
 
         <spring.version>5.0.5.RELEASE</spring.version>
         <spring-data.version>2.0.9.RELEASE</spring-data.version>
-        <mysql.version>6.0.6</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <druid.version>1.1.10</druid.version>
         <hibernate.version>5.3.5.Final</hibernate.version>
         <hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
