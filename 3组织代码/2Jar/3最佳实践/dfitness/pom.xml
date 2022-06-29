@@ -36,7 +36,7 @@
         <jackson.version>2.9.6</jackson.version>
         <fastjson.version>1.2.47</fastjson.version>
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
-        <poi.version>3.17</poi.version>
+        <poi.version>4.1.1</poi.version>
         <walker.version>1.0-SNAPSHOT</walker.version>
     </properties>
 
