@@ -22,7 +22,7 @@
         <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <jstl.version>1.2</jstl.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.9.1</shiro.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <servlet-api.version>4.0.0</servlet-api.version>
         <jackson.version>2.9.8</jackson.version>
